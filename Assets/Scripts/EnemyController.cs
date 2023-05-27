@@ -23,6 +23,11 @@ public class EnemyController : MonoBehaviour {
         DetermineEnemy(1);
     }
 
+    //Update Method - sets slider value to match the current health on a constant basis
+    void Update() {
+        slider.value = currentHealth;
+    }
+
     void DetermineEnemy(int enemyNum) {
         switch (enemyNum) {
             case 1:
