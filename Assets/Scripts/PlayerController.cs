@@ -1,32 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
     [Header("--PUBLIC PLAYER DATA--")]
-    public float startHealth;
-    public float currentHealth;
+    public float fireboltVelocity;
 
     [Header("--PUBLIC PLAYER OBJECTS--")]
-    public Slider slider;
+    public Rigidbody2D firebolt;
+    public Rigidbody2D staffPosition;
 
     Animator anim;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Awake() {
         anim = GetComponent<Animator>();
-        currentHealth = startHealth;
-    }
-
-    //Update Method - sets slider value to match the current health on a constant basis
-    void Update() {
-        slider.value = currentHealth;
     }
 
     public void FireAttack() {
         //play animation for attack
+        Debug.Log("FIRE ATTACK");
+        Rigidbody2D newfirebolt = Instantiate(firebolt, staffPosition.position, transform.rotation) as Rigidbody2D;
+		newfirebolt.AddForce(transform.right * fireboltVelocity, ForceMode2D.Force);
     }
 
     public void IceAttack() {

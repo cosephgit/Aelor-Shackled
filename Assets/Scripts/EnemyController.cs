@@ -5,27 +5,14 @@ using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour {
 
-    [Header("--PUBLIC ENEMY DATA--")]
-    public float startHealth;
-    public float currentHealth;
-
-    [Header("--PUBLIC ENEMY OBJECTS--")]
-    public Slider slider;
-
     Animator anim;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Awake() {
         anim = GetComponent<Animator>();
-        currentHealth = startHealth;
 
         //BattleController calls this method instead
         DetermineEnemy(1);
-    }
-
-    //Update Method - sets slider value to match the current health on a constant basis
-    void Update() {
-        slider.value = currentHealth;
     }
 
     void DetermineEnemy(int enemyNum) {
@@ -46,9 +33,9 @@ public class EnemyController : MonoBehaviour {
         while (true) {
             yield return new WaitForSeconds(3f);
             //attack 3 once health is below 50%
-            if (currentHealth <= 50) {
-                Debug.Log("attack3");
-            }
+            //if (currentHealth <= 50) {
+             //   Debug.Log("attack3");
+            //}
 
             yield return new WaitForSeconds(3f);
             //use attack 1
