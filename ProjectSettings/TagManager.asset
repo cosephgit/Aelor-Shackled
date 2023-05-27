@@ -47,3 +47,6 @@ TagManager:
   - name: Interactable
     uniqueID: 1736876463
     locked: 0
+  - name: Dialogue
+    uniqueID: 1609240467
+    locked: 0

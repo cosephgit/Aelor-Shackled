@@ -114,6 +114,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 067f03a2624fa8946a93514bc33713e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSprite: {fileID: 8027216345264259284}
+  playerSpeed: 4
+  animator: {fileID: 0}
+  idleEvents: []
+  idleDelay: 10
+  text: {fileID: 0}
   eventLook: {fileID: 0}
   eventTalk: {fileID: 0}
   eventUse: {fileID: 0}

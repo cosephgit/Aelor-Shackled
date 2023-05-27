@@ -6,16 +6,15 @@ using UnityEngine;
 
 public class EventDialogue : Event
 {
-    [SerializeField]private TalkableBase subject;
+    [SerializeField]private ActorBase subject;
     [SerializeField]private string line;
+    [SerializeField]private AnimSingle anim = AnimSingle.None; // if not None then the subject will play the matching anim (if present)
 
     public override void Run(EventSequence setSequence)
     {
         base.Run(setSequence);
 
-        subject.ShowLine(line);
-
-        EndDelay();
+        subject.ShowLine(line, anim);
     }
 
     public override void End()

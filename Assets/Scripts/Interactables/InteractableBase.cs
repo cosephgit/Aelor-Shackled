@@ -4,7 +4,7 @@ using UnityEngine;
 
 // the base class for all objects which can be interacted with
 
-public class InteractableBase : TalkableBase
+public class InteractableBase : ActorBase
 {
     // each of the these indicate the event sequences that should be triggered when the indicated interaction type is selected
     // these CAN BE CHANGED by event sequences
