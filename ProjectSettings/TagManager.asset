@@ -15,8 +15,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - MoveBoundary
+  - Interactable
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: PlayerPawn
+    uniqueID: 1028545303
+    locked: 0
+  - name: Interactable
+    uniqueID: 1736876463
+    locked: 0
+  - name: Dialogue
+    uniqueID: 1609240467
     locked: 0
