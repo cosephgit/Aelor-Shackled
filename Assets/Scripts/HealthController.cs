@@ -36,18 +36,18 @@ public class HealthController : MonoBehaviour {
 		canChange = true;
 		float oldHealth = health;
 		
+		if (canChange) {
+			health -= damage;
+			health = Mathf.Clamp(health, 0, maxHealth);
+			onHealthChanged(oldHealth, health);
+		}
+
 		if (isEnemy) {
 			enemySlider.value = health;
 		}
 
         if (isPlayer) {
 			playerSlider.value = health;
-		}
-		
-		if (canChange) {
-			health -= damage;
-			health = Mathf.Clamp(health, 0, maxHealth);
-			onHealthChanged(oldHealth, health);
 		}
 	}
 

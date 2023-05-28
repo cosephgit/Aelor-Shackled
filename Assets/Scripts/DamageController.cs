@@ -6,6 +6,8 @@ public class DamageController : MonoBehaviour {
 
     public float damage;
 
+	public ParticleSystem frostBeamEffect;
+
 	void OnCollisionEnter2(Collision2D c) {
 		HitObject(c.gameObject);
         Destroy(gameObject);
@@ -13,7 +15,8 @@ public class DamageController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c) {
 		if (this.gameObject.tag == "FrostbiteBeam") {
-			
+			ParticleSystem newfrostBeamEffect = Instantiate(frostBeamEffect, transform.position, transform.rotation);
+			Destroy(newfrostBeamEffect, 5f);
 		}
 		HitObject(c.gameObject);
         Destroy(gameObject);

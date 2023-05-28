@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9222981775050626797}
   m_Layer: 0
   m_Name: IceBeam
-  m_TagString: Untagged
+  m_TagString: FrostbiteBeam
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
+  frostBeamEffect: {fileID: 4513638601550759582, guid: fccbd41ec67e4cc4da2f2885071a20fa, type: 3}
 --- !u!1001 &8814318758600849719
 PrefabInstance:
   m_ObjectHideFlags: 0
