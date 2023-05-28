@@ -8,6 +8,9 @@ using UnityEngine;
 
 public static class Global
 {
+    // gameplay constants
+    public const int INVENTORYSLOTS = 6; // the number of inventory slots in the game
+    // layer names
     public const string LAYERMOVEAREA = "MoveBoundary";
     public const string LAYERINTERACTABLE = "Interactable";
 

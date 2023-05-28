@@ -225,7 +225,7 @@ public class ActorBase : MonoBehaviour
     // update the player position each frame if needed
     private void Update()
     {
-        if (SceneManager.instance.GetAdventureActive())
+        if (SceneManager.instance.adventureState && !SceneManager.instance.adventurePaused)
         {
             if (waiting)
             {

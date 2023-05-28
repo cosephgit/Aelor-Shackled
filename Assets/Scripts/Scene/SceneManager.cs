@@ -17,8 +17,8 @@ public class SceneManager : MonoBehaviour
     [SerializeField]private float posYClose = -5f;
     [SerializeField]private float scaleFar = 0.5f;
     [SerializeField]private float posYFar = 5f;
-    private bool adventureState = true; // is the game currently in adventure mode (rather than battle mode)?
-    private bool adventurePaused = false; // is the adventure mode currently paused (to run an event)
+    public bool adventureState { get; private set; } = true; // is the game currently in adventure mode (rather than battle mode)?
+    public bool adventurePaused { get; private set; } = false; // is the adventure mode currently paused (to run an event)
 
     private void Awake()
     {
@@ -47,12 +47,6 @@ public class SceneManager : MonoBehaviour
     public void SetAdventureState(bool stateSet)
     {
         adventureState = stateSet;
-    }
-
-    // returns if adventure mode is currently active and unpaused
-    public bool GetAdventureActive()
-    {
-        return (adventureState && !adventurePaused);
     }
 
     public float GetScaleForYPos(float ypos)
