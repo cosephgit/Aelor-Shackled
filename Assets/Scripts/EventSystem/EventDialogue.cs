@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // this type of event plays a dialogue line on the indicated pawn
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
 
 public class EventDialogue : Event
 {

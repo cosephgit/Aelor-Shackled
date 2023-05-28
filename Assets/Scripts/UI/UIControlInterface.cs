@@ -5,16 +5,36 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 // this class detects mouse clicks/touch taps and implements their effects
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
 
 public class UIControlInterface : MonoBehaviour
 {
+    public static UIControlInterface instance;
     [SerializeField]private UIInteractMenu interactionMenu;
+    [field: SerializeField]public UIDialogueTree dialogueTree { get; private set; }
+    [field: SerializeField]public Canvas canvas { get; private set; }
     [SerializeField]private Image mousePointer;
+    [SerializeField]private RectTransform canvasRect;
+    [SerializeField]private CanvasScaler canvasScaler;
     private InteractableBase interactable;
+    private Vector2 offsetUI;
 
     private void Awake()
     {
+        if (instance)
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+        else
+            instance = this;
+
         interactionMenu.gameObject.SetActive(false);
+        offsetUI = new Vector2((float)canvasRect.sizeDelta.x / 2f, (float)canvasRect.sizeDelta.y / 2f);
     }
 
     // called when a position to touch is determined
@@ -118,5 +138,15 @@ public class UIControlInterface : MonoBehaviour
         {
             interactable.DoSpecial();
         }
+    }
+
+    // takes a worldspace point and returns the screenspace point
+    public Vector2 WorldToScreenPos(Vector2 pos)
+    {
+        Vector2 viewportPos = Camera.main.WorldToScreenPoint(pos);
+        Vector2 canvasPos = new Vector2(viewportPos.x * canvasScaler.referenceResolution.x / Screen.width,
+                                        viewportPos.y * canvasScaler.referenceResolution.y / Screen.height);
+
+        return canvasPos;
     }
 }

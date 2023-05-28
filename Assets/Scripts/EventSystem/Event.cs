@@ -6,6 +6,8 @@ using UnityEngine;
 // these are data holders and should be added to an event sequence
 // they will called in the order defined in the event sequence
 // on it's own this class will just leave a pause
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
 
 public class Event : MonoBehaviour
 {
@@ -43,7 +45,13 @@ public class Event : MonoBehaviour
     // end this event and let the event sequence know
     public virtual void End()
     {
+        endTime = 0;
         //Debug.Log("endTime = " + endTime);
         sequence.EventComplete();
+    }
+
+    public virtual void EndEventRemote(int index)
+    {
+        End(); // need to end the event sequence NOW so that the adventure mode is unpaused (if needed)
     }
 }

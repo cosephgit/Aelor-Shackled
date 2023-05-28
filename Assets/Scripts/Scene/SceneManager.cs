@@ -4,6 +4,8 @@ using UnityEngine;
 
 // the scene manager is a singleton unique to each scene
 // it acts as a service provider for key references to e.g. the player pawn, the movement area collider(s), and any scripts that should be run on scene start
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
 
 public class SceneManager : MonoBehaviour
 {

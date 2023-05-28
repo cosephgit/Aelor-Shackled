@@ -7,10 +7,11 @@ using UnityEngine.UI;
 // it appears when the player clicks on an interactable object and button useability is set depending on the type of object
 // it disappears when the player clicks off it, or after they click on a valid interaction option
 // the interaction option is returned to the controller interface, which then passes the instruction to the interactable
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
 
 public class UIInteractMenu : MonoBehaviour
 {
-    [SerializeField]private UIControlInterface controlInterface;
     [SerializeField]private Button buttonLook;
     [SerializeField]private Button buttonTalk;
     [SerializeField]private Button buttonUse;
@@ -34,22 +35,22 @@ public class UIInteractMenu : MonoBehaviour
 
     public void ButtonLookPress()
     {
-        controlInterface.SelectLook();
+        UIControlInterface.instance.SelectLook();
         gameObject.SetActive(false);
     }
     public void ButtonTalkPress()
     {
-        controlInterface.SelectTalk();
+        UIControlInterface.instance.SelectTalk();
         gameObject.SetActive(false);
     }
     public void ButtonUsePress()
     {
-        controlInterface.SelectUse();
+        UIControlInterface.instance.SelectUse();
         gameObject.SetActive(false);
     }
     public void ButtonSpecialPress()
     {
-        controlInterface.SelectSpecial();
+        UIControlInterface.instance.SelectSpecial();
         gameObject.SetActive(false);
     }
 }
