@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DamageController : MonoBehaviour {
 
-    public float damage = 1;
+    public float damage;
 
 	void OnCollisionEnter2(Collision2D c) {
 		HitObject(c.gameObject);
@@ -12,6 +12,9 @@ public class DamageController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D c) {
+		if (this.gameObject.tag == "FrostbiteBeam") {
+			
+		}
 		HitObject(c.gameObject);
         Destroy(gameObject);
 	}
