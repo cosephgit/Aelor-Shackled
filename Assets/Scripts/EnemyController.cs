@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour {
     Animator anim;
 
     //Initial Method - sets above data to corresponding gameobjects
-    void Awake() {
+    void Start() {
         anim = GetComponent<Animator>();
 
         //BattleController calls this method instead
