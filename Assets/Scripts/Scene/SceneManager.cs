@@ -5,12 +5,12 @@ using UnityEngine;
 // the scene manager is a singleton unique to each scene
 // it acts as a service provider for key references to e.g. the player pawn, the movement area collider(s), and any scripts that should be run on scene start
 // Created by: Seph 27/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 29/5
 
 public class SceneManager : MonoBehaviour
 {
     public static SceneManager instance;
-    [field: SerializeField]public Collider2D moveArea { get; private set; } // the collider which defines the area which the player pawn can move within
+    [field: SerializeField]public WalkableArea[] moveAreas { get; private set; } // the collider which defines the area which the player pawn can move within
     [field: SerializeField]public PlayerAdventureController playerAdventure { get; private set; } // the player controller during adventure mode
     [field: Header("The scale of actors in the foreground (bottom of screen) and background (top of screen)")]
     [SerializeField]private float scaleClose = 1f;
@@ -64,5 +64,52 @@ public class SceneManager : MonoBehaviour
             float distance = (ypos - posYClose) / (posYFar - posYClose);
             return Mathf.Lerp(scaleClose, scaleFar, distance);
         }
+    }
+
+    // this finds the nearest walkable area to the point
+    // this is used to find the CURRENT area during start, and for planning pathfinding/
+    public WalkableArea GetClosestWalkable(Vector2 point, out Vector2 pointValid)
+    {
+        // first check if there's a collider directly under the point
+        Collider2D[] moveHits = Physics2D.OverlapPointAll(point, Global.LayerMove());
+
+        pointValid = point;
+
+        // if there is at least one movement collider under the pointer, check if any of them can be navigated to
+        foreach(Collider2D move in moveHits)
+        {
+            if (move.isActiveAndEnabled)
+            {
+                WalkableArea moveArea = move.GetComponent<WalkableArea>();
+
+                if (moveArea)
+                {
+                    // assume the first valid area under the point is the right one
+                    return moveArea;
+                }
+            }
+        }
+
+        // failed to find one under this point - find the nearest one
+        float closest = Mathf.Infinity;
+        WalkableArea closestArea = null;
+
+        foreach (WalkableArea moveArea in moveAreas)
+        {
+            if (moveArea.isActiveAndEnabled)
+            {
+                Vector2 closestPoint = moveArea.walkCollider.ClosestPoint(point);
+                float distance = (closestPoint - point).magnitude;
+
+                if (distance < closest)
+                {
+                    pointValid = closestPoint;
+                    closest = distance;
+                    closestArea = moveArea;
+                }
+            }
+        }
+
+        return closestArea;
     }
 }

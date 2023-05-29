@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 // this class detects mouse clicks/touch taps and implements their effects
 // Created by: Seph 27/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 29/5
 
 public class UIControlInterface : MonoBehaviour
 {
@@ -121,10 +121,8 @@ public class UIControlInterface : MonoBehaviour
                     }
                 }
 
-                // no interactables have been found at the touch point, so assume that the player wants to move to the clicked point
-                // need to convert the point to a point in the moveable play area
-                Vector2 movePoint = SceneManager.instance.moveArea.ClosestPoint(worldPos);
-                SceneManager.instance.playerAdventure.SetMoveTarget(movePoint);
+                // nothing has been clicked on, so try telling the player pawn to move to the point
+                SceneManager.instance.playerAdventure.TryMove(worldPos);
             }
         }
     }
