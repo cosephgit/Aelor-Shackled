@@ -30,6 +30,7 @@ public class ActorBase : MonoBehaviour
     [SerializeField]private float idleDelay = 10f;
     [Header("Dialogue")]
     [SerializeField]private TextMeshPro text;
+    [SerializeField]private Color tint = Color.clear;
     private float idleTimer;
     private Vector3 moveTarget;
     private bool moving = false;
@@ -43,6 +44,10 @@ public class ActorBase : MonoBehaviour
         if (text)
         {
             text.enabled = false;
+            if (tint.a > 0)
+                text.color = tint; // use the tint if it has been changed from clear
+            else if (sprite)
+                text.color = sprite.color; // else copy the sprite color
             SetIdleTimer();
         }
     }
@@ -64,6 +69,11 @@ public class ActorBase : MonoBehaviour
         moveTarget = pos;
         moveEvent = duringEvent;
         moving = true;
+    }
+
+    public void ClearMoveTarget()
+    {
+        moveTarget = transform.position;
     }
 
     // set the delay before an idle event will happen with a small amount of random variation
@@ -249,7 +259,7 @@ public class ActorBase : MonoBehaviour
             if (!moveEvent)
             {
                 // if NOT set to move during event, clear the current move target
-                moveTarget = transform.position;
+                ClearMoveTarget();
                 movingCycle = 0f;
                 if (animator)
                 {

@@ -116,6 +116,7 @@ public class UIControlInterface : MonoBehaviour
                         // something has been touched that can be interacted with, trigger the first one found
                         // note there should NOT be multiple interactables stacked up anyway, spread the items out more!
                         interactionMenu.OpenUIMenu(pos, interactable.HasLook(), interactable.HasTalk(), interactable.HasUse(), interactable.HasSpecial());
+                        SceneManager.instance.playerAdventure.ClearMoveTarget();
                         return;
                     }
                 }
