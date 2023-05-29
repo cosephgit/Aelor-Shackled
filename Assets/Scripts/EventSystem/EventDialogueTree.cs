@@ -4,6 +4,11 @@ using UnityEngine;
 
 // this event opens a dialogue tree and lets the player choose a dialogue option
 // it then triggers the next event depending on the dialogue selection
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
+
+// note this should ALWAYS be the last event of an event sequence
+// errors will happen if used incorrectly
 
 public class EventDialogueTree : Event
 {
@@ -25,7 +30,16 @@ public class EventDialogueTree : Event
     public override void Run(EventSequence setSequence)
     {
         base.Run(setSequence);
-        // TODO
-        finished = true;
+
+        UIControlInterface.instance.dialogueTree.OpenDialogue(transform.position, dialogueOptions, this);
+
+        finished = false;
+    }
+
+    // takes the index of the selected dialogue option from the UIDialogueTree
+    public override void EndEventRemote(int index)
+    {
+        End(); // need to end the event sequence NOW so that the adventure mode is unpaused (if needed)
+        dialogueEvents[index].Run(); // and with the start of the new event sequence adventure adventure mode will be paused again (if needed)
     }
 }

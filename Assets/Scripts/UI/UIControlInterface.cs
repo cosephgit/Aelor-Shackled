@@ -5,16 +5,52 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 // this class detects mouse clicks/touch taps and implements their effects
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
 
 public class UIControlInterface : MonoBehaviour
 {
-    [SerializeField]private UIInteractMenu interactionMenu;
+    public static UIControlInterface instance;
+    [field: SerializeField]public UIInteractMenu interactionMenu { get; private set; }
+    [field: SerializeField]public UIDialogueTree dialogueTree { get; private set; }
+    [field: SerializeField]public UIInventory inventory { get; private set; }
     [SerializeField]private Image mousePointer;
+    [SerializeField]private CanvasScaler canvasScaler;
     private InteractableBase interactable;
 
     private void Awake()
     {
+        if (instance)
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+        else
+            instance = this;
+
         interactionMenu.gameObject.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = false;
+    }
+
+    private List<RaycastResult> GetUIObjects(Vector2 pos)
+    {
+        // check if the object is the interactionmenu
+        PointerEventData pointerData = new PointerEventData (EventSystem.current)
+        {
+            pointerId = -1,
+        };
+
+        pointerData.position = pos;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        return results;
     }
 
     // called when a position to touch is determined
@@ -25,42 +61,69 @@ public class UIControlInterface : MonoBehaviour
 
         // TODO add mouse pointer changes (e.g. highlight over interactables) here
 
-        if (tap & SceneManager.instance.GetAdventureActive())
+        if (tap && interactionMenu.gameObject.activeSelf)
         {
-            // if the player has tapped/clicked and we're in adventure mode, try to do adventure stuff
+            bool interactionHide = true;
 
-            if (EventSystem.current.IsPointerOverGameObject()){ } // only check for touches of game objects if there is no UI element under the mouse
-            else
+            // if the interaction menu is open, the first tap off it is just to close it
+            if (EventSystem.current.IsPointerOverGameObject())
             {
-                if (interactionMenu.gameObject.activeSelf)
-                {
-                    // if the interaction menu is open, the first tap off it is just to close it
-                    interactionMenu.gameObject.SetActive(false);
-                }
-                else
-                {
-                    Vector2 worldPos = Camera.main.ScreenToWorldPoint(pos);
-                    Collider2D[] touchHits = Physics2D.OverlapPointAll(worldPos, Global.LayerInteract());
+                List<RaycastResult> objectsUI = GetUIObjects(pos);
 
-                    foreach (Collider2D touch in touchHits)
+                for (int i = 0; i < objectsUI.Count; i++)
+                {
+                    UIInteractMenu interactTouched = objectsUI[i].gameObject.GetComponentInParent<UIInteractMenu>();
+
+                    if (interactTouched)
+                        interactionHide = false;
+                }
+            }
+
+            if (interactionHide)
+            {
+                interactionMenu.gameObject.SetActive(false);
+                tap = false;
+            }
+        }
+
+        if (SceneManager.instance.adventureState && !SceneManager.instance.adventurePaused)
+        {
+            // if in active adventure mode, do UI stuff
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                List<RaycastResult> objectsUI = GetUIObjects(pos);
+
+                for (int i = 0; i < objectsUI.Count; i++)
+                {
+                    UIInventory inventory = objectsUI[i].gameObject.GetComponentInParent<UIInventory>();
+
+                    if (inventory) inventory.UIMouseOver();
+                }
+            }
+            else if (tap)
+            {
+                // only check for touches of game objects if there is no UI element under the mouse
+                Vector2 worldPos = Camera.main.ScreenToWorldPoint(pos);
+                Collider2D[] touchHits = Physics2D.OverlapPointAll(worldPos, Global.LayerInteract());
+
+                foreach (Collider2D touch in touchHits)
+                {
+                    InteractableBase interactableTest = touch.gameObject.GetComponent<InteractableBase>();
+
+                    if (interactableTest)
                     {
-                        InteractableBase interactableTest = touch.gameObject.GetComponent<InteractableBase>();
-
-                        if (interactableTest)
-                        {
-                            interactable = interactableTest;
-                            // something has been touched that can be interacted with, trigger the first one found
-                            // note there should NOT be multiple interactables stacked up anyway, spread the items out more!
-                            interactionMenu.OpenUIMenu(pos, interactable.HasLook(), interactable.HasTalk(), interactable.HasUse(), interactable.HasSpecial());
-                            return;
-                        }
+                        interactable = interactableTest;
+                        // something has been touched that can be interacted with, trigger the first one found
+                        // note there should NOT be multiple interactables stacked up anyway, spread the items out more!
+                        interactionMenu.OpenUIMenu(pos, interactable.HasLook(), interactable.HasTalk(), interactable.HasUse(), interactable.HasSpecial());
+                        return;
                     }
-
-                    // no interactables have been found at the touch point, so assume that the player wants to move to the clicked point
-                    // need to convert the point to a point in the moveable play area
-                    Vector2 movePoint = SceneManager.instance.moveArea.ClosestPoint(worldPos);
-                    SceneManager.instance.playerAdventure.SetMoveTarget(movePoint);
                 }
+
+                // no interactables have been found at the touch point, so assume that the player wants to move to the clicked point
+                // need to convert the point to a point in the moveable play area
+                Vector2 movePoint = SceneManager.instance.moveArea.ClosestPoint(worldPos);
+                SceneManager.instance.playerAdventure.SetMoveTarget(movePoint);
             }
         }
     }
@@ -118,5 +181,15 @@ public class UIControlInterface : MonoBehaviour
         {
             interactable.DoSpecial();
         }
+    }
+
+    // takes a worldspace point and returns the screenspace point
+    public Vector2 WorldToScreenPos(Vector2 pos)
+    {
+        Vector2 viewportPos = Camera.main.WorldToScreenPoint(pos);
+        Vector2 canvasPos = new Vector2(viewportPos.x * canvasScaler.referenceResolution.x / Screen.width,
+                                        viewportPos.y * canvasScaler.referenceResolution.y / Screen.height);
+
+        return canvasPos;
     }
 }

@@ -6,6 +6,8 @@ using TMPro;
 // this low-level base class is used to make an object play dialogue lines and move around
 // all interactables and anything else that can act in the world are based on this
 // it has hooks for playing animations and showing text, but it does not assume they exist
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
 
 public enum AnimSingle
 {
@@ -223,7 +225,7 @@ public class ActorBase : MonoBehaviour
     // update the player position each frame if needed
     private void Update()
     {
-        if (SceneManager.instance.GetAdventureActive())
+        if (SceneManager.instance.adventureState && !SceneManager.instance.adventurePaused)
         {
             if (waiting)
             {
