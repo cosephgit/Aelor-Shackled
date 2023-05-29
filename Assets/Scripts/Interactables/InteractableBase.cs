@@ -3,6 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // the base class for all objects which can be interacted with
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
+
+public enum InteractionType
+{
+    Look,
+    Talk,
+    Use,
+    Special
+}
 
 public class InteractableBase : ActorBase
 {
@@ -53,20 +63,31 @@ public class InteractableBase : ActorBase
         }
     }
 
-    public void SetLook(EventSequence eventsNew)
+    public void SetEvent(InteractionType type, EventSequence eventNew)
     {
-        eventLook = eventsNew;
-    }
-    public void SetTalk(EventSequence eventsNew)
-    {
-        eventTalk = eventsNew;
-    }
-    public void SetUse(EventSequence eventsNew)
-    {
-        eventUse = eventsNew;
-    }
-    public void SetSpecial(EventSequence eventsNew)
-    {
-        eventSpecial = eventsNew;
+        switch (type)
+        {
+            default:
+            case InteractionType.Look:
+            {
+                eventLook = eventNew;
+                break;
+            }
+            case InteractionType.Talk:
+            {
+                eventTalk = eventNew;
+                break;
+            }
+            case InteractionType.Use:
+            {
+                eventUse = eventNew;
+                break;
+            }
+            case InteractionType.Special:
+            {
+                eventSpecial = eventNew;
+                break;
+            }
+        }
     }
 }

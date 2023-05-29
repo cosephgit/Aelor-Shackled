@@ -4,6 +4,8 @@ using UnityEngine;
 
 // the scene manager is a singleton unique to each scene
 // it acts as a service provider for key references to e.g. the player pawn, the movement area collider(s), and any scripts that should be run on scene start
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
 
 public class SceneManager : MonoBehaviour
 {
@@ -15,8 +17,8 @@ public class SceneManager : MonoBehaviour
     [SerializeField]private float posYClose = -5f;
     [SerializeField]private float scaleFar = 0.5f;
     [SerializeField]private float posYFar = 5f;
-    private bool adventureState = true; // is the game currently in adventure mode (rather than battle mode)?
-    private bool adventurePaused = false; // is the adventure mode currently paused (to run an event)
+    public bool adventureState { get; private set; } = true; // is the game currently in adventure mode (rather than battle mode)?
+    public bool adventurePaused { get; private set; } = false; // is the adventure mode currently paused (to run an event)
 
     private void Awake()
     {
@@ -45,12 +47,6 @@ public class SceneManager : MonoBehaviour
     public void SetAdventureState(bool stateSet)
     {
         adventureState = stateSet;
-    }
-
-    // returns if adventure mode is currently active and unpaused
-    public bool GetAdventureActive()
-    {
-        return (adventureState && !adventurePaused);
     }
 
     public float GetScaleForYPos(float ypos)

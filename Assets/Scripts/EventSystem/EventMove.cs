@@ -4,6 +4,8 @@ using UnityEngine;
 
 // this event tells the subject pawn to move to the target point
 // this event only ends when the subject reaches the target
+// Created by: Seph 27/5
+// Last edit by: Seph 28/5
 
 public class EventMove : Event
 {
