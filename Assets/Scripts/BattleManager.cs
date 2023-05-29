@@ -65,6 +65,6 @@ public class BattleManager : MonoBehaviour {
 
         Debug.Log("BattleEndsDefeat");
 
-        callingEvent.BattleEnd(false);
+        callingEvent.BattleEnd(true);
     }
 }
