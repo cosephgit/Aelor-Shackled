@@ -82,6 +82,7 @@ public class PlayerAdventureController : ActorBase
     }
 
     // remove the indicated item type from the inventory, and re-sort the inventory
+    // returns true if the item was successfully removed, false otherwise
     public bool UseItem(InventoryItem type)
     {
         for (int i = 0; i < Global.INVENTORYSLOTS; i++)
