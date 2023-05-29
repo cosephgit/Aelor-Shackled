@@ -807,6 +807,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e025fc7a6e81b2e48a4078b198dbc486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  playerCanvas: {fileID: 1545490629175323413}
+  enemyCanvas: {fileID: 1545490628068869548}
 --- !u!1001 &1545490629272094788
 PrefabInstance:
   m_ObjectHideFlags: 0
