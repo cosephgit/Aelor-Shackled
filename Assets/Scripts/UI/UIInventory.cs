@@ -74,4 +74,9 @@ public class UIInventory : MonoBehaviour
     {
 
     }
+
+    public void SetSlotContent(InventoryItem type)
+    {
+        
+    }
 }
