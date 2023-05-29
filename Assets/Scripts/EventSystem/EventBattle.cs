@@ -9,8 +9,7 @@ using UnityEngine;
 
 public class EventBattle : Event
 {
-    // TODO reference to battle class placeholder name: BATTLECLASS
-    //[SerializeField]private BATTLECLASS battle;
+    [SerializeField]private BattleManager battle;
     [SerializeField]private EventSequence sequenceVictory;
     [SerializeField]private EventSequence sequenceDefeat;
 
@@ -20,8 +19,7 @@ public class EventBattle : Event
         // TODO camera transition to battle view
         finished = false;
 
-        // TODO call battle class to start battle with reference to player pawn, enemy pawn, and this event, placeholder method name STARTBATTLE
-        // battle.STARTBATTLE(this);
+        //battle.BeginBattleEvent();
 
         // TEMP FOR TESTING
         UIControlInterface.instance.dialogueTree.OpenDialogue(transform.position, new string[2] { "WIN", "LOSE" }, this);

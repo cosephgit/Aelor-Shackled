@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - FrostbiteBeam
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -60,9 +61,9 @@ TagManager:
   - name: Interactable
     uniqueID: 1736876463
     locked: 0
-  - name: Dialogue
-    uniqueID: 1609240467
-    locked: 0
   - name: env foreground
     uniqueID: 2987763087
+    locked: 0
+  - name: Dialogue
+    uniqueID: 1609240467
     locked: 0

@@ -7,7 +7,7 @@ using TMPro;
 // all interactables and anything else that can act in the world are based on this
 // it has hooks for playing animations and showing text, but it does not assume they exist
 // Created by: Seph 27/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 29/5
 
 public enum AnimSingle
 {
@@ -30,8 +30,13 @@ public class ActorBase : MonoBehaviour
     [SerializeField]private float idleDelay = 10f;
     [Header("Dialogue")]
     [SerializeField]private TextMeshPro text;
+    [SerializeField]private Color tint = Color.clear;
     private float idleTimer;
-    private Vector3 moveTarget;
+    protected WalkableArea moveAreaCurrent;
+    protected Vector3 moveTarget; // the move target to reach the target inside the current collider
+    protected WalkableArea moveTargetArea; // the current move's target area
+    protected Vector3 moveTargetFinal; // the final move target
+    protected WalkableArea moveTargetAreaFinal; // the current move's target area
     private bool moving = false;
     private bool moveEvent = false; // set to true if the actor is required to move during an event
     private float movingCycle = 0f;
@@ -43,6 +48,10 @@ public class ActorBase : MonoBehaviour
         if (text)
         {
             text.enabled = false;
+            if (tint.a > 0)
+                text.color = tint; // use the tint if it has been changed from clear
+            else if (sprite)
+                text.color = sprite.color; // else copy the sprite color
             SetIdleTimer();
         }
     }
@@ -55,6 +64,8 @@ public class ActorBase : MonoBehaviour
 
             sprite.transform.localScale = spriteScale * SceneManager.instance.GetScaleForYPos(transform.position.y);
         }
+
+        moveAreaCurrent = SceneManager.instance.GetClosestWalkable(transform.position, out _);
     }
 
     // sets the movement target point for the player
@@ -64,6 +75,62 @@ public class ActorBase : MonoBehaviour
         moveTarget = pos;
         moveEvent = duringEvent;
         moving = true;
+    }
+
+    private void SetMovePath(WalkableArea areaNext, Vector2 pointNext, WalkableArea areaFinal, Vector2 pointfinal)
+    {
+        SetMoveTarget(pointNext);
+        moveTargetArea = areaNext;
+        moveTargetFinal = pointfinal;
+        moveTargetAreaFinal = areaFinal;
+    }
+
+    // try to find a way for this actor to move to the target point
+    // it finds the nearest move area
+    // then tries to pathfind to that area from the current area
+    // if it finds a path, it sets the actor to move it
+    // if it fails to find a path, it tells the actor not to move
+    // TODO might need adjustment later for when a path is blocked
+    public void TryMove(Vector2 point)
+    {
+        // first check if there's a collider directly under the point
+        WalkableArea areaNext; // the next movement area needed to follow this path
+        Vector2 pointNext; // the movement point needed to reach the next area in this path
+        Vector2 pointValid; // need to adjust the input point to a valid point inside a walkable area
+        WalkableArea areaTarget = SceneManager.instance.GetClosestWalkable(point, out pointValid);
+
+        if (areaTarget)
+        {
+            // the point is in a valid move area, check if it's possible to navigate to it from the current move area
+            if (moveAreaCurrent)
+            {
+                if (areaTarget == moveAreaCurrent)
+                {
+                    SetMovePath(areaTarget, pointValid, areaTarget, pointValid);
+                    return;
+                }
+                else if (moveAreaCurrent.FindConnection(new List<WalkableArea>(), areaTarget, out pointNext, out areaNext))
+                {
+                    // a valid connection has been found to this move area
+                    // move areas should NOT be overlapped, so assume this is the right final area
+                    SetMovePath(areaNext, pointNext, areaTarget, pointValid);
+                    return;
+                }
+            }
+            else
+            {
+                moveAreaCurrent = areaTarget;
+                SetMovePath(areaTarget, pointValid, areaTarget, pointValid);
+                Debug.LogError("actor " + gameObject + " does not have an initial move area set");
+            }
+        }
+    }
+
+    public void ClearMoveTarget()
+    {
+        moveTarget = transform.position;
+        moveTargetArea = null;
+        moveTargetAreaFinal = null;
     }
 
     // set the delay before an idle event will happen with a small amount of random variation
@@ -138,15 +205,43 @@ public class ActorBase : MonoBehaviour
 
         if (Mathf.Approximately(offset.magnitude, 0))
         {
-            if (animator)
+            bool finishedMove = true;
+
+            // have reached the current target point
+            // check if we have a final destination point and continue to it if possible
+            // otherwise, stop moving
+            if (moveTargetArea)
             {
-                animator.SetFloat("moveX", 0);
-                animator.SetFloat("moveY", 0);
+                // pathfinding is set up so check for next area
+                moveAreaCurrent = moveTargetArea;
+                moveTargetArea = null;
+                if (moveAreaCurrent == moveTargetAreaFinal)
+                {
+                    // have reached final move target, so just move to the final destination point
+                    moveTarget = moveTargetFinal;
+                    moveTargetAreaFinal = null;
+                    finishedMove = false;
+                }
+                else
+                {
+                    // there are more areas to move through, find the path
+                    TryMove(moveTargetFinal);
+                    finishedMove = false;
+                }
             }
-            moving = false;
-            movingCycle = 0f;
-            transform.rotation = Quaternion.identity;
-            SetIdleTimer();
+
+            if (finishedMove)
+            {
+                if (animator)
+                {
+                    animator.SetFloat("moveX", 0);
+                    animator.SetFloat("moveY", 0);
+                }
+                moving = false;
+                movingCycle = 0f;
+                transform.rotation = Quaternion.identity;
+                SetIdleTimer();
+            }
         }
         else
         {
@@ -249,7 +344,7 @@ public class ActorBase : MonoBehaviour
             if (!moveEvent)
             {
                 // if NOT set to move during event, clear the current move target
-                moveTarget = transform.position;
+                ClearMoveTarget();
                 movingCycle = 0f;
                 if (animator)
                 {
