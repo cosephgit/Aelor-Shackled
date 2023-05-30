@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26712147d44a92408b796f7fb5b6e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
+  delay: 0.1
   item: {fileID: 0}
   eventPass: {fileID: 0}
   eventFail: {fileID: 0}

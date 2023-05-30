@@ -42,6 +42,7 @@ public class ActorBase : MonoBehaviour
     private float movingCycle = 0f;
     private bool waiting = false; // waiting for battle mode or adventure pause to end
     private Vector3 spriteScale;
+    protected bool asleep = false;
 
     protected virtual void Awake()
     {
@@ -87,6 +88,8 @@ public class ActorBase : MonoBehaviour
     // this should already be validated within the defined moveable area in the SceneManager
     public void SetMoveTarget(Vector3 pos, bool duringEvent = false)
     {
+        if (asleep) return;
+
         moveTarget = pos - moveAreaCurrent.transform.position; // movement is always assigned RELATIVE TO A WALKABLE AREA
         //moveTarget = pos;
         moveEvent = duringEvent;
@@ -95,6 +98,8 @@ public class ActorBase : MonoBehaviour
 
     private void SetMovePath(WalkableArea areaNext, Vector3 pointNext, WalkableArea areaFinal, Vector3 pointfinal, bool duringEvent = false)
     {
+        if (asleep) return;
+
         moveTargetArea = areaNext;
         moveTargetFinal = pointfinal - areaFinal.transform.position;
         moveTargetAreaFinal = areaFinal;
@@ -109,6 +114,8 @@ public class ActorBase : MonoBehaviour
     // TODO might need adjustment later for when a path is blocked
     public void TryMove(Vector2 point, bool duringEvent)
     {
+        if (asleep) return;
+
         // first check if there's a collider directly under the point
         WalkableArea areaNext; // the next movement area needed to follow this path
         Vector2 pointNext; // the movement point needed to reach the next area in this path
@@ -341,6 +348,8 @@ public class ActorBase : MonoBehaviour
     // checks for idle animation and dialogue for an Update
     private void UpdateIdleCheck()
     {
+        if (asleep) return;
+
         if (idleEvents.Length > 0)
         {
             idleTimer -= Time.deltaTime;
@@ -388,5 +397,18 @@ public class ActorBase : MonoBehaviour
         }
 
         UpdateMove();
+    }
+
+    public virtual void Wake()
+    {
+        asleep = false;
+        SetIdleTimer();
+    }
+
+    public virtual void Sleep()
+    {
+        asleep = true;
+        HideLine();
+        ClearMoveTarget();
     }
 }

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8142400f502e64a48a0fc06fabbf7538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1
+  delay: 0.1
+  battle: {fileID: 0}
   sequenceVictory: {fileID: 0}
   sequenceDefeat: {fileID: 0}
