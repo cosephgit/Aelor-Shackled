@@ -4,7 +4,7 @@ using UnityEngine;
 
 // controller for any player-specific actor behaviour
 // Created by: Seph 27/5
-// Last edit by: Seph 29/5
+// Last edit by: Seph 30/5
 
 public class PlayerAdventureController : ActorBase
 {
@@ -22,9 +22,7 @@ public class PlayerAdventureController : ActorBase
         {
             bool done = false;
 
-            if (items[i])
-                UIControlInterface.instance.inventory.SetSlotContent(items[i]);
-            else
+            if (!items[i])
             {
                 // this is a blank slot, check all subsequent slots for an item to bring back
                 for (int j = i+1; j < Global.INVENTORYSLOTS; j++)
@@ -33,12 +31,11 @@ public class PlayerAdventureController : ActorBase
                     {
                         items[i] = items[j];
                         items[j] = null;
-                        UIControlInterface.instance.inventory.SetSlotContent(items[i]);
                         break;
                     }
                     else if (j == Global.INVENTORYSLOTS - 1)
                     {
-                        // reached the end of the inventory array so it must be empty
+                        // reached the end of the inventory array with empty slots so it must be empty
                         done = true;
                     }
                 }
@@ -46,6 +43,10 @@ public class PlayerAdventureController : ActorBase
 
             if (done) break;
         }
+
+        // update the UI
+        for (int i = 0; i < Global.INVENTORYSLOTS; i++)
+            UIControlInterface.instance.inventory.SetSlotContent(i, items[i]);
     }
 
     // returns the index of the item in the player's inventory if the player has it
@@ -75,6 +76,7 @@ public class PlayerAdventureController : ActorBase
                 // add the item to this slot
                 items[i] = type;
                 SortSlots();
+                UIControlInterface.instance.inventory.UIMouseOver();
                 return i;
             }
         }
@@ -91,6 +93,8 @@ public class PlayerAdventureController : ActorBase
             {
                 items[i] = null;
                 SortSlots();
+                // pop the inventory bar up when adding an item
+                UIControlInterface.instance.inventory.UIMouseOver();
                 return true;
             }
         }

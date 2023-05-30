@@ -5,7 +5,7 @@ using UnityEngine;
 // Manages a navigation collider
 // contains connection data to other navigation colliders in the scene for pathfinding between movement areas
 // Created by: Seph 29/5
-// Last edit by: Seph 29/5
+// Last edit by: Seph 30/5
 
 public class WalkableArea : MonoBehaviour
 {

@@ -7,7 +7,7 @@ using TMPro;
 // all interactables and anything else that can act in the world are based on this
 // it has hooks for playing animations and showing text, but it does not assume they exist
 // Created by: Seph 27/5
-// Last edit by: Seph 29/5
+// Last edit by: Seph 30/5
 
 public enum AnimSingle
 {
@@ -142,6 +142,11 @@ public class ActorBase : MonoBehaviour
         }
     }
 
+    public bool IsMoving()
+    {
+        return moving;
+    }
+
     // set the delay before an idle event will happen with a small amount of random variation
     private void SetIdleTimer()
     {
@@ -236,7 +241,23 @@ public class ActorBase : MonoBehaviour
         // end of hacky pretend animation
     }
 
+    // ends movement effects when the destination is reached
+    private void UpdateMoveAnimationEnd()
+    {
+        if (animator)
+        {
+            animator.SetFloat("moveX", 0);
+            animator.SetFloat("moveY", 0);
+        }
+        moving = false;
+        movingCycle = 0f;
+        transform.rotation = Quaternion.identity;
+        SetIdleTimer();
+    }
+
     // moves this pawn to it's current destination for one Update
+    // note that this DOES need to be checked even when not moving, to allow for parallax layers moving under the pawn
+    // (possibly actors will be made a child of the parallax layer in future)
     protected void UpdateMove()
     {
         Vector3 offset = moveTarget + moveAreaCurrent.transform.position - transform.position;
@@ -250,39 +271,36 @@ public class ActorBase : MonoBehaviour
             // otherwise, stop moving
             if (moveTargetArea)
             {
-                // pathfinding is set up so check for next area
-                EnterWalkArea(moveTargetArea);
-                moveTargetArea = null;
-                if (moveAreaCurrent == moveTargetAreaFinal)
+                if (moveTargetArea != moveAreaCurrent)
                 {
-                    // have reached final move target, so just move to the final destination point
-                    // remember that SetMovePath expects ABSOLUTE positions not RELATIVE positions
-                    SetMovePath(moveTargetAreaFinal, moveTargetFinal + moveTargetAreaFinal.transform.position, moveTargetAreaFinal, moveTargetFinal + moveTargetAreaFinal.transform.position, moveEvent);
-                    //moveTarget = moveTargetFinal;
-                    //moveTargetAreaFinal = null;
-                    finishedMove = false;
-                }
-                else
-                {
-                    // there are more areas to move through, find the path
-                    // remember that SetMovePath expects ABSOLUTE positions not RELATIVE positions
-                    TryMove(moveTargetFinal + moveTargetAreaFinal.transform.position, moveEvent);
-                    finishedMove = false;
+                    // then this move is not the final move in the path
+                    // pathfinding is set up so check for next area
+                    if (moveTargetAreaFinal)
+                    {
+                        EnterWalkArea(moveTargetArea);
+                        moveTargetArea = null;
+                        finishedMove = false;
+                        if (moveAreaCurrent == moveTargetAreaFinal)
+                        {
+                            // have reached final move target, so just move to the final destination point
+                            // remember that SetMovePath expects ABSOLUTE positions not RELATIVE positions
+                            SetMovePath(moveTargetAreaFinal, moveTargetFinal + moveTargetAreaFinal.transform.position, moveTargetAreaFinal, moveTargetFinal + moveTargetAreaFinal.transform.position, moveEvent);
+                            //moveTarget = moveTargetFinal;
+                            //moveTargetAreaFinal = null;
+                            finishedMove = false;
+                        }
+                        else
+                        {
+                            // there are more areas to move through, find the path
+                            // remember that TryMove expects ABSOLUTE positions not RELATIVE positions
+                            TryMove(moveTargetFinal + moveTargetAreaFinal.transform.position, moveEvent);
+                        }
+                    }
                 }
             }
 
             if (finishedMove)
-            {
-                if (animator)
-                {
-                    animator.SetFloat("moveX", 0);
-                    animator.SetFloat("moveY", 0);
-                }
-                moving = false;
-                movingCycle = 0f;
-                transform.rotation = Quaternion.identity;
-                SetIdleTimer();
-            }
+                UpdateMoveAnimationEnd();
         }
         else
         {
