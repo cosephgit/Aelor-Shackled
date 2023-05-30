@@ -65,24 +65,40 @@ public class ActorBase : MonoBehaviour
             sprite.transform.localScale = spriteScale * SceneManager.instance.GetScaleForYPos(transform.position.y);
         }
 
-        moveAreaCurrent = SceneManager.instance.GetClosestWalkable(transform.position, out _);
+        EnterWalkArea(SceneManager.instance.GetClosestWalkable(transform.position, out _));
+        ClearMoveTarget();
+    }
+
+    // when this actor needs to enter a walkable area, call this method to do so
+    private void EnterWalkArea(WalkableArea area)
+    {
+        sprite.sortingLayerID = area.GetAreaLayer();
+        moveAreaCurrent = area;
+    }
+
+    public void ClearMoveTarget()
+    {
+        moveTarget = transform.position - moveAreaCurrent.transform.position;
+        moveTargetArea = null;
+        moveTargetAreaFinal = null;
     }
 
     // sets the movement target point for the player
     // this should already be validated within the defined moveable area in the SceneManager
-    public void SetMoveTarget(Vector2 pos, bool duringEvent = false)
+    public void SetMoveTarget(Vector3 pos, bool duringEvent = false)
     {
-        moveTarget = pos;
+        moveTarget = pos - moveAreaCurrent.transform.position; // movement is always assigned RELATIVE TO A WALKABLE AREA
+        //moveTarget = pos;
         moveEvent = duringEvent;
         moving = true;
     }
 
-    private void SetMovePath(WalkableArea areaNext, Vector2 pointNext, WalkableArea areaFinal, Vector2 pointfinal)
+    private void SetMovePath(WalkableArea areaNext, Vector3 pointNext, WalkableArea areaFinal, Vector3 pointfinal, bool duringEvent = false)
     {
-        SetMoveTarget(pointNext);
         moveTargetArea = areaNext;
-        moveTargetFinal = pointfinal;
+        moveTargetFinal = pointfinal - areaFinal.transform.position;
         moveTargetAreaFinal = areaFinal;
+        SetMoveTarget(pointNext, duringEvent);
     }
 
     // try to find a way for this actor to move to the target point
@@ -91,7 +107,7 @@ public class ActorBase : MonoBehaviour
     // if it finds a path, it sets the actor to move it
     // if it fails to find a path, it tells the actor not to move
     // TODO might need adjustment later for when a path is blocked
-    public void TryMove(Vector2 point)
+    public void TryMove(Vector2 point, bool duringEvent)
     {
         // first check if there's a collider directly under the point
         WalkableArea areaNext; // the next movement area needed to follow this path
@@ -106,31 +122,24 @@ public class ActorBase : MonoBehaviour
             {
                 if (areaTarget == moveAreaCurrent)
                 {
-                    SetMovePath(areaTarget, pointValid, areaTarget, pointValid);
+                    SetMovePath(areaTarget, pointValid, areaTarget, pointValid, duringEvent);
                     return;
                 }
                 else if (moveAreaCurrent.FindConnection(new List<WalkableArea>(), areaTarget, out pointNext, out areaNext))
                 {
                     // a valid connection has been found to this move area
                     // move areas should NOT be overlapped, so assume this is the right final area
-                    SetMovePath(areaNext, pointNext, areaTarget, pointValid);
+                    SetMovePath(areaNext, pointNext, areaTarget, pointValid, duringEvent);
                     return;
                 }
             }
             else
             {
-                moveAreaCurrent = areaTarget;
-                SetMovePath(areaTarget, pointValid, areaTarget, pointValid);
+                EnterWalkArea(areaTarget);
+                SetMovePath(areaTarget, pointValid, areaTarget, pointValid, duringEvent);
                 Debug.LogError("actor " + gameObject + " does not have an initial move area set");
             }
         }
-    }
-
-    public void ClearMoveTarget()
-    {
-        moveTarget = transform.position;
-        moveTargetArea = null;
-        moveTargetAreaFinal = null;
     }
 
     // set the delay before an idle event will happen with a small amount of random variation
@@ -198,10 +207,39 @@ public class ActorBase : MonoBehaviour
         }
     }
 
+    private void UpdateMoveAnimation(Vector2 move)
+    {
+        // hacky pretend animation until we have some artwork
+        if (move.x > 0)
+        {
+            if (sprite)
+            {
+                Vector3 scale = sprite.transform.localEulerAngles;
+                scale.z = 5f;
+                sprite.transform.localEulerAngles = scale;
+            }
+            movingCycle -= Time.deltaTime;
+        }
+        else if (move.x < 0)
+        {
+            if (sprite)
+            {
+                Vector3 scale = sprite.transform.localEulerAngles;
+                scale.z = -5f;
+                sprite.transform.localEulerAngles = scale;
+            }
+            movingCycle += Time.deltaTime;
+        }
+        else
+            movingCycle += Time.deltaTime;
+        transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(movingCycle * 20f) * 5f);
+        // end of hacky pretend animation
+    }
+
     // moves this pawn to it's current destination for one Update
     protected void UpdateMove()
     {
-        Vector3 offset = moveTarget - transform.position;
+        Vector3 offset = moveTarget + moveAreaCurrent.transform.position - transform.position;
 
         if (Mathf.Approximately(offset.magnitude, 0))
         {
@@ -213,19 +251,22 @@ public class ActorBase : MonoBehaviour
             if (moveTargetArea)
             {
                 // pathfinding is set up so check for next area
-                moveAreaCurrent = moveTargetArea;
+                EnterWalkArea(moveTargetArea);
                 moveTargetArea = null;
                 if (moveAreaCurrent == moveTargetAreaFinal)
                 {
                     // have reached final move target, so just move to the final destination point
-                    moveTarget = moveTargetFinal;
-                    moveTargetAreaFinal = null;
+                    // remember that SetMovePath expects ABSOLUTE positions not RELATIVE positions
+                    SetMovePath(moveTargetAreaFinal, moveTargetFinal + moveTargetAreaFinal.transform.position, moveTargetAreaFinal, moveTargetFinal + moveTargetAreaFinal.transform.position, moveEvent);
+                    //moveTarget = moveTargetFinal;
+                    //moveTargetAreaFinal = null;
                     finishedMove = false;
                 }
                 else
                 {
                     // there are more areas to move through, find the path
-                    TryMove(moveTargetFinal);
+                    // remember that SetMovePath expects ABSOLUTE positions not RELATIVE positions
+                    TryMove(moveTargetFinal + moveTargetAreaFinal.transform.position, moveEvent);
                     finishedMove = false;
                 }
             }
@@ -263,31 +304,8 @@ public class ActorBase : MonoBehaviour
                 animator.SetFloat("moveY", move.y);
             }
 
-            // hacky pretend animation until we have some artwork
-            if (move.x > 0)
-            {
-                if (sprite)
-                {
-                    Vector3 scale = sprite.transform.localEulerAngles;
-                    scale.z = 5f;
-                    sprite.transform.localEulerAngles = scale;
-                }
-                movingCycle -= Time.deltaTime;
-            }
-            else if (move.x < 0)
-            {
-                if (sprite)
-                {
-                    Vector3 scale = sprite.transform.localEulerAngles;
-                    scale.z = -5f;
-                    sprite.transform.localEulerAngles = scale;
-                }
-                movingCycle += Time.deltaTime;
-            }
-            else
-                movingCycle += Time.deltaTime;
-            transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(movingCycle * 20f) * 5f);
-            // end of hacky pretend animation
+            if (moving)
+                UpdateMoveAnimation(move);
 
             move += transform.position;
 
@@ -328,11 +346,7 @@ public class ActorBase : MonoBehaviour
                 moveEvent = false; // make sure one event move doesn't bleed over into another event by accident
                 SetIdleTimer();
             }
-            else if (moving)
-            {
-                UpdateMove();
-            }
-            else
+            else if (!moving)
             {
                 UpdateIdleCheck();
             }
@@ -354,10 +368,7 @@ public class ActorBase : MonoBehaviour
                 transform.rotation = Quaternion.identity;
             }
         }
-        else if (moveEvent)
-        {
-            // allow moving during an event if required
-            UpdateMove();
-        }
+
+        UpdateMove();
     }
 }

@@ -18,7 +18,7 @@ public class EventMove : Event
         base.Run(setSequence);
 
         subjectTarget = target.position; // this is needed in case the subject is the parent of this event, else the subject will chase the target endlessly
-        subject.SetMoveTarget(subjectTarget, true);
+        subject.TryMove(subjectTarget, true);
         finished = false;
     }
 

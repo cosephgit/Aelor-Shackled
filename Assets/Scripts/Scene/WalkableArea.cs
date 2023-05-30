@@ -10,6 +10,7 @@ using UnityEngine;
 public class WalkableArea : MonoBehaviour
 {
     [field: SerializeField]public Collider2D walkCollider { get; private set; }
+    [SerializeField]private SpriteRenderer sprite;
     [SerializeField]private Transform[] walkConnection; // a point connecting to another walkable area
     [SerializeField]private WalkableArea[] walkArea; // a connected walkable area
     private int connectionCount;
@@ -20,6 +21,12 @@ public class WalkableArea : MonoBehaviour
 
         if (connectionCount != Mathf.Max(walkArea.Length, walkConnection.Length))
             Debug.LogError("connection and area count and mismatch");
+    }
+
+    void Start()
+    {
+        if (!SceneManager.instance.DEBUG)
+            sprite.color = Color.clear; // hide the debug sprite
     }
 
     // looks for the passed walkable area reference in all connections
@@ -55,9 +62,9 @@ public class WalkableArea : MonoBehaviour
         return false; // there is no connection, pathfinding failed to this node
     }
 
-/*
-PSEUDOCODE
-
-
-*/
+    // an ActorBase calls this when it enters this walkable area
+    public int GetAreaLayer()
+    {
+        return sprite.sortingLayerID;
+    }
 }
