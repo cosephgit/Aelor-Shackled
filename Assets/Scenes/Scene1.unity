@@ -1919,6 +1919,8 @@ MonoBehaviour:
   - {fileID: 864233695}
   - {fileID: 118819582}
   - {fileID: 113244957}
+  popUpDuration: 2
+  popUpMoveTime: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -5493,7 +5495,6 @@ MonoBehaviour:
   <dialogueTree>k__BackingField: {fileID: 822779245}
   <inventory>k__BackingField: {fileID: 517412756}
   mousePointer: {fileID: 2079058201}
-  canvasRect: {fileID: 1913120846}
   canvasScaler: {fileID: 1611385505}
 --- !u!114 &1962369024 stripped
 MonoBehaviour:
