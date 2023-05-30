@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 // this class detects mouse clicks/touch taps and implements their effects
 // Created by: Seph 27/5
-// Last edit by: Seph 29/5
+// Last edit by: Seph 30/5
 
 public class UIControlInterface : MonoBehaviour
 {
@@ -108,7 +108,7 @@ public class UIControlInterface : MonoBehaviour
 
                 foreach (Collider2D touch in touchHits)
                 {
-                    InteractableBase interactableTest = touch.gameObject.GetComponent<InteractableBase>();
+                    InteractableBase interactableTest = touch.gameObject.GetComponentInParent<InteractableBase>();
 
                     if (interactableTest)
                     {
@@ -122,7 +122,7 @@ public class UIControlInterface : MonoBehaviour
                 }
 
                 // nothing has been clicked on, so try telling the player pawn to move to the point
-                SceneManager.instance.playerAdventure.TryMove(worldPos);
+                SceneManager.instance.playerAdventure.TryMove(worldPos, false);
             }
         }
     }

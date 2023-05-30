@@ -5,11 +5,12 @@ using UnityEngine;
 // the scene manager is a singleton unique to each scene
 // it acts as a service provider for key references to e.g. the player pawn, the movement area collider(s), and any scripts that should be run on scene start
 // Created by: Seph 27/5
-// Last edit by: Seph 29/5
+// Last edit by: Seph 30/5
 
 public class SceneManager : MonoBehaviour
 {
     public static SceneManager instance;
+    [field: SerializeField]public bool DEBUG { get; private set; }
     [field: SerializeField]public WalkableArea[] moveAreas { get; private set; } // the collider which defines the area which the player pawn can move within
     [field: SerializeField]public PlayerAdventureController playerAdventure { get; private set; } // the player controller during adventure mode
     [field: Header("The scale of actors in the foreground (bottom of screen) and background (top of screen)")]

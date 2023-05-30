@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1209419582775632146}
-  - component: {fileID: 5419997197660826109}
+  - component: {fileID: -8882390596728959173}
   m_Layer: 0
-  m_Name: EventDefeat
+  m_Name: EventUseItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5419997197660826109
+--- !u!114 &-8882390596728959173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1209419582775632172}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09ab52949b2c1cb45b1c1657ece414b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 23e1fdee1c8be9743b826cbfc609a005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 0.1
+  delay: 1
+  item: {fileID: 0}

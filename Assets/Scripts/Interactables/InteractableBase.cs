@@ -4,7 +4,7 @@ using UnityEngine;
 
 // the base class for all objects which can be interacted with
 // Created by: Seph 27/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 30/5
 
 public enum InteractionType
 {
@@ -24,14 +24,16 @@ public class InteractableBase : ActorBase
     [SerializeField]private EventSequence eventSpecial;
 
     // check if there is an event sequence of the given type
-    public bool HasLook() { return (eventLook != null); }
-    public bool HasTalk() { return (eventTalk != null); }
-    public bool HasUse() { return (eventUse != null); }
-    public bool HasSpecial() { return (eventSpecial != null); }
+    public bool HasLook() { return (eventLook != null && !asleep); }
+    public bool HasTalk() { return (eventTalk != null && !asleep); }
+    public bool HasUse() { return (eventUse != null && !asleep); }
+    public bool HasSpecial() { return (eventSpecial != null && !asleep); }
 
     // run the event sequence of the given type
     public void DoLook()
     {
+        if (asleep) return;
+
         if (eventLook)
         {
             eventLook.Run();
@@ -40,6 +42,8 @@ public class InteractableBase : ActorBase
     }
     public void DoTalk()
     {
+        if (asleep) return;
+
         if (eventTalk)
         {
             eventTalk.Run();
@@ -48,6 +52,8 @@ public class InteractableBase : ActorBase
     }
     public void DoUse()
     {
+        if (asleep) return;
+
         if (eventUse)
         {
             eventUse.Run();
@@ -56,6 +62,8 @@ public class InteractableBase : ActorBase
     }
     public void DoSpecial()
     {
+        if (asleep) return;
+
         if (eventSpecial)
         {
             eventSpecial.Run();
