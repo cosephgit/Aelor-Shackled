@@ -13,6 +13,7 @@ public class EventSequence : MonoBehaviour
 {
     [SerializeField]private Event[] events; // the events which should be run in this event sequence
     [SerializeField]private bool pauseAdventure = true; // should normal adventure controls be put on pause until this event ends?
+    [SerializeField]private EventSequence eventSequenceNext; // if non-null, this event sequence is automatically started after this one ends
     private int eventCurrent; // the index of the current event in the events array
 
     public void Run()
@@ -33,6 +34,10 @@ public class EventSequence : MonoBehaviour
         {
             // event sequence has finished
             SceneManager.instance.SetAdventurePause(false);
+            if (eventSequenceNext)
+            {
+                eventSequenceNext.Run();
+            }
         }
     }
 

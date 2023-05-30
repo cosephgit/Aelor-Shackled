@@ -5,25 +5,27 @@ using UnityEngine;
 // this event tells the subject pawn to move to the target point
 // this event only ends when the subject reaches the target
 // Created by: Seph 27/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 30/5
 
 public class EventMove : Event
 {
     [SerializeField]private ActorBase subject;
-    [SerializeField]private Vector3 target;
+    [SerializeField]private Transform target;
+    Vector3 subjectTarget;
 
     public override void Run(EventSequence setSequence)
     {
         base.Run(setSequence);
 
-        subject.SetMoveTarget(target, true);
+        subjectTarget = target.position; // this is needed in case the subject is the parent of this event, else the subject will chase the target endlessly
+        subject.TryMove(subjectTarget, true);
         finished = false;
     }
 
     // this event only ends when the subject reaches the target point
     protected override void Update()
     {
-        if (Mathf.Approximately((subject.transform.position - target).magnitude, 0f))
+        if (!subject.IsMoving())
         {
             finished = true;
         }
