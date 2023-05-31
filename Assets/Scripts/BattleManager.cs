@@ -33,8 +33,8 @@ public class BattleManager : MonoBehaviour {
         player = GameObject.FindWithTag("Player");  //Set player
         enemy = GameObject.FindWithTag("Enemy");    //Set enemy
 
-        player.GetComponent<PlayerController>().enabled = false;
-        enemy.GetComponent<EnemyController>().enabled = false;
+        player.GetComponent<PlayerBattleController>().enabled = false;
+        enemy.GetComponent<EnemyBattleController>().enabled = false;
 
         //Set battle canvas inactive
         playerCanvas.SetActive(false);
@@ -49,8 +49,8 @@ public class BattleManager : MonoBehaviour {
         callingEvent = callingEventNew;
 
         //Enable player and enemy battle controllers
-        player.GetComponent<PlayerController>().enabled = true;
-        enemy.GetComponent<EnemyController>().enabled = true;
+        player.GetComponent<PlayerBattleController>().enabled = true;
+        enemy.GetComponent<EnemyBattleController>().enabled = true;
 
         //Set player and enemy canvas active
         playerCanvas.SetActive(true);
@@ -61,8 +61,8 @@ public class BattleManager : MonoBehaviour {
 
     public void BattleEndsVictory() {
         //Disable player and enemy battle controllers
-        player.GetComponent<PlayerController>().enabled = false;
-        enemy.GetComponent<EnemyController>().enabled = false;
+        player.GetComponent<PlayerBattleController>().enabled = false;
+        enemy.GetComponent<EnemyBattleController>().enabled = false;
 
         //Set player and enemy canvas inactive
         playerCanvas.SetActive(false);
@@ -75,8 +75,8 @@ public class BattleManager : MonoBehaviour {
 
     public void BattleEndsDefeat() {
         //Disable player and enemy battle controllers
-        player.GetComponent<PlayerController>().enabled = false;
-        enemy.GetComponent<EnemyController>().enabled = false;
+        player.GetComponent<PlayerBattleController>().enabled = false;
+        enemy.GetComponent<EnemyBattleController>().enabled = false;
 
         //Set player and enemy canvas inactive
         playerCanvas.SetActive(false);
