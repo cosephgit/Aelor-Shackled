@@ -46,6 +46,9 @@ TagManager:
   - name: far ground
     uniqueID: 1120107771
     locked: 0
+  - name: far interactable
+    uniqueID: 3110426933
+    locked: 0
   - name: ActorPawnBackground
     uniqueID: 2438649431
     locked: 0
