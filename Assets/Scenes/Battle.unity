@@ -1147,6 +1147,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &583942480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5065519644276888473, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
+  m_PrefabInstance: {fileID: 1917762736}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &691079645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1395,7 +1406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c38d75d17e8b240a38f63958a3e8ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlInterface: {fileID: 1913120847}
   buttonLook: {fileID: 948360241}
   buttonTalk: {fileID: 1760388440}
   buttonUse: {fileID: 1665687546}
@@ -1942,11 +1952,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1472147802 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1545490628068869548, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-  m_PrefabInstance: {fileID: 1917762736}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1490954475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2021,6 +2026,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8d0a76cbd89b0c439501550b1e5f861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1528821892 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1545490627677956682, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
+  m_PrefabInstance: {fileID: 1917762736}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1611385503
@@ -2178,8 +2194,8 @@ MonoBehaviour:
   firebolt: {fileID: 1989349184, guid: 9bf3add98e356b74b951e4c365feb076, type: 3}
   frostBiteBeam: {fileID: 426546186, guid: bb7c670351908a749b22a22dea211775, type: 3}
   staffPosition: {fileID: 0}
-  fireImage: {fileID: 0}
-  iceImage: {fileID: 0}
+  fireImage: {fileID: 1528821892}
+  iceImage: {fileID: 583942480}
 --- !u!1001 &1645958636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2885,8 +2901,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d64675531bd6d49b6a69a82c2c4181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionMenu: {fileID: 772839774}
+  <interactionMenu>k__BackingField: {fileID: 772839774}
+  <dialogueTree>k__BackingField: {fileID: 0}
+  <inventory>k__BackingField: {fileID: 0}
   mousePointer: {fileID: 2079058201}
+  canvasScaler: {fileID: 0}
 --- !u!1001 &1917762736
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2908,22 +2927,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1545490628371702295, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545490628674753822, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545490628674753822, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545490628674753822, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1545490628674753822, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2934375002308533300, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
@@ -2970,41 +2973,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5065519645357321421, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5065519645357321421, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5065519645357321421, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5065519645357321421, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5557773807644494687, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: enemyCanvas
-      value: 
-      objectReference: {fileID: 1472147802}
-    - target: {fileID: 5557773807644494687, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-      propertyPath: playerCanvas
-      value: 
-      objectReference: {fileID: 1970523933}
     - target: {fileID: 6675009479847065560, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
       propertyPath: m_Name
       value: BattleEventManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
---- !u!1 &1970523933 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1545490629175323413, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
-  m_PrefabInstance: {fileID: 1917762736}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1995356398
 PrefabInstance:
   m_ObjectHideFlags: 0

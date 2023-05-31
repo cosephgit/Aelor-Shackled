@@ -44,10 +44,16 @@ public class HealthController : MonoBehaviour {
 
 		if (isEnemy) {
 			enemySlider.value = health;
+			if (health <= 0) {
+				BattleManager.instance.BattleEndsVictory();
+			}
 		}
 
         if (isPlayer) {
 			playerSlider.value = health;
+			if (health <= 0) {
+				BattleManager.instance.BattleEndsDefeat();
+			}
 		}
 	}
 
