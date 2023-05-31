@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SCENE1FORESTOUTSKIRTS.unity
+    path: Assets/Scenes/FINAL SCENES/SCENE1FORESTOUTSKIRTS.unity
     guid: 63788caf33eac3049b2feb1b4099eacf
   m_configObjects: {}

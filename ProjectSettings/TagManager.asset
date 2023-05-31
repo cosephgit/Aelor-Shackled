@@ -46,6 +46,9 @@ TagManager:
   - name: far ground
     uniqueID: 1120107771
     locked: 0
+  - name: distant background
+    uniqueID: 473582623
+    locked: 0
   - name: far interactable
     uniqueID: 3110426933
     locked: 0

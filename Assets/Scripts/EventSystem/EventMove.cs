@@ -11,6 +11,7 @@ public class EventMove : Event
 {
     [SerializeField]private ActorBase subject;
     [SerializeField]private Transform target;
+    [SerializeField]private bool moveForced = false; // should this move be forced to this location, regardless of moveable areas?
     Vector3 subjectTarget;
 
     public override void Run(EventSequence setSequence)
@@ -18,7 +19,7 @@ public class EventMove : Event
         base.Run(setSequence);
 
         subjectTarget = target.position; // this is needed in case the subject is the parent of this event, else the subject will chase the target endlessly
-        subject.TryMove(subjectTarget, true);
+        subject.TryMove(subjectTarget, true, moveForced);
         finished = false;
     }
 

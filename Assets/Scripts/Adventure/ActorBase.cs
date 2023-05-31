@@ -23,7 +23,7 @@ public class ActorBase : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField]private SpriteRenderer sprite;
-    [SerializeField]private float playerSpeed = 4f;
+    [SerializeField]private float moveSpeed = 5f;
     [SerializeField]protected Animator animator;
     [Header("Idle actions")]
     [SerializeField]private EventSequence[] idleEvents;
@@ -111,10 +111,22 @@ public class ActorBase : MonoBehaviour
     // then tries to pathfind to that area from the current area
     // if it finds a path, it sets the actor to move it
     // if it fails to find a path, it tells the actor not to move
-    // TODO might need adjustment later for when a path is blocked
-    public void TryMove(Vector2 point, bool duringEvent)
+    public void TryMove(Vector3 point, bool duringEvent, bool forced = false)
     {
         if (asleep) return;
+
+        if (forced)
+        {
+            // for events moving outside of the walkable areas
+            moveTarget = point - moveAreaCurrent.transform.position;
+            moveTargetFinal = point - moveAreaCurrent.transform.position;
+
+            moveTargetArea = null;
+            moveTargetAreaFinal = null;
+
+            moving = true;
+            return;
+        }
 
         // first check if there's a collider directly under the point
         WalkableArea areaNext; // the next movement area needed to follow this path
@@ -221,29 +233,29 @@ public class ActorBase : MonoBehaviour
 
     private void UpdateMoveAnimation(Vector2 move)
     {
-        // hacky pretend animation until we have some artwork
-        if (move.x > 0)
+        // hacky pretend animation until we have some animations
+        if (move.x >= 0)
         {
             if (sprite)
             {
-                Vector3 scale = sprite.transform.localEulerAngles;
-                scale.z = 5f;
-                sprite.transform.localEulerAngles = scale;
-            }
-            movingCycle -= Time.deltaTime;
-        }
-        else if (move.x < 0)
-        {
-            if (sprite)
-            {
-                Vector3 scale = sprite.transform.localEulerAngles;
-                scale.z = -5f;
-                sprite.transform.localEulerAngles = scale;
+                Vector3 angles = sprite.transform.localEulerAngles;
+                angles.z = 5f;
+                sprite.transform.localEulerAngles = angles;
+                sprite.flipX = false;
             }
             movingCycle += Time.deltaTime;
         }
         else
-            movingCycle += Time.deltaTime;
+        {
+            if (sprite)
+            {
+                Vector3 angles = sprite.transform.localEulerAngles;
+                angles.z = -5f;
+                sprite.transform.localEulerAngles = angles;
+                sprite.flipX = true;
+            }
+            movingCycle -= Time.deltaTime;
+        }
         transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(movingCycle * 20f) * 5f);
         // end of hacky pretend animation
     }
@@ -251,6 +263,12 @@ public class ActorBase : MonoBehaviour
     // ends movement effects when the destination is reached
     private void UpdateMoveAnimationEnd()
     {
+        if (sprite)
+        {
+            Vector3 angles = sprite.transform.localEulerAngles;
+            angles.z = 0f;
+            sprite.transform.localEulerAngles = angles;
+        }
         if (animator)
         {
             animator.SetFloat("moveX", 0);
@@ -311,7 +329,7 @@ public class ActorBase : MonoBehaviour
         }
         else
         {
-            float frameSpeed = playerSpeed * Time.deltaTime; // * SceneManager.instance.GetScaleForYPos(transform.position.y);
+            float frameSpeed = moveSpeed * Time.deltaTime; // * SceneManager.instance.GetScaleForYPos(transform.position.y);
             Vector3 move;
 
             if (offset.magnitude <= frameSpeed)
