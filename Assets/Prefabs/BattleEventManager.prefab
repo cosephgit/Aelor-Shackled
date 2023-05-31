@@ -807,6 +807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e025fc7a6e81b2e48a4078b198dbc486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  callingEvent: {fileID: 0}
   player: {fileID: 0}
   enemy: {fileID: 0}
   playerCanvas: {fileID: 1545490629175323413}
