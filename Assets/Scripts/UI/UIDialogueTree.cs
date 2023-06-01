@@ -6,14 +6,13 @@ using TMPro;
 
 // manages the dialogue tree UI menu
 // Created by: Seph 28/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 1/6
 
 public class UIDialogueTree : MonoBehaviour
 {
     [Header("Ordered array of buttons")]
     [SerializeField]private Button[] buttons;
-    [SerializeField]private Image buttonBackground;
-    [SerializeField]private RectTransform dialogueRect;
+    [SerializeField]private GameObject buttonHolder;
     private TextMeshProUGUI[] buttonTexts;
     private int buttonCount;
     private Event currentDialogueTree;
@@ -38,7 +37,7 @@ public class UIDialogueTree : MonoBehaviour
 
         currentDialogueTree = parentEvent;
 
-        dialogueRect.anchoredPosition = UIControlInterface.instance.WorldToScreenPos(pos);
+        buttonHolder.transform.position = UIControlInterface.instance.WorldToScreenPos(pos);
 
         // show option buttons for only the provided lines
         for (int i = 0; i < buttonCount; i++)

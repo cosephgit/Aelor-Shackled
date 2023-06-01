@@ -37,6 +37,7 @@ public class ActorBase : MonoBehaviour
     protected WalkableArea moveTargetArea; // the current move's target area
     protected Vector3 moveTargetFinal; // the final move target
     protected WalkableArea moveTargetAreaFinal; // the current move's target area
+    private MoveFacing moveTargetFacing = MoveFacing.Normal; // the move facing that should be taken at the end of the move
     private bool moving = false;
     private bool moveEvent = false; // set to true if the actor is required to move during an event
     private float movingCycle = 0f;
@@ -73,12 +74,16 @@ public class ActorBase : MonoBehaviour
     // when this actor needs to enter a walkable area, call this method to do so
     private void EnterWalkArea(WalkableArea area)
     {
-        sprite.sortingLayerID = area.GetAreaLayer();
+        if (sprite)
+            sprite.sortingLayerID = area.GetAreaLayer();
         moveAreaCurrent = area;
     }
 
     public void ClearMoveTarget()
     {
+        if (!moveAreaCurrent)
+            EnterWalkArea(SceneManager.instance.GetClosestWalkable(transform.position, out _));
+
         moveTarget = transform.position - moveAreaCurrent.transform.position;
         moveTargetArea = null;
         moveTargetAreaFinal = null;
@@ -94,6 +99,7 @@ public class ActorBase : MonoBehaviour
         //moveTarget = pos;
         moveEvent = duringEvent;
         moving = true;
+        moveTargetFacing = MoveFacing.Normal;
     }
 
     private void SetMovePath(WalkableArea areaNext, Vector3 pointNext, WalkableArea areaFinal, Vector3 pointfinal, bool duringEvent = false)
@@ -104,6 +110,27 @@ public class ActorBase : MonoBehaviour
         moveTargetFinal = pointfinal - areaFinal.transform.position;
         moveTargetAreaFinal = areaFinal;
         SetMoveTarget(pointNext, duringEvent);
+    }
+
+    // when a move event requires ending a move with a certain facing this is called to set it
+    // when moving is set to false (at the end of a move) it will be applied
+    public void SetMoveFacing(MoveFacing moveFacingSet)
+    {
+        if (moving)
+        {
+            moveTargetFacing = moveFacingSet;
+        }
+        else
+        {
+            // if no move has been assigned, just change facing
+            if (sprite)
+            {
+                if (moveFacingSet == MoveFacing.Right)
+                    sprite.flipX = false;
+                else if (moveFacingSet == MoveFacing.Left)
+                    sprite.flipX = true;
+            }
+        }
     }
 
     // try to find a way for this actor to move to the target point
@@ -125,6 +152,7 @@ public class ActorBase : MonoBehaviour
             moveTargetAreaFinal = null;
 
             moving = true;
+            moveTargetFacing = MoveFacing.Normal;
             return;
         }
 
@@ -268,6 +296,11 @@ public class ActorBase : MonoBehaviour
             Vector3 angles = sprite.transform.localEulerAngles;
             angles.z = 0f;
             sprite.transform.localEulerAngles = angles;
+
+            if (moveTargetFacing == MoveFacing.Right)
+                sprite.flipX = false;
+            else if (moveTargetFacing == MoveFacing.Left)
+                sprite.flipX = true;
         }
         if (animator)
         {
@@ -275,6 +308,7 @@ public class ActorBase : MonoBehaviour
             animator.SetFloat("moveY", 0);
         }
         moving = false;
+        moveTargetFacing = MoveFacing.Normal;
         movingCycle = 0f;
         transform.rotation = Quaternion.identity;
         SetIdleTimer();

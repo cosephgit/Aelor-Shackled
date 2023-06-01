@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - PlayerPawn
   - MoveBoundary
   - Interactable
   - 
@@ -27,7 +27,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Projectile
   - 
   - 
   - 
@@ -75,6 +75,9 @@ TagManager:
     locked: 0
   - name: env foreground
     uniqueID: 2987763087
+    locked: 0
+  - name: Bullets
+    uniqueID: 2066971625
     locked: 0
   - name: Dialogue
     uniqueID: 1609240467

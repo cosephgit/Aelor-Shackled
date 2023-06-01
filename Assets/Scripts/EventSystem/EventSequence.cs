@@ -18,7 +18,6 @@ public class EventSequence : MonoBehaviour
 
     public void Run()
     {
-        Debug.Log("event sequence triggered");
         SceneManager.instance.SetAdventurePause(pauseAdventure);
         eventCurrent = 0;
         RunCurrentEvent();
