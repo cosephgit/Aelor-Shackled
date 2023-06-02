@@ -61,6 +61,15 @@ public class PlayerAdventureController : ActorBase
         return -1;
     }
 
+    // returns the index of the first item slot that is empty (or -1 if none are empty)
+    public int GetItemSlotEmpty()
+    {
+        for (int i = 0; i < Global.INVENTORYSLOTS; i++)
+            if (!items[i]) return i;
+
+        return -1;
+    }
+
     // returns the index of the slot that the item is added to, or -1 if it fails (out of slots, or already in inventory)
     public int AddItem(InventoryItem type)
     {

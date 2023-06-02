@@ -19,7 +19,7 @@ public class EventBattle : Event
         // TODO camera transition to battle view
         finished = false;
 
-        //battle.BeginBattleEvent();
+        //battle.BeginBattleEvent(this);
 
         // TEMP FOR TESTING
         UIControlInterface.instance.dialogueTree.OpenDialogue(transform.position, new string[2] { "WIN", "LOSE" }, this);
