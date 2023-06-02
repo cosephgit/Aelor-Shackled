@@ -6,19 +6,20 @@ using UnityEngine.UI;
 
 // this class detects mouse clicks/touch taps and implements their effects
 // Created by: Seph 27/5
-// Last edit by: Seph 30/5
+// Last edit by: Seph 1/6
 
-public class UIControlInterface : MonoBehaviour
+public class UIControlInterface : UIControlInterfaceMenu
 {
     public static UIControlInterface instance;
+    [field: Header("In game menus")]
     [field: SerializeField]public UIInteractMenu interactionMenu { get; private set; }
     [field: SerializeField]public UIDialogueTree dialogueTree { get; private set; }
     [field: SerializeField]public UIInventory inventory { get; private set; }
-    [SerializeField]private Image mousePointer;
-    [SerializeField]private CanvasScaler canvasScaler;
+    [field: SerializeField]public UIInventoryItemMove inventoryItem { get; private set; }
+    //[SerializeField]private Image mousePointer;
     private InteractableBase interactable;
 
-    private void Awake()
+    protected override void Awake()
     {
         if (instance)
         {
@@ -33,8 +34,7 @@ public class UIControlInterface : MonoBehaviour
 
         interactionMenu.gameObject.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+        base.Awake();
     }
 
     private List<RaycastResult> GetUIObjects(Vector2 pos)
@@ -55,9 +55,9 @@ public class UIControlInterface : MonoBehaviour
 
     // called when a position to touch is determined
     // the pos is the UI position, not the world position
-    void TouchInput(Vector2 pos, bool tap)
+    protected override void TouchInput(Vector2 pos, bool tap)
     {
-        mousePointer.transform.position = pos;
+        base.TouchInput(pos, tap);
 
         // TODO add mouse pointer changes (e.g. highlight over interactables) here
 
@@ -127,32 +127,6 @@ public class UIControlInterface : MonoBehaviour
         }
     }
 
-    // check for touches and mouse clicks each frame
-    private void Update()
-    {
-        if (Input.mousePresent)
-        {
-            // if there's a mouse, it takes control of the pointer
-            Vector3 touchPos = Input.mousePosition;
-            TouchInput(touchPos, (Input.GetMouseButtonDown(0)));
-
-            // detect stretching/shrinking/dragging
-        }
-        else if (Input.touchCount > 0)
-        {
-            // no mouse, so try for touch controls
-            if (Input.touchCount == 1)
-            {
-                Vector3 touchPos = Input.touches[0].position;
-                TouchInput(touchPos, true);
-            }
-            else
-            {
-                // detect stretching/shrinking/dragging
-            }
-        }
-    }
-
     public void SelectLook()
     {
         if (interactable)
@@ -183,12 +157,26 @@ public class UIControlInterface : MonoBehaviour
     }
 
     // takes a worldspace point and returns the screenspace point
-    public Vector2 WorldToScreenPos(Vector2 pos)
+    // this versions works for RectTransform.anchoredPosition only
+    // deprecated
+    /*
+    public Vector2 WorldToScreenPosForRect(Vector2 pos)
     {
         Vector2 viewportPos = Camera.main.WorldToScreenPoint(pos);
         Vector2 canvasPos = new Vector2(viewportPos.x * canvasScaler.referenceResolution.x / Screen.width,
                                         viewportPos.y * canvasScaler.referenceResolution.y / Screen.height);
 
+        Debug.Log("pos " + pos + " viewportpos " + viewportPos + " canvaspos " + canvasPos);
+
         return canvasPos;
+    }
+    */
+
+    // takes a worldspace point and returns the screenspace point
+    public Vector2 WorldToScreenPos(Vector2 pos)
+    {
+        Vector2 viewportPos = Camera.main.WorldToScreenPoint(pos);
+
+        return viewportPos;
     }
 }

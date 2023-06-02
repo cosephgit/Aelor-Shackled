@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1989349184}
   - component: {fileID: 1989349183}
   - component: {fileID: 5337752887949692333}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Firebolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2066971625
+  m_SortingLayer: 12
   m_SortingOrder: 0
   m_Sprite: {fileID: 3625043607559282579, guid: 19fb86013d8c24d6cb8410c0aadf30fa, type: 3}
   m_Color: {r: 0.8773585, g: 0.32399955, b: 0.1779548, a: 1}
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  frostBeamEffect: {fileID: 0}
 --- !u!1 &3344243469275459632
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3344243469275459633}
   - component: {fileID: 3344243469275459638}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}

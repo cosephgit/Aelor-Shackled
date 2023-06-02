@@ -1,9 +1,15 @@
+/****************************************************************************
+ * Author:			Skylar Masson
+ * Date started:	4/26/2023
+ * Description:  	Class contains all methods for the PlayerBattleController
+ ******************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerBattleController : MonoBehaviour {
 
     [Header("--PUBLIC PLAYER DATA--")]
     public float fireboltVelocity, frostBeamVelocity;

@@ -542,6 +542,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 1411570664058372082, guid: f98478aee7feda948a22238d6721906a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 1411570664058372088, guid: f98478aee7feda948a22238d6721906a, type: 3}
       propertyPath: enemySlider
       value: 
@@ -771,6 +775,10 @@ PrefabInstance:
     - target: {fileID: 7836362859276543887, guid: 19ead847b37e6a845ba77d047dda06a5, type: 3}
       propertyPath: m_Name
       value: PlayerCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836362859276543887, guid: 19ead847b37e6a845ba77d047dda06a5, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19ead847b37e6a845ba77d047dda06a5, type: 3}
