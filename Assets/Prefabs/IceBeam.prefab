@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 426546186}
   - component: {fileID: 426546185}
   - component: {fileID: 9222981775050626797}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: IceBeam
   m_TagString: FrostbiteBeam
   m_Icon: {fileID: 0}
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2066971625
+  m_SortingLayer: 12
   m_SortingOrder: 0
   m_Sprite: {fileID: -5177388603050735206, guid: 8884154dfe85442a3a3578be807dbcdf, type: 3}
   m_Color: {r: 0, g: 0.5715741, b: 0.6792453, a: 1}
@@ -149,6 +149,10 @@ PrefabInstance:
     - target: {fileID: 3578828511179829416, guid: 9e8cc07cce660ce46aa72a7586b13768, type: 3}
       propertyPath: m_Name
       value: IceTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 3578828511179829416, guid: 9e8cc07cce660ce46aa72a7586b13768, type: 3}
+      propertyPath: m_Layer
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3578828511179829422, guid: 9e8cc07cce660ce46aa72a7586b13768, type: 3}
       propertyPath: m_RootOrder

@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - PlayerPawn
   - MoveBoundary
   - Interactable
   - 
@@ -27,7 +27,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Projectile
   - 
   - 
   - 
@@ -45,6 +45,9 @@ TagManager:
     locked: 0
   - name: far ground
     uniqueID: 1120107771
+    locked: 0
+  - name: distant background
+    uniqueID: 473582623
     locked: 0
   - name: far interactable
     uniqueID: 3110426933
@@ -72,6 +75,9 @@ TagManager:
     locked: 0
   - name: env foreground
     uniqueID: 2987763087
+    locked: 0
+  - name: Bullets
+    uniqueID: 2066971625
     locked: 0
   - name: Dialogue
     uniqueID: 1609240467

@@ -25,14 +25,15 @@ public class UIInventory : MonoBehaviour
         posOriginal = inventoryBox.position;
         posOffscreen = inventoryBoxOffscreen.position;
 
+        for (int i = 0; i < inventorySlots.Length; i++)
+        {
+            inventorySlots[i].SetEmpty();
+            inventorySlots[i].SetInitialPos();
+        }
         // move the box off-screen at the start of the scene
         inventoryBox.position = posOffscreen;
         popUpProgress = 0f;
         popUpEndTime = 0f;
-        for (int i = 0; i < inventorySlots.Length; i++)
-        {
-            inventorySlots[i].SetEmpty();
-        }
     }
 
     // updates the inventory position for the current popUpProgress
@@ -81,5 +82,10 @@ public class UIInventory : MonoBehaviour
             inventorySlots[index].SetFilled(type);
         else
             inventorySlots[index].SetEmpty();
+    }
+
+    public Vector2 GetSlotPosition(int index)
+    {
+        return (inventorySlots[index].slotBasePos);
     }
 }
