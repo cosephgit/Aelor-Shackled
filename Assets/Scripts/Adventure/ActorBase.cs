@@ -16,7 +16,8 @@ public enum AnimSingle
     Cry, // trigger "cry"
     Fall, // trigger "fall"
     Die, // trigger "die" - this one does not automatically return to normal anim
-    None // does nothing
+    None, // does nothing
+    Attack // trigger "attack" (or cast spell)
 }
 
 public class ActorBase : MonoBehaviour
@@ -112,6 +113,27 @@ public class ActorBase : MonoBehaviour
         SetMoveTarget(pointNext, duringEvent);
     }
 
+    private void UpdateFacing(bool right)
+    {
+        if (animator)
+        {
+            if (right)
+            {
+                Vector3 scale = animator.transform.localScale;
+                scale.x = 1f;
+                animator.transform.localScale = scale;
+                //sprite.flipX = false;
+            }
+            else
+            {
+                Vector3 scale = animator.transform.localScale;
+                scale.x = -1f;
+                animator.transform.localScale = scale;
+                //sprite.flipX = true;
+            }
+        }
+    }
+
     // when a move event requires ending a move with a certain facing this is called to set it
     // when moving is set to false (at the end of a move) it will be applied
     public void SetMoveFacing(MoveFacing moveFacingSet)
@@ -126,9 +148,9 @@ public class ActorBase : MonoBehaviour
             if (sprite)
             {
                 if (moveFacingSet == MoveFacing.Right)
-                    sprite.flipX = false;
+                    UpdateFacing(true);
                 else if (moveFacingSet == MoveFacing.Left)
-                    sprite.flipX = true;
+                    UpdateFacing(false);
             }
         }
     }
@@ -237,13 +259,16 @@ public class ActorBase : MonoBehaviour
                     animator.SetTrigger("die");
                     break;
                 }
-                default:
-                case AnimSingle.None:
+                case AnimSingle.Attack:
                 {
-                    animator.SetBool("talking", true);
+                    animator.SetTrigger("attack");
                     break;
                 }
+                default:
+                case AnimSingle.None:
+                    break;
             }
+            animator.SetBool("talking", true);
         }
     }
 
@@ -261,31 +286,10 @@ public class ActorBase : MonoBehaviour
 
     private void UpdateMoveAnimation(Vector2 move)
     {
-        // hacky pretend animation until we have some animations
         if (move.x >= 0)
-        {
-            if (sprite)
-            {
-                Vector3 angles = sprite.transform.localEulerAngles;
-                angles.z = 5f;
-                sprite.transform.localEulerAngles = angles;
-                sprite.flipX = false;
-            }
-            movingCycle += Time.deltaTime;
-        }
+            UpdateFacing(true);
         else
-        {
-            if (sprite)
-            {
-                Vector3 angles = sprite.transform.localEulerAngles;
-                angles.z = -5f;
-                sprite.transform.localEulerAngles = angles;
-                sprite.flipX = true;
-            }
-            movingCycle -= Time.deltaTime;
-        }
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(movingCycle * 20f) * 5f);
-        // end of hacky pretend animation
+            UpdateFacing(false);
     }
 
     // ends movement effects when the destination is reached
@@ -293,24 +297,25 @@ public class ActorBase : MonoBehaviour
     {
         if (sprite)
         {
-            Vector3 angles = sprite.transform.localEulerAngles;
-            angles.z = 0f;
-            sprite.transform.localEulerAngles = angles;
+            //Vector3 angles = sprite.transform.localEulerAngles;
+            //angles.z = 0f;
+            //sprite.transform.localEulerAngles = angles;
 
             if (moveTargetFacing == MoveFacing.Right)
-                sprite.flipX = false;
+                UpdateFacing(true);
             else if (moveTargetFacing == MoveFacing.Left)
-                sprite.flipX = true;
+                UpdateFacing(false);
         }
         if (animator)
         {
+            animator.SetBool("moving", false);
             animator.SetFloat("moveX", 0);
             animator.SetFloat("moveY", 0);
         }
         moving = false;
         moveTargetFacing = MoveFacing.Normal;
-        movingCycle = 0f;
-        transform.rotation = Quaternion.identity;
+        //movingCycle = 0f;
+        //transform.rotation = Quaternion.identity;
         SetIdleTimer();
     }
 
@@ -377,6 +382,7 @@ public class ActorBase : MonoBehaviour
 
             if (animator)
             {
+                animator.SetBool("moving", true);
                 animator.SetFloat("moveX", move.x);
                 animator.SetFloat("moveY", move.y);
             }
@@ -441,6 +447,7 @@ public class ActorBase : MonoBehaviour
                 movingCycle = 0f;
                 if (animator)
                 {
+                    animator.SetBool("moving", false);
                     animator.SetFloat("moveX", 0f);
                     animator.SetFloat("moveY", 0f);
                 }
