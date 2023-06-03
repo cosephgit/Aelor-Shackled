@@ -8,7 +8,9 @@ public class SoundSystemManager : MonoBehaviour {
 
     [Header("AUDIO")]
     public AudioClip[] sfxClips;
+    public AudioClip[] musicClips;
     private AudioSource[] sfxPool;
+    public AudioSource musicSource;
     public int maxSFXSources = 10;
     private int currentSFX;
     public AudioSource multi;
@@ -24,6 +26,8 @@ public class SoundSystemManager : MonoBehaviour {
         else {
             Destroy(gameObject);
         }
+
+        PlayMusic("ForestOutskirts");
     }
 
     void Start() {
@@ -58,6 +62,18 @@ public class SoundSystemManager : MonoBehaviour {
                 sfx.pitch = pitch;
                 sfx.volume = volume;
                 sfx.Play();
+                currentSFX++;
+                currentSFX %= maxSFXSources;
+                break;
+            }
+        }
+    }
+
+    public void PlayMusic(string clipName) {
+        for (int i = 0; i < musicClips.Length; i++) {
+            if (clipName == musicClips[i].name) {
+                musicSource.clip = musicClips[i];
+                musicSource.Play();
                 currentSFX++;
                 currentSFX %= maxSFXSources;
                 break;
