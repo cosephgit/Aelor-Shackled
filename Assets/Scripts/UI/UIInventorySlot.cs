@@ -6,7 +6,7 @@ using UnityEngine.UI;
 // this class shows the current player inventory
 // the inventory box slides down out of sight while empty or not in use, and pops back up on mouse over
 // Created by: Seph 28/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 30/5
 
 public class UIInventorySlot : MonoBehaviour
 {
@@ -20,11 +20,13 @@ public class UIInventorySlot : MonoBehaviour
         slotItem.enabled = false;
     }
 
-    public void SetFilled(Sprite item)
+    public void SetFilled(InventoryItem item)
     {
         slotButton.interactable = true;
 
-        slotItem.sprite = item;
+        slotItem.sprite = item.itemImage.sprite;
+        slotItem.color = item.itemImage.color;
+
         slotItem.enabled = true;
     }
 }

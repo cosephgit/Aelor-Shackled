@@ -43,11 +43,32 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: PlayerPawn
+  - name: far ground
+    uniqueID: 1120107771
+    locked: 0
+  - name: ActorPawnBackground
+    uniqueID: 2438649431
+    locked: 0
+  - name: far bg
+    uniqueID: 85976659
+    locked: 0
+  - name: base ground
+    uniqueID: 1696380559
+    locked: 0
+  - name: env background
+    uniqueID: 164684419
+    locked: 0
+  - name: envmiddle
+    uniqueID: 1690905877
+    locked: 0
+  - name: ActorPawn
     uniqueID: 1028545303
     locked: 0
   - name: Interactable
     uniqueID: 1736876463
+    locked: 0
+  - name: env foreground
+    uniqueID: 2987763087
     locked: 0
   - name: Dialogue
     uniqueID: 1609240467
