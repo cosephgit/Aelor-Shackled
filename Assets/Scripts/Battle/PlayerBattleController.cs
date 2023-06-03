@@ -26,11 +26,10 @@ public class PlayerBattleController : MonoBehaviour {
     public Image iceImage;
 
 
-    Animator anim;
+    [SerializeField] protected Animator anim;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Awake() {
-        anim = GetComponent<Animator>();
         fireImage.fillAmount = fireCooldown;
         iceImage.fillAmount = iceCooldown;
     }
@@ -56,6 +55,7 @@ public class PlayerBattleController : MonoBehaviour {
                     newfirebolt.AddForce(transform.right * fireboltVelocity, ForceMode2D.Force);
                     fireCooldown = 10f;
                     fireImage.fillAmount = 1;
+                    anim.SetTrigger("attack");
                 }
                 break;
             case 2: //Ice attack

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FrostbiteBeam
   - Enemy
+  - FireBurnEffect
   layers:
   - Default
   - TransparentFX
