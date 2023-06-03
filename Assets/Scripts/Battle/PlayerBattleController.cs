@@ -56,6 +56,7 @@ public class PlayerBattleController : MonoBehaviour {
                     fireCooldown = 10f;
                     fireImage.fillAmount = 1;
                     anim.SetTrigger("attack");
+                    SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
                 }
                 break;
             case 2: //Ice attack

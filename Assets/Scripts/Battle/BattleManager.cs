@@ -30,7 +30,13 @@ public class BattleManager : MonoBehaviour {
 
     //Initial method that sets the instance to only this class
     void Awake() {
-        if (instance == null) instance = this;
+        if (instance == null) {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else {
+            Destroy(gameObject);
+        }
     }
 
     //Method at start sets player and enemy variables; disables battle-related controllers and canvas

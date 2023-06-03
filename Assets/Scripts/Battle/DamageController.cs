@@ -30,6 +30,7 @@ public class DamageController : MonoBehaviour {
 	}
 
 	void HitObject(GameObject g) {
+		SoundSystemManager.instance.PlaySFX("Attack Hit");
 		HealthController health = g.GetComponentInParent<HealthController>();
 		if (health != null) {
 			health.TakeDamage(damage);

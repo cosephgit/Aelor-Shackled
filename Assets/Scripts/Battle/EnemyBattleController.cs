@@ -42,11 +42,13 @@ public class EnemyBattleController : MonoBehaviour {
             //}
 
             yield return new WaitForSeconds(3f);
-            //use attack 1
+            
+            //ATTACK ONE (FIRE)
             Debug.Log("attack 1");
             anim.SetTrigger("attack1");
             Rigidbody2D newfirebolt = Instantiate(firebolt, powerPosition.position, powerPosition.transform.rotation) as Rigidbody2D;
             newfirebolt.AddForce(-transform.right * fireboltVelocity, ForceMode2D.Force);
+            SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
 
             //wait another second
             yield return new WaitForSeconds(2f);
