@@ -5,17 +5,21 @@ using UnityEngine.UI;
 
 public class EnemyBattleController : MonoBehaviour {
 
-    Animator anim;
+    [Header("--PUBLIC ENEMY OBJECTS--")]
+    public Rigidbody2D firebolt;
+    public Rigidbody2D powerPosition;
+
+    [Header("--PUBLIC ENEMY DATA--")]
+    public float fireboltVelocity;
+
+    [SerializeField] protected Animator anim;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Start() {
-        anim = GetComponent<Animator>();
-
-        //BattleController calls this method instead
-        DetermineEnemy(1);
+        //Will use later
     }
 
-    void DetermineEnemy(int enemyNum) {
+    public void DetermineEnemy(int enemyNum) {
         switch (enemyNum) {
             case 1:
                 StartCoroutine(Enemy1Coroutine());
@@ -31,15 +35,19 @@ public class EnemyBattleController : MonoBehaviour {
 
     IEnumerator Enemy1Coroutine() {
         while (true) {
-            yield return new WaitForSeconds(3f);
+           // yield return new WaitForSeconds(3f);
             //attack 3 once health is below 50%
             //if (currentHealth <= 50) {
-             //   Debug.Log("attack3");
+                //Debug.Log("attack3");
             //}
 
             yield return new WaitForSeconds(3f);
             //use attack 1
             Debug.Log("attack 1");
+            anim.SetTrigger("attack1");
+            Rigidbody2D newfirebolt = Instantiate(firebolt, powerPosition.position, powerPosition.transform.rotation) as Rigidbody2D;
+            newfirebolt.AddForce(-transform.right * fireboltVelocity, ForceMode2D.Force);
+
             //wait another second
             yield return new WaitForSeconds(2f);
             //use attack 2

@@ -3820,27 +3820,10 @@ PrefabInstance:
       propertyPath: battle
       value: 
       objectReference: {fileID: 377034722}
-    m_RemovedComponents:
-    - {fileID: 8027216344893037391, guid: 71945cd6127c903408cbf6860477f871, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71945cd6127c903408cbf6860477f871, type: 3}
 --- !u!1 &8027216344893037387 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8027216345264259285, guid: 71945cd6127c903408cbf6860477f871, type: 3}
   m_PrefabInstance: {fileID: 8027216344893037385}
   m_PrefabAsset: {fileID: 0}
---- !u!70 &8027216344893037391
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8027216344893037387}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.011098623, y: 2.0627286}
-  m_Size: {x: 0.7656255, y: 4.1180787}
-  m_Direction: 0

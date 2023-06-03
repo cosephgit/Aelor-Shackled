@@ -71,6 +71,8 @@ public class BattleManager : MonoBehaviour {
         #endif
 
         player.transform.position = new Vector2(-7.00f, -1.71f);    //Move player back a bit to give space in between the chars for the fight
+
+        enemyController.DetermineEnemy(1); //Start the enemyBattleController
     }
 
     public void BattleEndsVictory() {
