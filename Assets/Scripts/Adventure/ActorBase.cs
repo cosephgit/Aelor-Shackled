@@ -101,12 +101,14 @@ public class ActorBase : MonoBehaviour
         moveEvent = duringEvent;
         moving = true;
         moveTargetFacing = MoveFacing.Normal;
+
+        SoundSystemManager.instance.footstepSource.Play();  //Play Audio for footstep
     }
 
     private void SetMovePath(WalkableArea areaNext, Vector3 pointNext, WalkableArea areaFinal, Vector3 pointfinal, bool duringEvent = false)
     {
         if (asleep) return;
-
+        
         moveTargetArea = areaNext;
         moveTargetFinal = pointfinal - areaFinal.transform.position;
         moveTargetAreaFinal = areaFinal;
@@ -308,6 +310,7 @@ public class ActorBase : MonoBehaviour
         }
         if (animator)
         {
+            SoundSystemManager.instance.footstepSource.Stop();  //Stop Audio for footstep
             animator.SetBool("moving", false);
             animator.SetFloat("moveX", 0);
             animator.SetFloat("moveY", 0);

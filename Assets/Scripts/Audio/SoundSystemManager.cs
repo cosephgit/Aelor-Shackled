@@ -11,6 +11,7 @@ public class SoundSystemManager : MonoBehaviour {
     public AudioClip[] musicClips;
     private AudioSource[] sfxPool;
     public AudioSource musicSource;
+    public AudioSource footstepSource;
     public int maxSFXSources = 10;
     private int currentSFX;
     public AudioSource multi;
