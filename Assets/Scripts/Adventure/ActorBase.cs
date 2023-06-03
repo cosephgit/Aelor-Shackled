@@ -16,14 +16,15 @@ public enum AnimSingle
     Cry, // trigger "cry"
     Fall, // trigger "fall"
     Die, // trigger "die" - this one does not automatically return to normal anim
-    None // does nothing
+    None, // does nothing
+    Attack // trigger "attack" (or cast spell)
 }
 
 public class ActorBase : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField]private SpriteRenderer sprite;
-    [SerializeField]private float playerSpeed = 4f;
+    [SerializeField]private float moveSpeed = 5f;
     [SerializeField]protected Animator animator;
     [Header("Idle actions")]
     [SerializeField]private EventSequence[] idleEvents;
@@ -37,6 +38,7 @@ public class ActorBase : MonoBehaviour
     protected WalkableArea moveTargetArea; // the current move's target area
     protected Vector3 moveTargetFinal; // the final move target
     protected WalkableArea moveTargetAreaFinal; // the current move's target area
+    private MoveFacing moveTargetFacing = MoveFacing.Normal; // the move facing that should be taken at the end of the move
     private bool moving = false;
     private bool moveEvent = false; // set to true if the actor is required to move during an event
     private float movingCycle = 0f;
@@ -73,12 +75,16 @@ public class ActorBase : MonoBehaviour
     // when this actor needs to enter a walkable area, call this method to do so
     private void EnterWalkArea(WalkableArea area)
     {
-        sprite.sortingLayerID = area.GetAreaLayer();
+        if (sprite)
+            sprite.sortingLayerID = area.GetAreaLayer();
         moveAreaCurrent = area;
     }
 
     public void ClearMoveTarget()
     {
+        if (!moveAreaCurrent)
+            EnterWalkArea(SceneManager.instance.GetClosestWalkable(transform.position, out _));
+
         moveTarget = transform.position - moveAreaCurrent.transform.position;
         moveTargetArea = null;
         moveTargetAreaFinal = null;
@@ -94,6 +100,7 @@ public class ActorBase : MonoBehaviour
         //moveTarget = pos;
         moveEvent = duringEvent;
         moving = true;
+        moveTargetFacing = MoveFacing.Normal;
     }
 
     private void SetMovePath(WalkableArea areaNext, Vector3 pointNext, WalkableArea areaFinal, Vector3 pointfinal, bool duringEvent = false)
@@ -106,15 +113,70 @@ public class ActorBase : MonoBehaviour
         SetMoveTarget(pointNext, duringEvent);
     }
 
+    private void UpdateFacing(bool right)
+    {
+        if (animator)
+        {
+            if (right)
+            {
+                Vector3 scale = animator.transform.localScale;
+                scale.x = 1f;
+                animator.transform.localScale = scale;
+                //sprite.flipX = false;
+            }
+            else
+            {
+                Vector3 scale = animator.transform.localScale;
+                scale.x = -1f;
+                animator.transform.localScale = scale;
+                //sprite.flipX = true;
+            }
+        }
+    }
+
+    // when a move event requires ending a move with a certain facing this is called to set it
+    // when moving is set to false (at the end of a move) it will be applied
+    public void SetMoveFacing(MoveFacing moveFacingSet)
+    {
+        if (moving)
+        {
+            moveTargetFacing = moveFacingSet;
+        }
+        else
+        {
+            // if no move has been assigned, just change facing
+            if (sprite)
+            {
+                if (moveFacingSet == MoveFacing.Right)
+                    UpdateFacing(true);
+                else if (moveFacingSet == MoveFacing.Left)
+                    UpdateFacing(false);
+            }
+        }
+    }
+
     // try to find a way for this actor to move to the target point
     // it finds the nearest move area
     // then tries to pathfind to that area from the current area
     // if it finds a path, it sets the actor to move it
     // if it fails to find a path, it tells the actor not to move
-    // TODO might need adjustment later for when a path is blocked
-    public void TryMove(Vector2 point, bool duringEvent)
+    public void TryMove(Vector3 point, bool duringEvent, bool forced = false)
     {
         if (asleep) return;
+
+        if (forced)
+        {
+            // for events moving outside of the walkable areas
+            moveTarget = point - moveAreaCurrent.transform.position;
+            moveTargetFinal = point - moveAreaCurrent.transform.position;
+
+            moveTargetArea = null;
+            moveTargetAreaFinal = null;
+
+            moving = true;
+            moveTargetFacing = MoveFacing.Normal;
+            return;
+        }
 
         // first check if there's a collider directly under the point
         WalkableArea areaNext; // the next movement area needed to follow this path
@@ -197,13 +259,16 @@ public class ActorBase : MonoBehaviour
                     animator.SetTrigger("die");
                     break;
                 }
-                default:
-                case AnimSingle.None:
+                case AnimSingle.Attack:
                 {
-                    animator.SetBool("talking", true);
+                    animator.SetTrigger("attack");
                     break;
                 }
+                default:
+                case AnimSingle.None:
+                    break;
             }
+            animator.SetBool("talking", true);
         }
     }
 
@@ -221,44 +286,36 @@ public class ActorBase : MonoBehaviour
 
     private void UpdateMoveAnimation(Vector2 move)
     {
-        // hacky pretend animation until we have some artwork
-        if (move.x > 0)
-        {
-            if (sprite)
-            {
-                Vector3 scale = sprite.transform.localEulerAngles;
-                scale.z = 5f;
-                sprite.transform.localEulerAngles = scale;
-            }
-            movingCycle -= Time.deltaTime;
-        }
-        else if (move.x < 0)
-        {
-            if (sprite)
-            {
-                Vector3 scale = sprite.transform.localEulerAngles;
-                scale.z = -5f;
-                sprite.transform.localEulerAngles = scale;
-            }
-            movingCycle += Time.deltaTime;
-        }
+        if (move.x >= 0)
+            UpdateFacing(true);
         else
-            movingCycle += Time.deltaTime;
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Sin(movingCycle * 20f) * 5f);
-        // end of hacky pretend animation
+            UpdateFacing(false);
     }
 
     // ends movement effects when the destination is reached
     private void UpdateMoveAnimationEnd()
     {
+        if (sprite)
+        {
+            //Vector3 angles = sprite.transform.localEulerAngles;
+            //angles.z = 0f;
+            //sprite.transform.localEulerAngles = angles;
+
+            if (moveTargetFacing == MoveFacing.Right)
+                UpdateFacing(true);
+            else if (moveTargetFacing == MoveFacing.Left)
+                UpdateFacing(false);
+        }
         if (animator)
         {
+            animator.SetBool("moving", false);
             animator.SetFloat("moveX", 0);
             animator.SetFloat("moveY", 0);
         }
         moving = false;
-        movingCycle = 0f;
-        transform.rotation = Quaternion.identity;
+        moveTargetFacing = MoveFacing.Normal;
+        //movingCycle = 0f;
+        //transform.rotation = Quaternion.identity;
         SetIdleTimer();
     }
 
@@ -311,7 +368,7 @@ public class ActorBase : MonoBehaviour
         }
         else
         {
-            float frameSpeed = playerSpeed * Time.deltaTime; // * SceneManager.instance.GetScaleForYPos(transform.position.y);
+            float frameSpeed = moveSpeed * Time.deltaTime; // * SceneManager.instance.GetScaleForYPos(transform.position.y);
             Vector3 move;
 
             if (offset.magnitude <= frameSpeed)
@@ -325,6 +382,7 @@ public class ActorBase : MonoBehaviour
 
             if (animator)
             {
+                animator.SetBool("moving", true);
                 animator.SetFloat("moveX", move.x);
                 animator.SetFloat("moveY", move.y);
             }
@@ -389,6 +447,7 @@ public class ActorBase : MonoBehaviour
                 movingCycle = 0f;
                 if (animator)
                 {
+                    animator.SetBool("moving", false);
                     animator.SetFloat("moveX", 0f);
                     animator.SetFloat("moveY", 0f);
                 }

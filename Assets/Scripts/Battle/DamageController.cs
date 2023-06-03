@@ -16,14 +16,14 @@ public class DamageController : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D c) {
 		if (this.gameObject.tag == "FrostbiteBeam") {
 			ParticleSystem newfrostBeamEffect = Instantiate(frostBeamEffect, transform.position, transform.rotation);
-			Destroy(newfrostBeamEffect, 5f);
+			Destroy(newfrostBeamEffect.gameObject, 5f);
 		}
 		HitObject(c.gameObject);
         Destroy(gameObject);
 	}
 
 	void HitObject(GameObject g) {
-		HealthController health = g.GetComponent<HealthController>();
+		HealthController health = g.GetComponentInParent<HealthController>();
 		if (health != null) {
 			health.TakeDamage(damage);
 		}
