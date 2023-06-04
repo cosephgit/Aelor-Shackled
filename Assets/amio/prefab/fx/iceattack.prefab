@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 619802925}
   - component: {fileID: 619802924}
   - component: {fileID: 771018957685566816}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: iceattack
   m_TagString: FrostbiteBeam
   m_Icon: {fileID: 0}
@@ -119,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8595496578062539275}
   - component: {fileID: 7335848443059223407}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: sprites
   m_TagString: Untagged
   m_Icon: {fileID: 0}

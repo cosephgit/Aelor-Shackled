@@ -14,17 +14,19 @@ public class PlayerBattleController : MonoBehaviour {
     [Header("--PUBLIC PLAYER DATA--")]
     public float fireboltVelocity, frostBeamVelocity;
     public float fireCooldown,
-                 iceCooldown;
+                 iceCooldown,
+                 shieldCooldown;
 
     [Header("--PUBLIC PLAYER OBJECTS--")]
     public Rigidbody2D firebolt;
     public Rigidbody2D frostBiteBeam;
-    public Rigidbody2D fireboltPosition, frostbeamPosition;
+    public Rigidbody2D shield;
+    public Rigidbody2D fireboltPosition, frostbeamPosition, shieldPosition;
 
     [Header("--PUBLIC SPELL UI--")]
     public Image fireImage;
     public Image iceImage;
-
+    public Image shieldImage;
 
     [SerializeField] protected Animator anim;
 
@@ -32,6 +34,7 @@ public class PlayerBattleController : MonoBehaviour {
     void Awake() {
         fireImage.fillAmount = fireCooldown;
         iceImage.fillAmount = iceCooldown;
+        shieldImage.fillAmount = shieldCooldown;
     }
 
     void Update() {
@@ -43,6 +46,11 @@ public class PlayerBattleController : MonoBehaviour {
         if (iceCooldown > 0) {
             iceCooldown -= Time.deltaTime;
             iceImage.fillAmount -= 1 / (iceCooldown + 5) * Time.deltaTime;
+        }
+
+        if (shieldCooldown > 0) {
+            shieldCooldown -= Time.deltaTime;
+            shieldImage.fillAmount -= 1 / (shieldCooldown + 5) * Time.deltaTime;
         }
     }
 
@@ -66,9 +74,17 @@ public class PlayerBattleController : MonoBehaviour {
                     newFrostBiteBeam.AddForce(transform.right * frostBeamVelocity, ForceMode2D.Force);
                     iceCooldown = 10f;
                     iceImage.fillAmount = 1;
+                    anim.SetTrigger("attack");
+                    SoundSystemManager.instance.PlaySFX("Frost Spell Cast");
                 }
                 break;
             case 3: //Shield defense
+                Rigidbody2D newShield = Instantiate(shield, shieldPosition.position, transform.rotation) as Rigidbody2D;
+                shieldCooldown = 10f;
+                shieldImage.fillAmount = 1;
+                Destroy(newShield, 3f);
+                anim.SetTrigger("attack");
+                SoundSystemManager.instance.PlaySFX("Defense Spell");
                 break;
             default:
                 break;

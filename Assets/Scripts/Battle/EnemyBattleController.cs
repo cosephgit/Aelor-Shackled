@@ -44,7 +44,7 @@ public class EnemyBattleController : MonoBehaviour {
 
             yield return new WaitForSeconds(3f);
             if (!canAttack) break;
-            
+
             //ATTACK ONE (FIRE)
             Debug.Log("attack 1");
             anim.SetTrigger("attack1");
@@ -67,9 +67,7 @@ public class EnemyBattleController : MonoBehaviour {
 
     public IEnumerator Frozen() {
         canAttack = false;
-        Debug.Log(canAttack);
         yield return new WaitForSeconds(5f);
-        Debug.Log(canAttack);
         canAttack = true;
         DetermineEnemy(1);
     }

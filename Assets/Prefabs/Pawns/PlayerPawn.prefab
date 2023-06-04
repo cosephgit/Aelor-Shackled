@@ -312,12 +312,16 @@ MonoBehaviour:
   frostBeamVelocity: 150
   fireCooldown: 0
   iceCooldown: 0
+  shieldCooldown: 0
   firebolt: {fileID: 8701723019770871252, guid: c379b3043f5a59e459a7ebbe21931e0b, type: 3}
   frostBiteBeam: {fileID: 619802925, guid: 455b901635f8cc741a068d3151eeb5bf, type: 3}
+  shield: {fileID: -5914221592496102438, guid: de820e8e215cfd64ebf9c02f1be699f0, type: 3}
   fireboltPosition: {fileID: 229369882}
   frostbeamPosition: {fileID: 1514292846}
+  shieldPosition: {fileID: 1514292846}
   fireImage: {fileID: 0}
   iceImage: {fileID: 0}
+  shieldImage: {fileID: 0}
   anim: {fileID: 7557594897429148461}
 --- !u!114 &6857606251394639751
 MonoBehaviour:

@@ -16,18 +16,27 @@ public class DamageController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c) {
 		if (this.gameObject.tag == "FireBurnEffect") {
-			GameObject effect = Instantiate(burnEffect, this.transform.position + this.transform.up, this.transform.rotation);
-			Destroy(effect.gameObject, 3f);
+
+			if (c.gameObject.CompareTag("Enemy") || c.gameObject.CompareTag("Player")) {
+				GameObject effect = Instantiate(burnEffect, this.transform.position + this.transform.up, this.transform.rotation);
+				Destroy(effect.gameObject, 3f);
+			}
 		}
 
 		if (this.gameObject.tag == "FrostbiteBeam") {
-			ParticleSystem effect = Instantiate(frostBeamEffect, transform.position, transform.rotation);
+
+			if (c.gameObject.CompareTag("Enemy") || c.gameObject.CompareTag("Player")) {
+				ParticleSystem effect = Instantiate(frostBeamEffect, transform.position, transform.rotation);
+				Destroy(effect.gameObject, 5f);
+			}
 			
 			if(c.gameObject.CompareTag("Enemy")) {
 				c.gameObject.GetComponent<EnemyBattleController>().Froze();
 			}
+		}
 
-			Destroy(effect.gameObject, 5f);
+		if (c.gameObject.CompareTag("Shield")) {
+			Destroy(this.gameObject);
 		}
 
 		HitObject(c.gameObject);
@@ -35,10 +44,21 @@ public class DamageController : MonoBehaviour {
 	}
 
 	void HitObject(GameObject g) {
-		SoundSystemManager.instance.PlaySFX("Attack Hit");
+		if (g.CompareTag("Shield")) {
+			SoundSystemManager.instance.PlaySFX("Shield Hit-001");
+		}
+		else {
+			SoundSystemManager.instance.PlaySFX("Attack Hit");
+		}
 		HealthController health = g.GetComponentInParent<HealthController>();
 		if (health != null) {
 			health.TakeDamage(damage);
+		}
+	}
+
+	void Update() {
+		if (this.gameObject.tag == "Shield") {
+			Destroy(this.gameObject, 5f);
 		}
 	}
 }
