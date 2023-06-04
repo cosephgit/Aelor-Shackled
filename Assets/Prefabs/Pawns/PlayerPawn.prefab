@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 229369881}
   - component: {fileID: 229369882}
   m_Layer: 9
-  m_Name: Spawn
+  m_Name: SpawnFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,6 +40,59 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229369880}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!1 &1514292844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1514292845}
+  - component: {fileID: 1514292846}
+  m_Layer: 9
+  m_Name: SpawnIce
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1514292845
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514292844}
+  m_LocalRotation: {x: -0, y: -0, z: -0.032852866, w: 0.9994603}
+  m_LocalPosition: {x: 2.46, y: 2.96, z: 0}
+  m_LocalScale: {x: 0.0673, y: 1.4973887, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6857606249777988721}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.765}
+--- !u!50 &1514292846
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514292844}
   m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -201,6 +254,7 @@ Transform:
   - {fileID: 6374264893743734412}
   - {fileID: 6374264895035557721}
   - {fileID: 229369881}
+  - {fileID: 1514292845}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -259,8 +313,9 @@ MonoBehaviour:
   fireCooldown: 0
   iceCooldown: 0
   firebolt: {fileID: 8701723019770871252, guid: c379b3043f5a59e459a7ebbe21931e0b, type: 3}
-  frostBiteBeam: {fileID: 426546186, guid: bb7c670351908a749b22a22dea211775, type: 3}
-  staffPosition: {fileID: 229369882}
+  frostBiteBeam: {fileID: 619802925, guid: 455b901635f8cc741a068d3151eeb5bf, type: 3}
+  fireboltPosition: {fileID: 229369882}
+  frostbeamPosition: {fileID: 1514292846}
   fireImage: {fileID: 0}
   iceImage: {fileID: 0}
   anim: {fileID: 7557594897429148461}

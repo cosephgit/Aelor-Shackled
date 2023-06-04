@@ -22,6 +22,11 @@ public class DamageController : MonoBehaviour {
 
 		if (this.gameObject.tag == "FrostbiteBeam") {
 			ParticleSystem effect = Instantiate(frostBeamEffect, transform.position, transform.rotation);
+			
+			if(c.gameObject.CompareTag("Enemy")) {
+				c.gameObject.GetComponent<EnemyBattleController>().Froze();
+			}
+
 			Destroy(effect.gameObject, 5f);
 		}
 

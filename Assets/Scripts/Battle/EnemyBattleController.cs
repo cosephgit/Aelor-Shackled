@@ -11,12 +11,13 @@ public class EnemyBattleController : MonoBehaviour {
 
     [Header("--PUBLIC ENEMY DATA--")]
     public float fireboltVelocity;
+    public bool canAttack;
 
     [SerializeField] protected Animator anim;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Start() {
-        //Will use later
+        canAttack = true;
     }
 
     public void DetermineEnemy(int enemyNum) {
@@ -34,7 +35,7 @@ public class EnemyBattleController : MonoBehaviour {
     }
 
     IEnumerator Enemy1Coroutine() {
-        while (true) {
+        while (canAttack) {
            // yield return new WaitForSeconds(3f);
             //attack 3 once health is below 50%
             //if (currentHealth <= 50) {
@@ -42,6 +43,7 @@ public class EnemyBattleController : MonoBehaviour {
             //}
 
             yield return new WaitForSeconds(3f);
+            if (!canAttack) break;
             
             //ATTACK ONE (FIRE)
             Debug.Log("attack 1");
@@ -49,6 +51,7 @@ public class EnemyBattleController : MonoBehaviour {
             Rigidbody2D newfirebolt = Instantiate(firebolt, powerPosition.position, powerPosition.transform.rotation) as Rigidbody2D;
             newfirebolt.AddForce(-transform.right * fireboltVelocity, ForceMode2D.Force);
             SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
+            if (!canAttack) break;
 
             //wait another second
             yield return new WaitForSeconds(2f);
@@ -56,5 +59,18 @@ public class EnemyBattleController : MonoBehaviour {
             Debug.Log("attack 2");
             //repeat
         }
+    }
+
+    public void Froze() {
+        StartCoroutine(Frozen());
+    }
+
+    public IEnumerator Frozen() {
+        canAttack = false;
+        Debug.Log(canAttack);
+        yield return new WaitForSeconds(5f);
+        Debug.Log(canAttack);
+        canAttack = true;
+        DetermineEnemy(1);
     }
 }

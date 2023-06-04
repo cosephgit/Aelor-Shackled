@@ -19,7 +19,7 @@ public class PlayerBattleController : MonoBehaviour {
     [Header("--PUBLIC PLAYER OBJECTS--")]
     public Rigidbody2D firebolt;
     public Rigidbody2D frostBiteBeam;
-    public Rigidbody2D staffPosition;
+    public Rigidbody2D fireboltPosition, frostbeamPosition;
 
     [Header("--PUBLIC SPELL UI--")]
     public Image fireImage;
@@ -51,7 +51,7 @@ public class PlayerBattleController : MonoBehaviour {
             case 1: //Fire attack
                 if (fireCooldown <= 0) {
                     //play animation for attack
-                    Rigidbody2D newfirebolt = Instantiate(firebolt, staffPosition.position, transform.rotation) as Rigidbody2D;
+                    Rigidbody2D newfirebolt = Instantiate(firebolt, fireboltPosition.position, transform.rotation) as Rigidbody2D;
                     newfirebolt.AddForce(transform.right * fireboltVelocity, ForceMode2D.Force);
                     fireCooldown = 10f;
                     fireImage.fillAmount = 1;
@@ -62,7 +62,7 @@ public class PlayerBattleController : MonoBehaviour {
             case 2: //Ice attack
                 if (iceCooldown <= 0) {
                     //play animation for attack
-                    Rigidbody2D newFrostBiteBeam = Instantiate(frostBiteBeam, staffPosition.position, transform.rotation) as Rigidbody2D;
+                    Rigidbody2D newFrostBiteBeam = Instantiate(frostBiteBeam, frostbeamPosition.position, transform.rotation) as Rigidbody2D;
                     newFrostBiteBeam.AddForce(transform.right * frostBeamVelocity, ForceMode2D.Force);
                     iceCooldown = 10f;
                     iceImage.fillAmount = 1;
