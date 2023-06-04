@@ -16,6 +16,7 @@ public class UIControlInterface : UIControlInterfaceMenu
     [field: SerializeField]public UIDialogueTree dialogueTree { get; private set; }
     [field: SerializeField]public UIInventory inventory { get; private set; }
     [field: SerializeField]public UIInventoryItemMove inventoryItem { get; private set; }
+    [field: SerializeField]public UIFadeOutManager fadeManager { get; private set; }
     //[SerializeField]private Image mousePointer;
     private InteractableBase interactable;
 

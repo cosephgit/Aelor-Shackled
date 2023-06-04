@@ -32,21 +32,25 @@ public class EventTrigger : MonoBehaviour
     {
         if (active)
         {
-            if (timeCountdown > 0)
+            // triggers only operate during adventure mode
+            if (SceneManager.instance.adventureState && !SceneManager.instance.adventurePaused)
             {
-                timeCountdown -= Time.deltaTime;
-                if (timeCountdown <= 0)
+                if (timeCountdown > 0)
                 {
-                    Trigger();
-                    return;
+                    timeCountdown -= Time.deltaTime;
+                    if (timeCountdown <= 0)
+                    {
+                        Trigger();
+                        return;
+                    }
                 }
-            }
-            if (triggerArea)
-            {
-                if (triggerArea.OverlapPoint(SceneManager.instance.playerAdventure.transform.position))
+                if (triggerArea)
                 {
-                    Trigger();
-                    return;
+                    if (triggerArea.OverlapPoint(SceneManager.instance.playerAdventure.transform.position))
+                    {
+                        Trigger();
+                        return;
+                    }
                 }
             }
         }
