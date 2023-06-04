@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - FireBurnEffect
   - Shield
+  - Lightning
   layers:
   - Default
   - TransparentFX

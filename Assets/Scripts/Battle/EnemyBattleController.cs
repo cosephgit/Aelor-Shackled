@@ -7,17 +7,23 @@ public class EnemyBattleController : MonoBehaviour {
 
     [Header("--PUBLIC ENEMY OBJECTS--")]
     public Rigidbody2D firebolt;
-    public Rigidbody2D powerPosition;
+    public Rigidbody2D lightningBolt;
+    public Rigidbody2D powerPosition, lightningPosition;
 
     [Header("--PUBLIC ENEMY DATA--")]
     public float fireboltVelocity;
     public bool canAttack;
+    public bool canSuperAttack;
 
     [SerializeField] protected Animator anim;
+
+    HealthController health;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Start() {
         canAttack = true;
+        canSuperAttack = true;
+        health = GetComponent<HealthController>();
     }
 
     public void DetermineEnemy(int enemyNum) {
@@ -36,11 +42,14 @@ public class EnemyBattleController : MonoBehaviour {
 
     IEnumerator Enemy1Coroutine() {
         while (canAttack) {
-           // yield return new WaitForSeconds(3f);
-            //attack 3 once health is below 50%
-            //if (currentHealth <= 50) {
-                //Debug.Log("attack3");
-            //}
+            yield return new WaitForSeconds(2f);
+            if (health.health <= 50 && canSuperAttack) {
+                    anim.SetTrigger("attack1");
+                    Rigidbody2D newlightningBolt = Instantiate(lightningBolt, lightningPosition.position, lightningPosition.transform.rotation) as Rigidbody2D;
+                    Destroy(newlightningBolt, 1.5f);
+                    yield return new WaitForSeconds(4f);
+                    canSuperAttack = false;
+                }
 
             yield return new WaitForSeconds(3f);
             if (!canAttack) break;
@@ -52,12 +61,6 @@ public class EnemyBattleController : MonoBehaviour {
             newfirebolt.AddForce(-transform.right * fireboltVelocity, ForceMode2D.Force);
             SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
             if (!canAttack) break;
-
-            //wait another second
-            yield return new WaitForSeconds(2f);
-            //use attack 2
-            Debug.Log("attack 2");
-            //repeat
         }
     }
 

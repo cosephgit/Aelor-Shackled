@@ -3988,6 +3988,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1775258696}
     m_Modifications:
+    - target: {fileID: 2101520020, guid: 71945cd6127c903408cbf6860477f871, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 2101520020, guid: 71945cd6127c903408cbf6860477f871, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.65
+      objectReference: {fileID: 0}
     - target: {fileID: 637769976074970529, guid: 71945cd6127c903408cbf6860477f871, type: 3}
       propertyPath: subject
       value: 
@@ -4028,6 +4036,10 @@ PrefabInstance:
       propertyPath: subject
       value: 
       objectReference: {fileID: 1617175539}
+    - target: {fileID: 8027216344893037389, guid: 71945cd6127c903408cbf6860477f871, type: 3}
+      propertyPath: maxHealth
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8027216344893037389, guid: 71945cd6127c903408cbf6860477f871, type: 3}
       propertyPath: enemySlider
       value: 
