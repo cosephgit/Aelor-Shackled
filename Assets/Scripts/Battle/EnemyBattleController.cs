@@ -15,6 +15,7 @@ public class EnemyBattleController : MonoBehaviour {
     public bool canAttack;
     public bool canSuperAttack;
 
+    [SerializeField] Camera cam;
     [SerializeField] protected Animator anim;
 
     HealthController health;
@@ -47,6 +48,7 @@ public class EnemyBattleController : MonoBehaviour {
                     anim.SetTrigger("attack1");
                     Rigidbody2D newlightningBolt = Instantiate(lightningBolt, lightningPosition.position, lightningPosition.transform.rotation) as Rigidbody2D;
                     SoundSystemManager.instance.PlaySFX("Lightning Spell");
+                    cam.GetComponent<CamShake>().shakeDuration = 1f;
                     Destroy(newlightningBolt, 1.5f);
                     yield return new WaitForSeconds(4f);
                     canSuperAttack = false;

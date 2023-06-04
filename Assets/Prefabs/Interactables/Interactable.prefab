@@ -294,6 +294,7 @@ MonoBehaviour:
   fireboltVelocity: 200
   canAttack: 0
   canSuperAttack: 0
+  cam: {fileID: 0}
   anim: {fileID: 4252434507457954672}
 --- !u!70 &8027216344893037391
 CapsuleCollider2D:
