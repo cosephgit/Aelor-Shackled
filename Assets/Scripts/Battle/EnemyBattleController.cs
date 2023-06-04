@@ -46,6 +46,7 @@ public class EnemyBattleController : MonoBehaviour {
             if (health.health <= 50 && canSuperAttack) {
                     anim.SetTrigger("attack1");
                     Rigidbody2D newlightningBolt = Instantiate(lightningBolt, lightningPosition.position, lightningPosition.transform.rotation) as Rigidbody2D;
+                    SoundSystemManager.instance.PlaySFX("Lightning Spell");
                     Destroy(newlightningBolt, 1.5f);
                     yield return new WaitForSeconds(4f);
                     canSuperAttack = false;

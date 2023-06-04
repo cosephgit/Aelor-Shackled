@@ -3649,22 +3649,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6986520505515625356, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
-      propertyPath: sfxClips.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6986520505515625356, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
-      propertyPath: sfxClips.Array.data[3]
-      value: 
-      objectReference: {fileID: 8300000, guid: 76fec73c9714e124b98324a2c03d5872, type: 3}
-    - target: {fileID: 6986520505515625356, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
-      propertyPath: sfxClips.Array.data[4]
-      value: 
-      objectReference: {fileID: 8300000, guid: 09f1336f7ad55b64086ed298933ad777, type: 3}
-    - target: {fileID: 6986520505515625356, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
-      propertyPath: sfxClips.Array.data[5]
-      value: 
-      objectReference: {fileID: 8300000, guid: 9ab29b527e32f014c8382245e53611cb, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
 --- !u!1001 &6857606251394639747
@@ -3988,14 +3972,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1775258696}
     m_Modifications:
-    - target: {fileID: 2101520020, guid: 71945cd6127c903408cbf6860477f871, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -13.56
-      objectReference: {fileID: 0}
-    - target: {fileID: 2101520020, guid: 71945cd6127c903408cbf6860477f871, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 9.65
-      objectReference: {fileID: 0}
     - target: {fileID: 637769976074970529, guid: 71945cd6127c903408cbf6860477f871, type: 3}
       propertyPath: subject
       value: 
@@ -4036,10 +4012,6 @@ PrefabInstance:
       propertyPath: subject
       value: 
       objectReference: {fileID: 1617175539}
-    - target: {fileID: 8027216344893037389, guid: 71945cd6127c903408cbf6860477f871, type: 3}
-      propertyPath: maxHealth
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 8027216344893037389, guid: 71945cd6127c903408cbf6860477f871, type: 3}
       propertyPath: enemySlider
       value: 

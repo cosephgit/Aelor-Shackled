@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2101520019}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -12.25, y: 5.89, z: 0}
+  m_LocalPosition: {x: -13.56, y: 24.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -293,6 +293,7 @@ MonoBehaviour:
   lightningPosition: {fileID: 2101520021}
   fireboltVelocity: 200
   canAttack: 0
+  canSuperAttack: 0
   anim: {fileID: 4252434507457954672}
 --- !u!70 &8027216344893037391
 CapsuleCollider2D:
