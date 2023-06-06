@@ -40,17 +40,17 @@ public class PlayerBattleController : MonoBehaviour {
     void Update() {
         if (fireCooldown > 0) {
             fireCooldown -= Time.deltaTime;
-            fireImage.fillAmount -= 1 / (fireCooldown + 5) * Time.deltaTime;
+            fireImage.fillAmount -= 1 / (fireCooldown + 1f) * Time.deltaTime;
         }
 
         if (iceCooldown > 0) {
             iceCooldown -= Time.deltaTime;
-            iceImage.fillAmount -= 1 / (iceCooldown + 5) * Time.deltaTime;
+            iceImage.fillAmount -= 1 / (iceCooldown + 2) * Time.deltaTime;
         }
 
         if (shieldCooldown > 0) {
             shieldCooldown -= Time.deltaTime;
-            shieldImage.fillAmount -= 1 / (shieldCooldown + 5) * Time.deltaTime;
+            shieldImage.fillAmount -= 1 / (shieldCooldown + 2) * Time.deltaTime;
         }
     }
 
@@ -61,7 +61,7 @@ public class PlayerBattleController : MonoBehaviour {
                     //play animation for attack
                     Rigidbody2D newfirebolt = Instantiate(firebolt, fireboltPosition.position, transform.rotation) as Rigidbody2D;
                     newfirebolt.AddForce(transform.right * fireboltVelocity, ForceMode2D.Force);
-                    fireCooldown = 10f;
+                    fireCooldown = 3f;
                     fireImage.fillAmount = 1;
                     anim.SetTrigger("attack");
                     SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
@@ -72,19 +72,21 @@ public class PlayerBattleController : MonoBehaviour {
                     //play animation for attack
                     Rigidbody2D newFrostBiteBeam = Instantiate(frostBiteBeam, frostbeamPosition.position, transform.rotation) as Rigidbody2D;
                     newFrostBiteBeam.AddForce(transform.right * frostBeamVelocity, ForceMode2D.Force);
-                    iceCooldown = 10f;
+                    iceCooldown = 5f;
                     iceImage.fillAmount = 1;
                     anim.SetTrigger("attack");
                     SoundSystemManager.instance.PlaySFX("Frost Spell Cast");
                 }
                 break;
             case 3: //Shield defense
-                Rigidbody2D newShield = Instantiate(shield, shieldPosition.position, transform.rotation) as Rigidbody2D;
-                shieldCooldown = 10f;
-                shieldImage.fillAmount = 1;
-                Destroy(newShield, 3f);
-                anim.SetTrigger("attack");
-                SoundSystemManager.instance.PlaySFX("Defense Spell");
+                if (shieldCooldown <= 0) {
+                    Rigidbody2D newShield = Instantiate(shield, shieldPosition.position, transform.rotation) as Rigidbody2D;
+                    shieldCooldown = 5f;
+                    shieldImage.fillAmount = 1;
+                    Destroy(newShield, 3f);
+                    anim.SetTrigger("attack");
+                    SoundSystemManager.instance.PlaySFX("Defense Spell");
+                }
                 break;
             default:
                 break;
