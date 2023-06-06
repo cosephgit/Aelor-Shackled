@@ -62,4 +62,9 @@ public class EventTrigger : MonoBehaviour
         active = true;
         if (triggerTimer > 0) timeCountdown = triggerTimer;
     }
+
+    public void SetEvent(EventSequence eventSequenceNew)
+    {
+        triggerEvent = eventSequenceNew;
+    }
 }

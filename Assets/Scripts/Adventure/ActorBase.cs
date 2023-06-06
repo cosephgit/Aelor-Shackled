@@ -82,8 +82,7 @@ public class ActorBase : MonoBehaviour
 
     public void ClearMoveTarget()
     {
-        if (!moveAreaCurrent)
-            EnterWalkArea(SceneManager.instance.GetClosestWalkable(transform.position, out _));
+        EnterWalkArea(SceneManager.instance.GetClosestWalkable(transform.position, out _));
 
         moveTarget = transform.position - moveAreaCurrent.transform.position;
         moveTargetArea = null;
