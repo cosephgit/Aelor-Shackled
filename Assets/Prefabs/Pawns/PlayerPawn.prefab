@@ -322,6 +322,9 @@ MonoBehaviour:
   fireImage: {fileID: 0}
   iceImage: {fileID: 0}
   shieldImage: {fileID: 0}
+  fireText: {fileID: 0}
+  frostText: {fileID: 0}
+  shieldText: {fileID: 0}
   anim: {fileID: 7557594897429148461}
 --- !u!114 &6857606251394639751
 MonoBehaviour:

@@ -28,6 +28,11 @@ public class PlayerBattleController : MonoBehaviour {
     public Image iceImage;
     public Image shieldImage;
 
+    [Header("--PUBLIC SPELLTEXT UI--")]
+    public GameObject fireText;
+    public GameObject frostText;
+    public GameObject shieldText;
+
     [SerializeField] protected Animator anim;
 
     //Initial Method - sets above data to corresponding gameobjects
@@ -35,23 +40,27 @@ public class PlayerBattleController : MonoBehaviour {
         fireImage.fillAmount = fireCooldown;
         iceImage.fillAmount = iceCooldown;
         shieldImage.fillAmount = shieldCooldown;
+
+        fireText.SetActive(true);
+        frostText.SetActive(true);
+        shieldText.SetActive(true);
     }
 
     void Update() {
         if (fireCooldown > 0) {
             fireCooldown -= Time.deltaTime;
             fireImage.fillAmount -= 1 / (fireCooldown + 1f) * Time.deltaTime;
-        }
+        } else fireText.SetActive(true);
 
         if (iceCooldown > 0) {
             iceCooldown -= Time.deltaTime;
             iceImage.fillAmount -= 1 / (iceCooldown + 2) * Time.deltaTime;
-        }
+        } else frostText.SetActive(true);
 
         if (shieldCooldown > 0) {
             shieldCooldown -= Time.deltaTime;
             shieldImage.fillAmount -= 1 / (shieldCooldown + 2) * Time.deltaTime;
-        }
+        } else shieldText.SetActive(true);
     }
 
     public void Attack(int attackNum) {
@@ -65,6 +74,7 @@ public class PlayerBattleController : MonoBehaviour {
                     fireImage.fillAmount = 1;
                     anim.SetTrigger("attack");
                     SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
+                    fireText.SetActive(false);
                 }
                 break;
             case 2: //Ice attack
@@ -76,6 +86,7 @@ public class PlayerBattleController : MonoBehaviour {
                     iceImage.fillAmount = 1;
                     anim.SetTrigger("attack");
                     SoundSystemManager.instance.PlaySFX("Frost Spell Cast");
+                    frostText.SetActive(false);
                 }
                 break;
             case 3: //Shield defense
@@ -86,6 +97,7 @@ public class PlayerBattleController : MonoBehaviour {
                     Destroy(newShield, 3f);
                     anim.SetTrigger("attack");
                     SoundSystemManager.instance.PlaySFX("Defense Spell");
+                    shieldText.SetActive(false);
                 }
                 break;
             default:
