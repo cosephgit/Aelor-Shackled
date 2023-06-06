@@ -12,6 +12,7 @@ public class DamageController : MonoBehaviour {
 	void OnCollisionEnter2(Collision2D c) {
 		HitObject(c.gameObject);
         Destroy(gameObject);
+		Debug.Log(c);
 	}
 
 	void OnTriggerEnter2D(Collider2D c) {
@@ -36,6 +37,7 @@ public class DamageController : MonoBehaviour {
 		}
 
 		if (c.gameObject.CompareTag("Shield")) {
+			Debug.Log(c);
 			Destroy(this.gameObject);
 		}
 
@@ -46,6 +48,7 @@ public class DamageController : MonoBehaviour {
 	void HitObject(GameObject g) {
 		if (g.CompareTag("Shield")) {
 			SoundSystemManager.instance.PlaySFX("Shield Hit-001");
+			Debug.Log(g);
 		}
 		else {
 			SoundSystemManager.instance.PlaySFX("Attack Hit");
@@ -58,6 +61,7 @@ public class DamageController : MonoBehaviour {
 
 	void Update() {
 		if (this.gameObject.tag == "Shield") {
+			Debug.Log("UPDATE");
 			Destroy(this.gameObject, 5f);
 		}
 	}

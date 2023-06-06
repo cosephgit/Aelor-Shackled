@@ -8,7 +8,8 @@ public class EnemyBattleController : MonoBehaviour {
     [Header("--PUBLIC ENEMY OBJECTS--")]
     public Rigidbody2D firebolt;
     public Rigidbody2D lightningBolt;
-    public Rigidbody2D powerPosition, lightningPosition;
+    public Rigidbody2D shield;
+    public Rigidbody2D powerPosition, lightningPosition, shieldPosition;
 
     [Header("--PUBLIC ENEMY DATA--")]
     public float fireboltVelocity;
@@ -58,12 +59,18 @@ public class EnemyBattleController : MonoBehaviour {
             if (!canAttack) break;
 
             //ATTACK ONE (FIRE)
-            Debug.Log("attack 1");
             anim.SetTrigger("attack1");
             Rigidbody2D newfirebolt = Instantiate(firebolt, powerPosition.position, powerPosition.transform.rotation) as Rigidbody2D;
             newfirebolt.AddForce(-transform.right * fireboltVelocity, ForceMode2D.Force);
             SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
             if (!canAttack) break;
+
+            yield return new WaitForSeconds(2f);
+
+            //ATTACK TWO (SHIELD)
+            anim.SetTrigger("attack1");
+            Rigidbody2D newShield = Instantiate(shield, shieldPosition.position, transform.rotation) as Rigidbody2D;
+            Destroy(newShield, 2f);
         }
     }
 
