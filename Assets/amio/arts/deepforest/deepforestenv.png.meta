@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dc0e11c2c78f2ba43bb60f18249baa1f
+guid: 07607f3276e2fb548a58061c365320a7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fire_0
+      name: deepforestenv_0
       rect:
         serializedVersion: 2
-        x: 44
-        y: 373
-        width: 87
-        height: 129
+        x: 77
+        y: 70
+        width: 721
+        height: 1039
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9b108e9e061b04c4db4574484cc7bf0a
-      internalID: -490072568
+      spriteID: a9849708cd6946442add878e8f0eead9
+      internalID: -761681924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_1
+      name: deepforestenv_1
       rect:
         serializedVersion: 2
-        x: 171
-        y: 371
-        width: 93
-        height: 144
+        x: 720
+        y: 808
+        width: 2078
+        height: 1282
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6435a4bfde89d864496baa6e41f0e95e
-      internalID: 1112505443
+      spriteID: 293f5b9690e714841b6d851d8e94cfd8
+      internalID: -1789492138
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_2
+      name: deepforestenv_2
       rect:
         serializedVersion: 2
-        x: 317
-        y: 368
-        width: 73
-        height: 147
+        x: 2859
+        y: 617
+        width: 1747
+        height: 1531
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eaa11b5484eb51d4b98298e4d2392cb8
-      internalID: -1496209836
+      spriteID: d1ed913a5288ae64d8301da78349413c
+      internalID: -994002539
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_3
+      name: deepforestenv_3
       rect:
         serializedVersion: 2
-        x: 437
-        y: 370
-        width: 85
-        height: 132
+        x: 4753
+        y: 757
+        width: 2184
+        height: 1377
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9e2fc2c00ace97042be55921fa7fa998
-      internalID: 71123016
+      spriteID: 9bb98f0ec123cd34780e92a065f40d06
+      internalID: -1599581332
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_4
+      name: deepforestenv_4
       rect:
         serializedVersion: 2
-        x: 434
-        y: 197
-        width: 85
-        height: 114
+        x: 6417
+        y: 734
+        width: 10
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa3ea10c0085252448c96a81a7420ad7
-      internalID: -1306295332
+      spriteID: 9f4b8a6e13ff1f941a7e9462574e8fce
+      internalID: 624788116
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_5
+      name: deepforestenv_5
       rect:
         serializedVersion: 2
-        x: 314
-        y: 198
-        width: 83
-        height: 125
+        x: 1325
+        y: 73
+        width: 642
+        height: 253
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0208e20e8e0959d42af0be0ac4dca809
-      internalID: -1455305778
+      spriteID: 8e3145d0a41379346a38a3277ccae02a
+      internalID: 2084023499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_6
+      name: deepforestenv_6
       rect:
         serializedVersion: 2
-        x: 178
-        y: 200
-        width: 86
-        height: 126
+        x: 2128
+        y: 156
+        width: 369
+        height: 143
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bdce01b9236140447b4d93c85196f091
-      internalID: -330996749
+      spriteID: c0e2e7fdd245b2544a851224c51e4e62
+      internalID: 863125465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_7
+      name: deepforestenv_7
       rect:
         serializedVersion: 2
-        x: 54
-        y: 199
-        width: 75
-        height: 115
+        x: 2675
+        y: 43
+        width: 369
+        height: 150
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,20 +266,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0645b79e5c69aa24095a35f33f99e93a
-      internalID: -1337397682
+      spriteID: 01fd595b1aa66a74296420d5eccf45dd
+      internalID: 1596341677
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_8
+      name: deepforestenv_8
       rect:
         serializedVersion: 2
-        x: 48
-        y: 26
-        width: 66
-        height: 123
+        x: 3235
+        y: 132
+        width: 270
+        height: 150
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -287,20 +287,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3948643f1fb33174c9fa9cb63782b3e3
-      internalID: 895455193
+      spriteID: 5ae2b71cad3fbd04dba5fbfa44f0accc
+      internalID: -1870320482
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: fire_9
+      name: deepforestenv_9
       rect:
         serializedVersion: 2
-        x: 187
-        y: 23
-        width: 74
-        height: 127
+        x: 3707
+        y: 70
+        width: 1165
+        height: 332
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,50 +308,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36cdfb9c3add71e41ac42f9e01c6b597
-      internalID: -1398566815
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fire_10
-      rect:
-        serializedVersion: 2
-        x: 323
-        y: 22
-        width: 68
-        height: 138
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 246bf2cf354501447878286ca59474b3
-      internalID: -1370264688
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: fire_11
-      rect:
-        serializedVersion: 2
-        x: 446
-        y: 24
-        width: 76
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4cb54a7b1c84fc743a9c863c8a002f5a
-      internalID: -588793918
+      spriteID: 8b58e705aa284214283da334fd77007b
+      internalID: 1327731191
       vertices: []
       indices: 
       edges: []
@@ -367,18 +325,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      fire_0: -2134775790
-      fire_1: 633257304
-      fire_10: -93702742
-      fire_11: -641136924
-      fire_2: -1879441236
-      fire_3: 891335497
-      fire_4: 648541922
-      fire_5: -1252965652
-      fire_6: 1625564886
-      fire_7: -1571897413
-      fire_8: 142213474
-      fire_9: -987738315
+      deepforestenv_0: -761681924
+      deepforestenv_1: -1789492138
+      deepforestenv_2: -994002539
+      deepforestenv_3: -1599581332
+      deepforestenv_4: 624788116
+      deepforestenv_5: 2084023499
+      deepforestenv_6: 863125465
+      deepforestenv_7: 1596341677
+      deepforestenv_8: -1870320482
+      deepforestenv_9: 1327731191
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

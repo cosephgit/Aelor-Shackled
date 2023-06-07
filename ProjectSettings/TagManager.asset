@@ -43,6 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: 'distant blur '
+    uniqueID: 3505925709
+    locked: 0
   - name: far ground
     uniqueID: 1120107771
     locked: 0
