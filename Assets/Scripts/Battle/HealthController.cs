@@ -57,7 +57,7 @@ public class HealthController : MonoBehaviour {
 		}
 	}
 
-	public void AddHealth(float h) {
+	public void AddHealth (float h) {
 		health += h;
 		health = Mathf.Clamp(health, 0, maxHealth);
 		onHealthChanged(oldHealth, health);

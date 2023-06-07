@@ -6,9 +6,6 @@ TagManager:
   tags:
   - FrostbiteBeam
   - Enemy
-  - FireBurnEffect
-  - Shield
-  - Lightning
   layers:
   - Default
   - TransparentFX

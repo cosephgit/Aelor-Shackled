@@ -5,30 +5,17 @@ using UnityEngine.UI;
 
 public class EnemyBattleController : MonoBehaviour {
 
-    [Header("--PUBLIC ENEMY OBJECTS--")]
-    public Rigidbody2D firebolt;
-    public Rigidbody2D lightningBolt;
-    public Rigidbody2D shield;
-    public Rigidbody2D powerPosition, lightningPosition, shieldPosition;
-
-    [Header("--PUBLIC ENEMY DATA--")]
-    public float fireboltVelocity;
-    public bool canAttack;
-    public bool canSuperAttack;
-
-    [SerializeField] Camera cam;
-    [SerializeField] protected Animator anim;
-
-    HealthController health;
+    Animator anim;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Start() {
-        canAttack = true;
-        canSuperAttack = true;
-        health = GetComponent<HealthController>();
+        anim = GetComponent<Animator>();
+
+        //BattleController calls this method instead
+        DetermineEnemy(1);
     }
 
-    public void DetermineEnemy(int enemyNum) {
+    void DetermineEnemy(int enemyNum) {
         switch (enemyNum) {
             case 1:
                 StartCoroutine(Enemy1Coroutine());
@@ -43,45 +30,21 @@ public class EnemyBattleController : MonoBehaviour {
     }
 
     IEnumerator Enemy1Coroutine() {
-        while (canAttack) {
-            yield return new WaitForSeconds(2f);
-            if (health.health <= 50 && canSuperAttack) {
-                    anim.SetTrigger("attack1");
-                    Rigidbody2D newlightningBolt = Instantiate(lightningBolt, lightningPosition.position, lightningPosition.transform.rotation) as Rigidbody2D;
-                    SoundSystemManager.instance.PlaySFX("Lightning Spell");
-                    cam.GetComponent<CamShake>().shakeDuration = 1f;
-                    Destroy(newlightningBolt, 1.5f);
-                    yield return new WaitForSeconds(4f);
-                    canSuperAttack = false;
-                }
+        while (true) {
+            yield return new WaitForSeconds(3f);
+            //attack 3 once health is below 50%
+            //if (currentHealth <= 50) {
+             //   Debug.Log("attack3");
+            //}
 
             yield return new WaitForSeconds(3f);
-            if (!canAttack) break;
-
-            //ATTACK ONE (FIRE)
-            anim.SetTrigger("attack1");
-            Rigidbody2D newfirebolt = Instantiate(firebolt, powerPosition.position, powerPosition.transform.rotation) as Rigidbody2D;
-            newfirebolt.AddForce(-transform.right * fireboltVelocity, ForceMode2D.Force);
-            SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
-            if (!canAttack) break;
-
+            //use attack 1
+            Debug.Log("attack 1");
+            //wait another second
             yield return new WaitForSeconds(2f);
-
-            //ATTACK TWO (SHIELD)
-            anim.SetTrigger("attack1");
-            Rigidbody2D newShield = Instantiate(shield, shieldPosition.position, transform.rotation) as Rigidbody2D;
-            Destroy(newShield, 2f);
+            //use attack 2
+            Debug.Log("attack 2");
+            //repeat
         }
-    }
-
-    public void Froze() {
-        StartCoroutine(Frozen());
-    }
-
-    public IEnumerator Frozen() {
-        canAttack = false;
-        yield return new WaitForSeconds(5f);
-        canAttack = true;
-        DetermineEnemy(1);
     }
 }

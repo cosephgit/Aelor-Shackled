@@ -24,34 +24,27 @@ public class BattleManager : MonoBehaviour {
     public GameObject playerCanvas;
     public GameObject enemyCanvas;
 
-    private PlayerBattleController playerBattleController;
-    private PlayerAdventureController playerAdventureController;
+    private PlayerBattleController playerController;
     private EnemyBattleController enemyController;
 
     //Initial method that sets the instance to only this class
     void Awake() {
-        if (instance == null) {
-            DontDestroyOnLoad(gameObject);
-            instance = this;
-        }
-        else {
-            Destroy(gameObject);
-        }
+        if (instance == null) instance = this;
     }
 
     //Method at start sets player and enemy variables; disables battle-related controllers and canvas
     void Start() {
 
-        player = GameObject.FindWithTag("Player");  //Set player
-        playerBattleController = player.GetComponent<PlayerBattleController>();
-        playerAdventureController = player.GetComponent<PlayerAdventureController>();
+        if (!player)
+            player = GameObject.FindWithTag("Player");  //Set player
+        playerController = player.GetComponent<PlayerBattleController>();
 
-        enemy = GameObject.FindWithTag("Enemy");    //Set enemy
+        if (!enemy)
+            enemy = GameObject.FindWithTag("Enemy");    //Set enemy
         enemyController = enemy.GetComponent<EnemyBattleController>();
 
-        playerBattleController.enabled = false;
+        playerController.enabled = false;
         enemyController.enabled = false;
-        playerAdventureController.enabled = true;
 
         //Set battle canvas inactive
         playerCanvas.gameObject.SetActive(false);
@@ -64,9 +57,8 @@ public class BattleManager : MonoBehaviour {
         callingEvent = callingEventNew;
 
         //Enable player and enemy battle controllers
-        playerBattleController.enabled = true;
+        playerController.enabled = true;
         enemyController.enabled = true;
-        playerAdventureController.enabled = false;
 
         //Set player and enemy canvas active
         playerCanvas.SetActive(true);
@@ -75,19 +67,12 @@ public class BattleManager : MonoBehaviour {
         #if UNITY_EDITOR
         Debug.Log("BeginBattleEvent");
         #endif
-
-        player.transform.position = new Vector2(-7.00f, -1.71f);    //Move player back a bit to give space in between the chars for the fight
-
-        enemyController.DetermineEnemy(1); //Start the enemyBattleController
-
-        SoundSystemManager.instance.PlayMusic("SorcererFight1");
     }
 
     public void BattleEndsVictory() {
         //Disable player and enemy battle controllers
-        playerBattleController.enabled = false;
+        playerController.enabled = false;
         enemyController.enabled = false;
-        playerAdventureController.enabled = true;
 
         //Set player and enemy canvas inactive
         playerCanvas.SetActive(false);
@@ -102,9 +87,8 @@ public class BattleManager : MonoBehaviour {
 
     public void BattleEndsDefeat() {
         //Disable player and enemy battle controllers
-        playerBattleController.enabled = false;
+        playerController.enabled = false;
         enemyController.enabled = false;
-        playerAdventureController.enabled = true;
 
         //Set player and enemy canvas inactive
         playerCanvas.SetActive(false);
