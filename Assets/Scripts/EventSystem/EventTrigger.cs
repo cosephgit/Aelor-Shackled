@@ -6,14 +6,14 @@ using UnityEngine;
 // if given a collider, it will trigger on the player if they enter the collider
 // if the timer is set, it will trigger automatically when the timer runs out
 // Created by: Seph 30/5
-// Last edit by: Seph 30/5
+// Last edit by: Seph 7/6
 
 public class EventTrigger : MonoBehaviour
 {
     [SerializeField]private BoxCollider2D triggerArea;
     [SerializeField]private float triggerTimer;
     [SerializeField]private EventSequence triggerEvent;
-    [SerializeField]private bool oneShot = false; // set true if this trigger should activate only once
+    //[SerializeField]private bool oneShot = false; // set true if this trigger should activate only once
     private float timeCountdown;
     private bool active = true;
 

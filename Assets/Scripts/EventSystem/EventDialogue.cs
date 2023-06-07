@@ -4,7 +4,7 @@ using UnityEngine;
 
 // this type of event plays a dialogue line on the indicated pawn
 // Created by: Seph 27/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 7/6
 
 public class EventDialogue : Event
 {
@@ -19,14 +19,16 @@ public class EventDialogue : Event
     {
         base.Run(setSequence);
 
-        if (oneShot && usedOnce)
+        if (oneShot)
         {
-            finished = true;
-            End();
-            return;
+            if (usedOnce)
+            {
+                End();
+                return;
+            }
+            usedOnce = true;
         }
 
-        usedOnce = true;
         subject.ShowLine(line, anim);
     }
 

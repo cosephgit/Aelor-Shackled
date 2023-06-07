@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 // this basic class just handles the mouse pointer for the menu
 // Created by: Seph 1/6
-// Last edit by: Seph 1/6
+// Last edit by: Seph 7/6
 
 public class UIControlInterfaceMenu : MonoBehaviour
 {
     [Header("Universal menu features")]
-    [SerializeField]private Image mousePointer;
+    [SerializeField]private Transform mousePointer;
 
     protected virtual void Awake()
     {
@@ -20,7 +20,7 @@ public class UIControlInterfaceMenu : MonoBehaviour
 
     protected virtual void TouchInput(Vector2 pos, bool tap)
     {
-        mousePointer.transform.position = pos;
+        mousePointer.position = pos;
     }
 
     // check for touches and mouse clicks each frame

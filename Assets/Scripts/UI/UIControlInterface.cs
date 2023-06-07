@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 // this class detects mouse clicks/touch taps and implements their effects
 // Created by: Seph 27/5
-// Last edit by: Seph 6/6
+// Last edit by: Seph 7/6
 
 public class UIControlInterface : UIControlInterfaceMenu
 {

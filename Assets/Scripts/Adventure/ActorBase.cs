@@ -7,7 +7,7 @@ using TMPro;
 // all interactables and anything else that can act in the world are based on this
 // it has hooks for playing animations and showing text, but it does not assume they exist
 // Created by: Seph 27/5
-// Last edit by: Seph 30/5
+// Last edit by: Seph 7/6
 
 public enum AnimSingle
 {
@@ -32,6 +32,7 @@ public class ActorBase : MonoBehaviour
     [Header("Dialogue")]
     [SerializeField]private TextMeshPro text;
     [SerializeField]private Color tint = Color.clear;
+    private SpriteRenderer[] spritesSecondary; // used for detecting any secondary sprites that artists might use for animation
     private float idleTimer;
     protected WalkableArea moveAreaCurrent;
     protected Vector3 moveTarget; // the move target to reach the target inside the current collider
@@ -41,7 +42,6 @@ public class ActorBase : MonoBehaviour
     private MoveFacing moveTargetFacing = MoveFacing.Normal; // the move facing that should be taken at the end of the move
     private bool moving = false;
     private bool moveEvent = false; // set to true if the actor is required to move during an event
-    private float movingCycle = 0f;
     private bool waiting = false; // waiting for battle mode or adventure pause to end
     private Vector3 spriteScale;
     protected bool asleep = false;
@@ -55,8 +55,13 @@ public class ActorBase : MonoBehaviour
                 text.color = tint; // use the tint if it has been changed from clear
             else if (sprite)
                 text.color = sprite.color; // else copy the sprite color
+
             SetIdleTimer();
         }
+        if (sprite)
+            spritesSecondary = sprite.GetComponentsInChildren<SpriteRenderer>();
+        else
+            spritesSecondary = new SpriteRenderer[0];
     }
 
     private void Start()
@@ -76,7 +81,13 @@ public class ActorBase : MonoBehaviour
     private void EnterWalkArea(WalkableArea area)
     {
         if (sprite)
+        {
             sprite.sortingLayerID = area.GetAreaLayer();
+            for (int i = 0; i < spritesSecondary.Length; i++)
+            {
+                spritesSecondary[i].sortingLayerID = area.GetAreaLayer();
+            }
+        }
         moveAreaCurrent = area;
     }
 
@@ -443,7 +454,6 @@ public class ActorBase : MonoBehaviour
             {
                 // if NOT set to move during event, clear the current move target
                 ClearMoveTarget();
-                movingCycle = 0f;
                 if (animator)
                 {
                     animator.SetBool("moving", false);
