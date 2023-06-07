@@ -14,7 +14,10 @@ public class BattleManager : MonoBehaviour {
 
     public static BattleManager instance;   //Creating a singleton so each script can call it without having to assign it to each class that uses it.
 
-    [SerializeField] EventBattle callingEvent;  //Store the current battle even
+    [SerializeField]private EventBattle callingEvent;  //Store the current battle even
+    [SerializeField]private Transform camPos; // position the camera should take during the battle
+    [SerializeField]private float camOrthoSize = 3f; // position the camera should take during the battle
+    [SerializeField]private ParallaxManager parallax; // parallax manager - needs to be notified to track the above point
 
     [Header("--PUBLIC GAMEOBJECTS--")]  //All public Gameobjects
     public GameObject player;
@@ -25,12 +28,15 @@ public class BattleManager : MonoBehaviour {
     public GameObject enemyCanvas;
 
     private PlayerBattleController playerBattleController;
+        // Seph handled by event system
     //private PlayerAdventureController playerAdventureController;
     private EnemyBattleController enemyController;
 
     //Initial method that sets the instance to only this class
     void Awake()
     {
+        // Seph we don't want DoNotDestroyOnLoad here it does nothing useful and causes problems
+        // rewritten to avoid some potential problems
         if (instance)
         {
             if (instance != this)
@@ -46,19 +52,21 @@ public class BattleManager : MonoBehaviour {
     //Method at start sets player and enemy variables; disables battle-related controllers and canvas
     void Start() {
 
-        if (!player)
+        if (!player) // Seph we want to be able to manually set this in editor so only find it if  it's not already set
             player = GameObject.FindWithTag("Player");  //Set player
 
         playerBattleController = player.GetComponent<PlayerBattleController>();
+        // Seph handled by event system
         //playerAdventureController = player.GetComponent<PlayerAdventureController>();
 
-        if (!enemy)
+        if (!enemy) /// Seph we want to be able to manually set this in editor so only find it if  it's not already set
             enemy = GameObject.FindWithTag("Enemy");    //Set enemy
 
         enemyController = enemy.GetComponent<EnemyBattleController>();
 
         playerBattleController.enabled = false;
         enemyController.enabled = false;
+        // Seph handled by event system
         //playerAdventureController.enabled = true;
 
         //Set battle canvas inactive
@@ -74,6 +82,7 @@ public class BattleManager : MonoBehaviour {
         //Enable player and enemy battle controllers
         playerBattleController.enabled = true;
         enemyController.enabled = true;
+        // Seph handled by event system
         //playerAdventureController.enabled = false;
 
         //Set player and enemy canvas active
@@ -84,9 +93,12 @@ public class BattleManager : MonoBehaviour {
         Debug.Log("BeginBattleEvent");
         #endif
 
-        player.transform.position = new Vector2(-7.00f, -1.71f);    //Move player back a bit to give space in between the chars for the fight
+        // Seph handled by event system
+        //player.transform.position = new Vector2(-7.00f, -1.71f);    //Move player back a bit to give space in between the chars for the fight
 
         enemyController.DetermineEnemy(1); //Start the enemyBattleController
+
+        parallax.SetBattlePos(camPos.position, camOrthoSize);
 
         SoundSystemManager.instance.PlayMusic("SorcererFight1");
     }
@@ -94,6 +106,7 @@ public class BattleManager : MonoBehaviour {
     public void BattleEndsVictory() {
         //Disable player and enemy battle controllers
         playerBattleController.enabled = false;
+        enemyController.EndBattle();
         enemyController.enabled = false;
         //playerAdventureController.enabled = true;
 
@@ -106,11 +119,16 @@ public class BattleManager : MonoBehaviour {
         #endif
 
         callingEvent.BattleEnd(true);
+
+        SoundSystemManager.instance.StopMusic();
+
+        parallax.EndBattleState();
     }
 
     public void BattleEndsDefeat() {
         //Disable player and enemy battle controllers
         playerBattleController.enabled = false;
+        enemyController.EndBattle();
         enemyController.enabled = false;
         //playerAdventureController.enabled = true;
 
@@ -123,5 +141,9 @@ public class BattleManager : MonoBehaviour {
         #endif
 
         callingEvent.BattleEnd(true);
+
+        SoundSystemManager.instance.StopMusic();
+
+        parallax.EndBattleState();
     }
 }

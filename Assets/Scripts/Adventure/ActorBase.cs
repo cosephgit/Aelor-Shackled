@@ -40,7 +40,7 @@ public class ActorBase : MonoBehaviour
     protected Vector3 moveTargetFinal; // the final move target
     protected WalkableArea moveTargetAreaFinal; // the current move's target area
     private MoveFacing moveTargetFacing = MoveFacing.Normal; // the move facing that should be taken at the end of the move
-    private bool moving = false;
+    protected bool moving = false;
     private bool moveEvent = false; // set to true if the actor is required to move during an event
     private bool waiting = false; // waiting for battle mode or adventure pause to end
     private Vector3 spriteScale;
@@ -111,8 +111,6 @@ public class ActorBase : MonoBehaviour
         moveEvent = duringEvent;
         moving = true;
         moveTargetFacing = MoveFacing.Normal;
-
-        SoundSystemManager.instance.footstepSource.Play();  //Play Audio for footstep
     }
 
     private void SetMovePath(WalkableArea areaNext, Vector3 pointNext, WalkableArea areaFinal, Vector3 pointfinal, bool duringEvent = false)
@@ -320,7 +318,6 @@ public class ActorBase : MonoBehaviour
         }
         if (animator)
         {
-            SoundSystemManager.instance.footstepSource.Stop();  //Stop Audio for footstep
             animator.SetBool("moving", false);
             animator.SetFloat("moveX", 0);
             animator.SetFloat("moveY", 0);

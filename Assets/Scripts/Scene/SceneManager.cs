@@ -35,6 +35,11 @@ public class SceneManager : MonoBehaviour
             instance = this;
     }
 
+    private void Start()
+    {
+        SoundSystemManager.instance.PlayMusic("ForestOutskirts");
+    }
+
     // un/pauses the adventure state (used for event sequences)
     public void SetAdventurePause(bool pauseSet)
     {

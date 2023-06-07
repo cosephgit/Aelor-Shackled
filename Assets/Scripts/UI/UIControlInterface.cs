@@ -100,8 +100,6 @@ public class UIControlInterface : UIControlInterfaceMenu
 
                     if (inventory) inventory.UIMouseOver();
                 }
-                if (tap)
-                    Debug.Log("clicked on UI");
             }
             else if (tap)
             {
@@ -109,13 +107,9 @@ public class UIControlInterface : UIControlInterfaceMenu
                 Vector2 worldPos = Camera.main.ScreenToWorldPoint(pos);
                 Collider2D[] touchHits = Physics2D.OverlapPointAll(worldPos, Global.LayerInteract());
 
-                Debug.Log("clicked");
-
                 foreach (Collider2D touch in touchHits)
                 {
                     InteractableBase interactableTest = touch.gameObject.GetComponentInParent<InteractableBase>();
-
-                    Debug.Log("clicked on object");
 
                     if (interactableTest)
                     {
@@ -131,10 +125,6 @@ public class UIControlInterface : UIControlInterfaceMenu
                 // nothing has been clicked on, so try telling the player pawn to move to the point
                 SceneManager.instance.playerAdventure.TryMove(worldPos, false);
             }
-        }
-        else if (tap)
-        {
-            Debug.Log("click failed - in event sequence");
         }
     }
 

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// * Date edited:     7/6/2023 by Seph
+ 
 public class SoundSystemManager : MonoBehaviour {
     
     public static SoundSystemManager instance;
@@ -20,15 +22,18 @@ public class SoundSystemManager : MonoBehaviour {
     public bool pitchInc = false;
 
     void Awake() {
-        if (instance == null) {
-            DontDestroyOnLoad(gameObject);
+        // Seph we don't want DoNotDestroyOnLoad here it does nothing useful and causes problems
+        // rewritten to avoid some potential problems
+        if (instance)
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+        else
             instance = this;
-        }
-        else {
-            Destroy(gameObject);
-        }
-
-        PlayMusic("ForestOutskirts");
     }
 
     void Start() {
@@ -47,7 +52,7 @@ public class SoundSystemManager : MonoBehaviour {
         PlaySFX(clipName, Random.Range(0.95f, 1.25f), 1);
     }
 
-    public void PlaySFX(string clipName) {
+    public void PlaySFXStandard(string clipName) {
         PlaySFX(clipName, 1, 3);
     }
 
@@ -75,10 +80,13 @@ public class SoundSystemManager : MonoBehaviour {
             if (clipName == musicClips[i].name) {
                 musicSource.clip = musicClips[i];
                 musicSource.Play();
-                currentSFX++;
-                currentSFX %= maxSFXSources;
                 break;
             }
         }
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
     }
 }

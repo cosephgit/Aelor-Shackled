@@ -30,7 +30,11 @@ public class EventBattle : Event
         finished = true;
         base.End();
         if (victory)
+        {
+            // resume normal BGM
+            SoundSystemManager.instance.PlayMusic("ForestOutskirts");
             sequenceVictory.Run();
+        }
         else
             sequenceDefeat.Run();
     }

@@ -1,6 +1,7 @@
 /****************************************************************************
  * Author:			Skylar Masson
  * Date started:	4/26/2023
+ * Date edited:     7/6/2023 by Seph
  * Description:  	Class contains all methods for the PlayerBattleController
  ******************************************************************************/
 
@@ -11,17 +12,23 @@ using UnityEngine.UI;
 
 public class PlayerBattleController : MonoBehaviour {
 
-    [Header("--PUBLIC PLAYER DATA--")]
-    public float fireboltVelocity, frostBeamVelocity;
-    public float fireCooldown,
-                 iceCooldown,
-                 shieldCooldown;
+    [Header("Power settings")]
+    [SerializeField]private float fireboltVelocity = 200f;
+    [SerializeField]private float frostBeamVelocity = 150f;
+    [SerializeField]private float shieldDuration = 3f;
+    [SerializeField]private float fireCooldownMax = 3f;
+    [SerializeField]private float iceCooldownMax = 5f;
+    [SerializeField]private float shieldCooldownMax = 5f;
 
     [Header("--PUBLIC PLAYER OBJECTS--")]
     public Rigidbody2D firebolt;
     public Rigidbody2D frostBiteBeam;
     public Rigidbody2D shield;
-    public Rigidbody2D fireboltPosition, frostbeamPosition, shieldPosition;
+
+    [Header("--SPELL START POSITIONS--")]
+    public Transform fireboltPosition;
+    public Transform frostbeamPosition;
+    public Transform shieldPosition;
 
     [Header("--PUBLIC SPELL UI--")]
     public Image fireImage;
@@ -34,6 +41,11 @@ public class PlayerBattleController : MonoBehaviour {
     public GameObject shieldText;
 
     [SerializeField] protected Animator anim;
+
+    // power cooldown timers
+    private float fireCooldown,
+                 iceCooldown,
+                 shieldCooldown;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Awake() {
@@ -49,17 +61,23 @@ public class PlayerBattleController : MonoBehaviour {
     void Update() {
         if (fireCooldown > 0) {
             fireCooldown -= Time.deltaTime;
-            fireImage.fillAmount -= 1 / (fireCooldown + 1f) * Time.deltaTime;
+            // Seph: fixed
+            fireImage.fillAmount = fireCooldown / fireCooldownMax;
+            //fireImage.fillAmount -= 1 / (fireCooldown + 1f) * Time.deltaTime;
         } else fireText.SetActive(true);
 
         if (iceCooldown > 0) {
             iceCooldown -= Time.deltaTime;
-            iceImage.fillAmount -= 1 / (iceCooldown + 2) * Time.deltaTime;
+            // Seph: fixed
+            iceImage.fillAmount = iceCooldown / iceCooldownMax;
+            //iceImage.fillAmount -= 1 / (iceCooldown + 2) * Time.deltaTime;
         } else frostText.SetActive(true);
 
         if (shieldCooldown > 0) {
             shieldCooldown -= Time.deltaTime;
-            shieldImage.fillAmount -= 1 / (shieldCooldown + 2) * Time.deltaTime;
+            // Seph: fixed
+            shieldImage.fillAmount = shieldCooldown / shieldCooldownMax;
+            //shieldImage.fillAmount -= 1 / (shieldCooldown + 2) * Time.deltaTime;
         } else shieldText.SetActive(true);
     }
 
@@ -70,10 +88,10 @@ public class PlayerBattleController : MonoBehaviour {
                     //play animation for attack
                     Rigidbody2D newfirebolt = Instantiate(firebolt, fireboltPosition.position, transform.rotation) as Rigidbody2D;
                     newfirebolt.AddForce(transform.right * fireboltVelocity, ForceMode2D.Force);
-                    fireCooldown = 3f;
+                    fireCooldown = fireCooldownMax;
                     fireImage.fillAmount = 1;
                     anim.SetTrigger("attack");
-                    SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
+                    SoundSystemManager.instance.PlaySFXStandard("Fire Spell Cast");
                     fireText.SetActive(false);
                 }
                 break;
@@ -82,21 +100,21 @@ public class PlayerBattleController : MonoBehaviour {
                     //play animation for attack
                     Rigidbody2D newFrostBiteBeam = Instantiate(frostBiteBeam, frostbeamPosition.position, transform.rotation) as Rigidbody2D;
                     newFrostBiteBeam.AddForce(transform.right * frostBeamVelocity, ForceMode2D.Force);
-                    iceCooldown = 5f;
+                    iceCooldown = iceCooldownMax;
                     iceImage.fillAmount = 1;
                     anim.SetTrigger("attack");
-                    SoundSystemManager.instance.PlaySFX("Frost Spell Cast");
+                    SoundSystemManager.instance.PlaySFXStandard("Frost Spell Cast");
                     frostText.SetActive(false);
                 }
                 break;
             case 3: //Shield defense
                 if (shieldCooldown <= 0) {
                     Rigidbody2D newShield = Instantiate(shield, shieldPosition.position, transform.rotation) as Rigidbody2D;
-                    shieldCooldown = 5f;
+                    shieldCooldown = shieldCooldownMax;
                     shieldImage.fillAmount = 1;
-                    Destroy(newShield, 3f);
+                    Destroy(newShield, shieldDuration);
                     anim.SetTrigger("attack");
-                    SoundSystemManager.instance.PlaySFX("Defense Spell");
+                    SoundSystemManager.instance.PlaySFXStandard("Defense Spell");
                     shieldText.SetActive(false);
                 }
                 break;

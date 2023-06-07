@@ -3,28 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// * Date edited:     7/6/2023 by Seph
+ 
 public class EnemyBattleController : MonoBehaviour {
+
+    [Header("--POWER AND ATTACK TIMING--")]
+    [SerializeField]private float durationPrep = 2f;
+    [SerializeField]private float durationPostLightning = 4f;
+    [SerializeField]private float durationPostSuperCheck = 3f;
+    [SerializeField]private float durationPostFirebolt = 2f;
+    [SerializeField]private float durationShield = 2f;
+    [Header("--SPELL POSITIONS--")]
+    [SerializeField]private Transform powerPosition;
+    [SerializeField]private Transform shieldPosition;
 
     [Header("--PUBLIC ENEMY OBJECTS--")]
     public Rigidbody2D firebolt;
     public Rigidbody2D lightningBolt;
     public Rigidbody2D shield;
-    public Rigidbody2D powerPosition, lightningPosition, shieldPosition;
+    [SerializeField]private Vector2 lightingOffset;
 
     [Header("--PUBLIC ENEMY DATA--")]
     public float fireboltVelocity;
-    public bool canAttack;
-    public bool canSuperAttack;
+    public bool canAttack = true;
+    public bool canSuperAttack = true;
 
-    [SerializeField] Camera cam;
+    [SerializeField]private CamShake camShake;
     [SerializeField] protected Animator anim;
 
     HealthController health;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Start() {
-        canAttack = true;
-        canSuperAttack = true;
         health = GetComponent<HealthController>();
     }
 
@@ -44,33 +54,42 @@ public class EnemyBattleController : MonoBehaviour {
 
     IEnumerator Enemy1Coroutine() {
         while (canAttack) {
-            yield return new WaitForSeconds(2f);
+
+            yield return new WaitForSeconds(durationPrep);
+
             if (health.health <= 50 && canSuperAttack) {
-                    anim.SetTrigger("attack1");
-                    Rigidbody2D newlightningBolt = Instantiate(lightningBolt, lightningPosition.position, lightningPosition.transform.rotation) as Rigidbody2D;
-                    SoundSystemManager.instance.PlaySFX("Lightning Spell");
-                    cam.GetComponent<CamShake>().shakeDuration = 1f;
-                    Destroy(newlightningBolt, 1.5f);
-                    yield return new WaitForSeconds(4f);
+                    anim.SetTrigger("attack");
+
+                    // Seph: set the position of the lightning relative to the player position
+                    Vector2 lightningPos = (Vector2)SceneManager.instance.playerAdventure.transform.position + lightingOffset;
+
+                    Rigidbody2D newlightningBolt = Instantiate(lightningBolt, lightningPos, lightningBolt.transform.rotation) as Rigidbody2D;
+                    SoundSystemManager.instance.PlaySFXStandard("Lightning Spell");
+                    Destroy(newlightningBolt.gameObject, 1f);
+
+                    camShake.shakeDuration = 1f;
+
                     canSuperAttack = false;
+
+                    yield return new WaitForSeconds(durationPostLightning);
                 }
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(durationPostSuperCheck);
             if (!canAttack) break;
 
             //ATTACK ONE (FIRE)
-            anim.SetTrigger("attack1");
+            anim.SetTrigger("attack");
             Rigidbody2D newfirebolt = Instantiate(firebolt, powerPosition.position, powerPosition.transform.rotation) as Rigidbody2D;
             newfirebolt.AddForce(-transform.right * fireboltVelocity, ForceMode2D.Force);
-            SoundSystemManager.instance.PlaySFX("Fire Spell Cast");
+            SoundSystemManager.instance.PlaySFXStandard("Fire Spell Cast");
             if (!canAttack) break;
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(durationPostFirebolt);
 
             //ATTACK TWO (SHIELD)
-            anim.SetTrigger("attack1");
+            anim.SetTrigger("attack");
             Rigidbody2D newShield = Instantiate(shield, shieldPosition.position, transform.rotation) as Rigidbody2D;
-            Destroy(newShield, 2f);
+            Destroy(newShield, durationShield);
         }
     }
 
@@ -79,9 +98,19 @@ public class EnemyBattleController : MonoBehaviour {
     }
 
     public IEnumerator Frozen() {
+        bool canSuperAttackStore = canSuperAttack;
+
+        canSuperAttack = false;
         canAttack = false;
         yield return new WaitForSeconds(5f);
         canAttack = true;
+        canSuperAttack = canSuperAttackStore;
+
         DetermineEnemy(1);
+    }
+
+    public void EndBattle()
+    {
+        StopAllCoroutines();
     }
 }

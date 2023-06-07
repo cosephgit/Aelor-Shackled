@@ -72,7 +72,7 @@ Rigidbody2D:
   m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8fbd18075f1c04dab47408b92bf5cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnHit: 1
   damage: 0
   frostBeamEffect: {fileID: 4513638601550759582, guid: fccbd41ec67e4cc4da2f2885071a20fa, type: 3}
   burnEffect: {fileID: 0}
@@ -180,7 +181,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1028545303
-  m_SortingLayer: 9
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: -349301994, guid: 6839b989a30ec1b4c84a4cc84f4d4231, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
