@@ -1,7 +1,7 @@
 /****************************************************************************
  * Author:			Skylar Masson
  * Date started:	4/26/2023
- * Date edited:     2/6/2023 (Seph)
+ * Date edited:     7/6/2023 (Seph)
  * Description:  	Class contains all methods for the Battle Sequence
  ******************************************************************************/
 
@@ -25,33 +25,41 @@ public class BattleManager : MonoBehaviour {
     public GameObject enemyCanvas;
 
     private PlayerBattleController playerBattleController;
-    private PlayerAdventureController playerAdventureController;
+    //private PlayerAdventureController playerAdventureController;
     private EnemyBattleController enemyController;
 
     //Initial method that sets the instance to only this class
-    void Awake() {
-        if (instance == null) {
-            DontDestroyOnLoad(gameObject);
+    void Awake()
+    {
+        if (instance)
+        {
+            if (instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+        }
+        else
             instance = this;
-        }
-        else {
-            Destroy(gameObject);
-        }
     }
 
     //Method at start sets player and enemy variables; disables battle-related controllers and canvas
     void Start() {
 
-        player = GameObject.FindWithTag("Player");  //Set player
-        playerBattleController = player.GetComponent<PlayerBattleController>();
-        playerAdventureController = player.GetComponent<PlayerAdventureController>();
+        if (!player)
+            player = GameObject.FindWithTag("Player");  //Set player
 
-        enemy = GameObject.FindWithTag("Enemy");    //Set enemy
+        playerBattleController = player.GetComponent<PlayerBattleController>();
+        //playerAdventureController = player.GetComponent<PlayerAdventureController>();
+
+        if (!enemy)
+            enemy = GameObject.FindWithTag("Enemy");    //Set enemy
+
         enemyController = enemy.GetComponent<EnemyBattleController>();
 
         playerBattleController.enabled = false;
         enemyController.enabled = false;
-        playerAdventureController.enabled = true;
+        //playerAdventureController.enabled = true;
 
         //Set battle canvas inactive
         playerCanvas.gameObject.SetActive(false);
@@ -66,7 +74,7 @@ public class BattleManager : MonoBehaviour {
         //Enable player and enemy battle controllers
         playerBattleController.enabled = true;
         enemyController.enabled = true;
-        playerAdventureController.enabled = false;
+        //playerAdventureController.enabled = false;
 
         //Set player and enemy canvas active
         playerCanvas.SetActive(true);
@@ -87,7 +95,7 @@ public class BattleManager : MonoBehaviour {
         //Disable player and enemy battle controllers
         playerBattleController.enabled = false;
         enemyController.enabled = false;
-        playerAdventureController.enabled = true;
+        //playerAdventureController.enabled = true;
 
         //Set player and enemy canvas inactive
         playerCanvas.SetActive(false);
@@ -104,7 +112,7 @@ public class BattleManager : MonoBehaviour {
         //Disable player and enemy battle controllers
         playerBattleController.enabled = false;
         enemyController.enabled = false;
-        playerAdventureController.enabled = true;
+        //playerAdventureController.enabled = true;
 
         //Set player and enemy canvas inactive
         playerCanvas.SetActive(false);
