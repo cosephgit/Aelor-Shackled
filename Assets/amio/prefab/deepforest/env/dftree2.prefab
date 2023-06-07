@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2953082213366961198}
   - component: {fileID: 8571863025591119205}
   m_Layer: 0
-  m_Name: deepforestenv_2
+  m_Name: dftree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5991120678753261068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 64.56273, y: -8.954797, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,11 +70,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1690905877
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_Sprite: {fileID: -994002539, guid: 07607f3276e2fb548a58061c365320a7, type: 3}
-  m_Color: {r: 0.80566037, g: 1, b: 0.9960339, a: 1}
+  m_Color: {r: 0.5981132, g: 0.955009, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
