@@ -2353,6 +2353,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ESEventSequenceLook
       objectReference: {fileID: 0}
+    - target: {fileID: 6374264895017142901, guid: e40bc3c84d32e2c4b9afddde7b996478, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e40bc3c84d32e2c4b9afddde7b996478, type: 3}
 --- !u!4 &140669317 stripped
@@ -23450,6 +23454,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ESEventSequenceUse
       objectReference: {fileID: 0}
+    - target: {fileID: 6374264895017142901, guid: e40bc3c84d32e2c4b9afddde7b996478, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e40bc3c84d32e2c4b9afddde7b996478, type: 3}
 --- !u!114 &928852988 stripped
@@ -35834,6 +35842,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 244274914863598898, guid: 71945cd6127c903408cbf6860477f871, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742213306712441295, guid: 71945cd6127c903408cbf6860477f871, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3260882932499705886, guid: 71945cd6127c903408cbf6860477f871, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -36708,7 +36724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1544450852
 Transform:
   m_ObjectHideFlags: 0
