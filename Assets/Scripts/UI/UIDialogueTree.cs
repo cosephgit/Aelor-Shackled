@@ -13,6 +13,8 @@ public class UIDialogueTree : MonoBehaviour
     [Header("Ordered array of buttons")]
     [SerializeField]private Button[] buttons;
     [SerializeField]private GameObject buttonHolder;
+    [SerializeField]private AudioClip soundButton;
+    [SerializeField]private AudioClip soundInteract;
     private TextMeshProUGUI[] buttonTexts;
     private int buttonCount;
     private Event currentDialogueTree;
@@ -34,6 +36,8 @@ public class UIDialogueTree : MonoBehaviour
     public void OpenDialogue(Vector3 pos, string[] lines, Event parentEvent)
     {
         gameObject.SetActive(true);
+
+        SoundSystemManager.instance.PlaySFXStandard(soundInteract);
 
         currentDialogueTree = parentEvent;
 
@@ -58,6 +62,8 @@ public class UIDialogueTree : MonoBehaviour
     public void ButtonDialogue(int index)
     {
         currentDialogueTree.EndEventRemote(index);
+
+        SoundSystemManager.instance.PlaySFXStandard(soundButton);
 
         Debug.Log("dialogue button " + index + " pressed");
 

@@ -62,6 +62,8 @@ MonoBehaviour:
   - {fileID: 2478368600456741406}
   popUpDuration: 2
   popUpMoveTime: 0.5
+  soundOpen: {fileID: 8300000, guid: fbc6b6c1d67976b43b6da0847b4fab58, type: 3}
+  soundClose: {fileID: 8300000, guid: 66a175245cc9b4348a236de051e8681d, type: 3}
 --- !u!1 &7720450945826004329
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +244,8 @@ MonoBehaviour:
   - {fileID: 832772882670207464}
   - {fileID: 832772882886769190}
   buttonHolder: {fileID: 7720450946667100989}
+  soundButton: {fileID: 8300000, guid: 54de4bd28eadb324f9607844a3774919, type: 3}
+  soundInteract: {fileID: 8300000, guid: bc912df167df23f479031edb9c9f821b, type: 3}
 --- !u!1 &7720450946181669303
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +300,8 @@ MonoBehaviour:
   buttonTalk: {fileID: 6162420344793102587}
   buttonUse: {fileID: 6162420343629091593}
   buttonSpecial: {fileID: 6162420344374507553}
+  soundButton: {fileID: 8300000, guid: 54de4bd28eadb324f9607844a3774919, type: 3}
+  soundInteract: {fileID: 8300000, guid: bc912df167df23f479031edb9c9f821b, type: 3}
 --- !u!1 &7720450946257403300
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +762,7 @@ MonoBehaviour:
   <inventory>k__BackingField: {fileID: 7720450945814186896}
   <inventoryItem>k__BackingField: {fileID: 7720450947440166525}
   <fadeManager>k__BackingField: {fileID: 7720450947269735656}
+  clickTick: {fileID: 8300000, guid: bc912df167df23f479031edb9c9f821b, type: 3}
 --- !u!1 &7720450947269735652
 GameObject:
   m_ObjectHideFlags: 0

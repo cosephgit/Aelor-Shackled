@@ -8,8 +8,11 @@ using UnityEngine;
 
 public class WalkEvent : MonoBehaviour
 {
+    [SerializeField]private AudioClip[] footstepSounds;
+
     public void Footstep()
     {
-        SoundSystemManager.instance.footstepSource.Play();
+        if (footstepSounds.Length > 0)
+            SoundSystemManager.instance.PlaySFXStandard(footstepSounds[Random.Range(0, footstepSounds.Length)]);
     }
 }

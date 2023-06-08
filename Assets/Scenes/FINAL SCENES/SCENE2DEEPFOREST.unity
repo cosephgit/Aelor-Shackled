@@ -30273,6 +30273,8 @@ MonoBehaviour:
   posYClose: -5
   scaleFar: 0.5
   posYFar: 5
+  musicClip: {fileID: 8300000, guid: eb21d14aca6774a468fa4fc8e07bd55b, type: 3}
+  ambientClip: {fileID: 8300000, guid: 0c24310b3fd8f364b808673406467943, type: 3}
 --- !u!4 &1237642136
 Transform:
   m_ObjectHideFlags: 0

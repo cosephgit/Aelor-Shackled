@@ -1743,17 +1743,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 21742334183711423, guid: 7af24732a7c24714ebb0ebdcf4ae14e9, type: 3}
   m_PrefabInstance: {fileID: 944941087}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &944941090 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 486213590, guid: 7af24732a7c24714ebb0ebdcf4ae14e9, type: 3}
-  m_PrefabInstance: {fileID: 944941087}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06221ece0f0ce44592c3cf59653d2af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &956189659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2309,18 +2298,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DEBUG>k__BackingField: 0
   <moveAreas>k__BackingField:
-  - {fileID: 0}
-  - {fileID: 944941090}
-  - {fileID: 0}
   - {fileID: 940993106}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   <playerAdventure>k__BackingField: {fileID: 1872475656}
   scaleClose: 1
   posYClose: -5
   scaleFar: 0.5
   posYFar: 5
+  musicClip: {fileID: 0}
+  ambientClip: {fileID: 0}
 --- !u!4 &1237642136
 Transform:
   m_ObjectHideFlags: 0

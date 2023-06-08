@@ -18,6 +18,8 @@ public class SceneManager : MonoBehaviour
     [SerializeField]private float posYClose = -5f;
     [SerializeField]private float scaleFar = 0.5f;
     [SerializeField]private float posYFar = 5f;
+    [SerializeField]private AudioClip musicClip;
+    [SerializeField]private AudioClip ambientClip;
     public bool adventureState { get; private set; } = true; // is the game currently in adventure mode (rather than battle mode)?
     public bool adventurePaused { get; private set; } = false; // is the adventure mode currently paused (to run an event)
 
@@ -37,7 +39,11 @@ public class SceneManager : MonoBehaviour
 
     private void Start()
     {
-        SoundSystemManager.instance.PlayMusic("ForestOutskirts");
+        if (musicClip)
+            SoundSystemManager.instance.PlayMusic(musicClip);
+
+        if (ambientClip)
+            SoundSystemManager.instance.PlayAmbience(ambientClip);
     }
 
     // un/pauses the adventure state (used for event sequences)

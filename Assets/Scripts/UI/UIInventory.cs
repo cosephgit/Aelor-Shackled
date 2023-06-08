@@ -15,6 +15,8 @@ public class UIInventory : MonoBehaviour
     [SerializeField]private UIInventorySlot[] inventorySlots = new UIInventorySlot[Global.INVENTORYSLOTS]; // the individual inventory slots to fill with items
     [SerializeField]private float popUpDuration = 2f; // how long the inventory pops up for
     [SerializeField]private float popUpMoveTime = 0.5f; // how long the inventory takes to go from top position to bottom position
+    [SerializeField]private AudioClip soundOpen;
+    [SerializeField]private AudioClip soundClose;
     private Vector3 posOriginal;
     private Vector3 posOffscreen;
     private float popUpEndTime; // how long before the inventory pops down
@@ -47,6 +49,9 @@ public class UIInventory : MonoBehaviour
         if (popUpEndTime > 0)
         {
             popUpEndTime -= Time.deltaTime;
+            if (popUpEndTime <= 0)
+                SoundSystemManager.instance.PlaySFXStandard(soundClose);
+
             if (popUpProgress < 1f)
             {
                 // move a bit towards top position
@@ -67,6 +72,9 @@ public class UIInventory : MonoBehaviour
 
     public void UIMouseOver()
     {
+        if (popUpEndTime <= 0)
+            SoundSystemManager.instance.PlaySFXStandard(soundOpen);
+
         popUpEndTime = popUpDuration;
     }
 

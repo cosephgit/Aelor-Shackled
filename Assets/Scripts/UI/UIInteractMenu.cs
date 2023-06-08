@@ -16,12 +16,16 @@ public class UIInteractMenu : MonoBehaviour
     [SerializeField]private Button buttonTalk;
     [SerializeField]private Button buttonUse;
     [SerializeField]private Button buttonSpecial;
+    [SerializeField]private AudioClip soundButton;
+    [SerializeField]private AudioClip soundInteract;
 
 
     public void OpenUIMenu(Vector3 pos, bool look, bool talk, bool use, bool special)
     {
         if (look || talk || use || special)
         {
+            SoundSystemManager.instance.PlaySFXStandard(soundInteract);
+
             gameObject.SetActive(true);
 
             transform.position = pos;
@@ -33,23 +37,32 @@ public class UIInteractMenu : MonoBehaviour
         }
     }
 
+    public void CloseUIMenu()
+    {
+
+    }
+
     public void ButtonLookPress()
     {
+        SoundSystemManager.instance.PlaySFXStandard(soundButton);
         UIControlInterface.instance.SelectLook();
         gameObject.SetActive(false);
     }
     public void ButtonTalkPress()
     {
+        SoundSystemManager.instance.PlaySFXStandard(soundButton);
         UIControlInterface.instance.SelectTalk();
         gameObject.SetActive(false);
     }
     public void ButtonUsePress()
     {
+        SoundSystemManager.instance.PlaySFXStandard(soundButton);
         UIControlInterface.instance.SelectUse();
         gameObject.SetActive(false);
     }
     public void ButtonSpecialPress()
     {
+        SoundSystemManager.instance.PlaySFXStandard(soundButton);
         UIControlInterface.instance.SelectSpecial();
         gameObject.SetActive(false);
     }

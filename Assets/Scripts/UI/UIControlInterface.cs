@@ -18,6 +18,7 @@ public class UIControlInterface : UIControlInterfaceMenu
     [field: SerializeField]public UIInventoryItemMove inventoryItem { get; private set; }
     [field: SerializeField]public UIFadeOutManager fadeManager { get; private set; }
     //[SerializeField]private Image mousePointer;
+    [SerializeField]private AudioClip clickTick;
     private InteractableBase interactable;
 
     protected override void Awake()
@@ -66,6 +67,8 @@ public class UIControlInterface : UIControlInterfaceMenu
         {
             bool interactionHide = true;
 
+            SoundSystemManager.instance.PlaySFXStandard(clickTick);
+
             // if the interaction menu is open, the first tap off it is just to close it
             if (EventSystem.current.IsPointerOverGameObject())
             {
@@ -106,6 +109,8 @@ public class UIControlInterface : UIControlInterfaceMenu
                 // only check for touches of game objects if there is no UI element under the mouse
                 Vector2 worldPos = Camera.main.ScreenToWorldPoint(pos);
                 Collider2D[] touchHits = Physics2D.OverlapPointAll(worldPos, Global.LayerInteract());
+
+                SoundSystemManager.instance.PlaySFXStandard(clickTick);
 
                 foreach (Collider2D touch in touchHits)
                 {

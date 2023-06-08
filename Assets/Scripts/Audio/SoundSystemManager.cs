@@ -13,6 +13,7 @@ public class SoundSystemManager : MonoBehaviour {
     public AudioClip[] musicClips;
     private AudioSource[] sfxPool;
     public AudioSource musicSource;
+    public AudioSource ambienceSource;
     public AudioSource footstepSource;
     public int maxSFXSources = 10;
     private int currentSFX;
@@ -51,13 +52,22 @@ public class SoundSystemManager : MonoBehaviour {
     public void PlayVariedSFX(string clipName) {
         PlaySFX(clipName, Random.Range(0.95f, 1.25f), 1);
     }
+    public void PlayVariedSFX(AudioClip clip) {
+        PlaySFX(clip, Random.Range(0.95f, 1.25f), 1);
+    }
 
     public void PlaySFXStandard(string clipName) {
         PlaySFX(clipName, 1, 3);
     }
+    public void PlaySFXStandard(AudioClip clip) {
+        PlaySFX(clip, 1, 3);
+    }
 
     public void PlaySFXLouder(string clipName) {
         PlaySFX(clipName, 1, 10);
+    }
+    public void PlaySFXLouder(AudioClip clip) {
+        PlaySFX(clip, 1, 10);
     }
 
     public void PlaySFX(string clipName, float pitch, float volume) {
@@ -75,6 +85,17 @@ public class SoundSystemManager : MonoBehaviour {
         }
     }
 
+    // plays the specified clip directly
+    public void PlaySFX(AudioClip clip, float pitch, float volume) {
+        AudioSource sfx = sfxPool[currentSFX];
+        sfx.clip = clip;
+        sfx.pitch = pitch;
+        sfx.volume = volume;
+        sfx.Play();
+        currentSFX++;
+        currentSFX %= maxSFXSources;
+    }
+
     public void PlayMusic(string clipName) {
         for (int i = 0; i < musicClips.Length; i++) {
             if (clipName == musicClips[i].name) {
@@ -85,8 +106,26 @@ public class SoundSystemManager : MonoBehaviour {
         }
     }
 
+    // plays the specified music clip directly
+    public void PlayMusic(AudioClip clip)
+    {
+        musicSource.clip = clip;
+        musicSource.Play();
+    }
+
     public void StopMusic()
     {
         musicSource.Stop();
+    }
+
+    public void PlayAmbience(AudioClip clip)
+    {
+        ambienceSource.clip = clip;
+        ambienceSource.Play();
+    }
+
+    public void StopAmbience()
+    {
+        ambienceSource.Stop();
     }
 }
