@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class Event : MonoBehaviour
 {
-    [SerializeField]private float delay = 1f; // the minimum time delay before the next event in the sequence should be triggered
+    [SerializeField]protected float delay = 1f; // the minimum time delay before the next event in the sequence should be triggered
     private EventSequence sequence;
     protected float endTime;
     protected bool finished;

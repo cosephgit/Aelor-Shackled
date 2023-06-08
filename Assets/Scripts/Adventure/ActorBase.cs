@@ -7,7 +7,7 @@ using TMPro;
 // all interactables and anything else that can act in the world are based on this
 // it has hooks for playing animations and showing text, but it does not assume they exist
 // Created by: Seph 27/5
-// Last edit by: Seph 7/6
+// Last edit by: Seph 8/6
 
 public enum AnimSingle
 {
@@ -488,5 +488,36 @@ public class ActorBase : MonoBehaviour
                 animator.SetTrigger("bounce");
             //animator.SetBool("flying", bounceValue);
         }
+    }
+
+    // cause this actor to fade away
+    public void FadeOut(float duration)
+    {
+        if (sprite)
+            StartCoroutine(FadeRoutine(duration));
+    }
+
+    private IEnumerator FadeRoutine(float duration)
+    {
+        float fadeCurrent = duration;
+        Color colorBase = sprite.color; // assume that all sprite components are the same color or this will be 100x more complicated
+
+        while (fadeCurrent > 0)
+        {
+            yield return new WaitForEndOfFrame();
+
+            fadeCurrent -= Time.deltaTime;
+
+            float progress = fadeCurrent / duration;
+            Color colorFrame = Color.Lerp(Color.black, colorBase, progress);
+            colorFrame.a = progress;
+
+            sprite.color = colorFrame;
+            for (int i = 0; i < spritesSecondary.Length; i++)
+                spritesSecondary[i].color = colorFrame;
+        }
+
+        // always put the actor to sleep at the end, make sure you're finished with it
+        Sleep();
     }
 }

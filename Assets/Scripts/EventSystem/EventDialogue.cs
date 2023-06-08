@@ -32,6 +32,14 @@ public class EventDialogue : Event
         subject.ShowLine(line, anim);
     }
 
+    protected override void Update()
+    {
+        if (endTime > 0 && Input.GetMouseButton(0))
+            endTime = Mathf.Max(endTime - Time.deltaTime, 0.01f);
+
+        base.Update();
+    }
+
     public override void End()
     {
         subject.HideLine();

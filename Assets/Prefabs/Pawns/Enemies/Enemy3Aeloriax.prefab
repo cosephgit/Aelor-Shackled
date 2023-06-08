@@ -38,7 +38,7 @@ PrefabInstance:
     - target: {fileID: 8739399238961043139, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 6622534523452839198}
     - target: {fileID: 8739399238961043139, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: tint.a
       value: 1
@@ -202,5 +202,10 @@ PrefabInstance:
 --- !u!95 &1982041930040627912 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9067841511329974136, guid: 98c270142ee7f7e4294d1ba1dcf6064d, type: 3}
+  m_PrefabInstance: {fileID: 7374311709980038576}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &6622534523452839198 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4445379809273954478, guid: 98c270142ee7f7e4294d1ba1dcf6064d, type: 3}
   m_PrefabInstance: {fileID: 7374311709980038576}
   m_PrefabAsset: {fileID: 0}
