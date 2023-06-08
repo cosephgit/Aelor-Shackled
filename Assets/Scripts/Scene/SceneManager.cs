@@ -13,6 +13,7 @@ public class SceneManager : MonoBehaviour
     [field: SerializeField]public bool DEBUG { get; private set; }
     [field: SerializeField]public WalkableArea[] moveAreas { get; private set; } // the collider which defines the area which the player pawn can move within
     [field: SerializeField]public PlayerAdventureController playerAdventure { get; private set; } // the player controller during adventure mode
+    [field: SerializeField]public ParallaxManager parallaxManager { get; private set; } // the player controller during adventure mode
     [field: Header("The scale of actors in the foreground (bottom of screen) and background (top of screen)")]
     [SerializeField]private float scaleClose = 1f;
     [SerializeField]private float posYClose = -5f;

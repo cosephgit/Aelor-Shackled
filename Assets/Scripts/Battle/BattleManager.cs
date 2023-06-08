@@ -1,7 +1,7 @@
 /****************************************************************************
  * Author:			Skylar Masson
  * Date started:	4/26/2023
- * Date edited:     7/6/2023 (Seph)
+ * Date edited:     8/6/2023 (Seph)
  * Description:  	Class contains all methods for the Battle Sequence
  ******************************************************************************/
 
@@ -17,7 +17,6 @@ public class BattleManager : MonoBehaviour {
     [SerializeField]private EventBattle callingEvent;  //Store the current battle even
     [SerializeField]private Transform camPos; // position the camera should take during the battle
     [SerializeField]private float camOrthoSize = 3f; // position the camera should take during the battle
-    [SerializeField]private ParallaxManager parallax; // parallax manager - needs to be notified to track the above point
 
     [Header("--PUBLIC GAMEOBJECTS--")]  //All public Gameobjects
     public GameObject player;
@@ -98,8 +97,6 @@ public class BattleManager : MonoBehaviour {
 
         enemyController.DetermineEnemy(1); //Start the enemyBattleController
 
-        parallax.SetBattlePos(camPos.position, camOrthoSize);
-
         SoundSystemManager.instance.PlayMusic("SorcererFight1");
     }
 
@@ -121,8 +118,6 @@ public class BattleManager : MonoBehaviour {
         callingEvent.BattleEnd(true);
 
         SoundSystemManager.instance.StopMusic();
-
-        parallax.EndBattleState();
     }
 
     public void BattleEndsDefeat() {
@@ -143,7 +138,5 @@ public class BattleManager : MonoBehaviour {
         callingEvent.BattleEnd(true);
 
         SoundSystemManager.instance.StopMusic();
-
-        parallax.EndBattleState();
     }
 }

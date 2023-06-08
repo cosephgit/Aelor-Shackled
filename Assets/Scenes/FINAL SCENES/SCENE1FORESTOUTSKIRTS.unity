@@ -28393,6 +28393,7 @@ MonoBehaviour:
   - {fileID: 1696581890}
   - {fileID: 1891699399}
   <playerAdventure>k__BackingField: {fileID: 1872475656}
+  <parallaxManager>k__BackingField: {fileID: 1299665829}
   scaleClose: 1
   posYClose: -5
   scaleFar: 0.5
@@ -29690,6 +29691,7 @@ MonoBehaviour:
   - 0.1
   - 0
   - -0.5
+  cameraSpeed: 8
 --- !u!4 &1305406949 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3927953406907227867, guid: 38df6a429f7abbc4082601c9445cfe36, type: 3}
