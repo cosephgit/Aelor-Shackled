@@ -15,8 +15,6 @@ public class BattleManager : MonoBehaviour {
     public static BattleManager instance;   //Creating a singleton so each script can call it without having to assign it to each class that uses it.
 
     [SerializeField]private EventBattle callingEvent;  //Store the current battle even
-    [SerializeField]private Transform camPos; // position the camera should take during the battle
-    [SerializeField]private float camOrthoSize = 3f; // position the camera should take during the battle
 
     [Header("--PUBLIC GAMEOBJECTS--")]  //All public Gameobjects
     public GameObject player;

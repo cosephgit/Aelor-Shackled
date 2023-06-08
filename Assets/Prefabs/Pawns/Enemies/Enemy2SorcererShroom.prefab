@@ -1,79 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1539689706
+--- !u!1001 &4154636947667541691
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 1830894714891450789}
     m_Modifications:
-    - target: {fileID: 3412623989305245780, guid: d6f5ec70d976b07498862447834a3096, type: 3}
-      propertyPath: m_Name
-      value: sorcerer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.51
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7311639320850111771, guid: d6f5ec70d976b07498862447834a3096, type: 3}
+    - target: {fileID: 3880598084110531439, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9222981931030849056, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
+      propertyPath: m_Name
+      value: sorcerer-shroom
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d6f5ec70d976b07498862447834a3096, type: 3}
---- !u!212 &1493354123249261769 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1493354123983507491, guid: d6f5ec70d976b07498862447834a3096, type: 3}
-  m_PrefabInstance: {fileID: 1539689706}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &6081486891746017226 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
+--- !u!95 &4426891155072453615 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 6081486891120784160, guid: d6f5ec70d976b07498862447834a3096, type: 3}
-  m_PrefabInstance: {fileID: 1539689706}
+  m_CorrespondingSourceObject: {fileID: 344321170109519188, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
+  m_PrefabInstance: {fileID: 4154636947667541691}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &9057802902449268972 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4907793250541270615, guid: dda38f8a5e88f5840915eb908ec0f407, type: 3}
+  m_PrefabInstance: {fileID: 4154636947667541691}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6926589308843929432
 PrefabInstance:
@@ -85,11 +89,11 @@ PrefabInstance:
     - target: {fileID: 8739399238258462052, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: anim
       value: 
-      objectReference: {fileID: 6081486891746017226}
+      objectReference: {fileID: 4426891155072453615}
     - target: {fileID: 8739399238961043139, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: sprite
       value: 
-      objectReference: {fileID: 1493354123249261769}
+      objectReference: {fileID: 9057802902449268972}
     - target: {fileID: 8739399238961043139, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: tint.a
       value: 1
@@ -109,7 +113,7 @@ PrefabInstance:
     - target: {fileID: 8739399238961043139, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 6081486891746017226}
+      objectReference: {fileID: 4426891155072453615}
     - target: {fileID: 8739399238961043139, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: eventLook
       value: 
@@ -164,7 +168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8739399238961043199, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: m_Name
-      value: Enemy1Sorcerer
+      value: Enemy2SorcererShroom
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
