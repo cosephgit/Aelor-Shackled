@@ -4,7 +4,7 @@ using UnityEngine;
 
 // simple class to be attached alongside a character animator for animation events
 // Created by: Seph 7/6
-// Last edit by: Seph 7/6
+// Last edit by: Seph 8/6
 
 public class WalkEvent : MonoBehaviour
 {
