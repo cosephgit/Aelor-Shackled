@@ -54,9 +54,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bounceMushroomManager: {fileID: 0}
+  bounceEndMushroomState: 3
   bounceEnding: {fileID: 7593961639679553897}
-  bounceSpeed: 10
+  bounceSpeed: 6
   bounceHeightVirtual: 4
+  bounceSound: {fileID: 8300000, guid: 5fb694f25fa70a245b10405abaffbb56, type: 3}
 --- !u!1 &5502134806925510143
 GameObject:
   m_ObjectHideFlags: 0

@@ -479,4 +479,14 @@ public class ActorBase : MonoBehaviour
         HideLine();
         ClearMoveTarget();
     }
+
+    public void SetBouncing(bool bounceValue)
+    {
+        if (animator)
+        {
+            if (bounceValue)
+                animator.SetTrigger("bounce");
+            //animator.SetBool("flying", bounceValue);
+        }
+    }
 }

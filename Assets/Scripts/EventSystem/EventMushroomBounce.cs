@@ -15,6 +15,7 @@ public class EventMushroomBounce : Event
     [SerializeField]private Transform bounceEnding; // an object defining the end point of the bounce sequence
     [SerializeField]private float bounceSpeed = 10f; // the linear speed moving from bounce point to bounce point
     [SerializeField]private float bounceHeightVirtual = 4f; // the amount of virtual height to apply on each bounce
+    [SerializeField]private AudioClip bounceSound;
     int bounceCurrent;
 
     public override void Run(EventSequence setSequence)
@@ -32,6 +33,11 @@ public class EventMushroomBounce : Event
         float distance = (end - start).magnitude; // the total linear distance of the bounce
         float bounceTime = distance / bounceSpeed; // the total time this bounce will take
 
+        bounceActor.SetBouncing(true);
+
+        if (bounceSound && bounceCurrent > 0)
+            SoundSystemManager.instance.PlayVariedSFX(bounceSound);
+
         while (progress < bounceTime)
         {
             Vector3 pos;
@@ -47,6 +53,8 @@ public class EventMushroomBounce : Event
         bounceActor.transform.position = end;
 
         bounceCurrent++;
+
+        bounceActor.SetBouncing(false);
 
         if (bounceCurrent < bounceSequence.Length)
             StartCoroutine(Bounce(end, bounceSequence[bounceCurrent].transform.position));
