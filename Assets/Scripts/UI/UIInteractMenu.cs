@@ -8,7 +8,7 @@ using UnityEngine.UI;
 // it disappears when the player clicks off it, or after they click on a valid interaction option
 // the interaction option is returned to the controller interface, which then passes the instruction to the interactable
 // Created by: Seph 27/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 8/6
 
 public class UIInteractMenu : MonoBehaviour
 {
@@ -26,14 +26,14 @@ public class UIInteractMenu : MonoBehaviour
         {
             SoundSystemManager.instance.PlaySFXStandard(soundInteract);
 
-            gameObject.SetActive(true);
-
             transform.position = pos;
 
             buttonLook.interactable = look;
             buttonTalk.interactable = talk;
             buttonUse.interactable = use;
             buttonSpecial.interactable = special;
+
+            gameObject.SetActive(true);
         }
     }
 

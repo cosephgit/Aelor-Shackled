@@ -19,7 +19,11 @@ public class UIControlInterface : UIControlInterfaceMenu
     [field: SerializeField]public UIFadeOutManager fadeManager { get; private set; }
     //[SerializeField]private Image mousePointer;
     [SerializeField]private AudioClip clickTick;
+    [SerializeField]private Image mouseImage;
+    [SerializeField]private Sprite mouseImageActive;
+    private Sprite mouseImagePassive;
     private InteractableBase interactable;
+    private bool mouseActive;
 
     protected override void Awake()
     {
@@ -35,6 +39,8 @@ public class UIControlInterface : UIControlInterfaceMenu
             instance = this;
 
         interactionMenu.gameObject.SetActive(false);
+
+        mouseImagePassive = mouseImage.sprite;
 
         base.Awake();
     }
@@ -55,19 +61,33 @@ public class UIControlInterface : UIControlInterfaceMenu
         return results;
     }
 
+    // updates the mouse pointer to the indicated active state
+    private void PointerState(bool active)
+    {
+        if (active != mouseActive)
+        {
+            mouseActive = active;
+            if (mouseActive)
+                mouseImage.sprite = mouseImageActive;
+            else
+                mouseImage.sprite = mouseImagePassive;
+        }
+    }
+
     // called when a position to touch is determined
     // the pos is the UI position, not the world position
     protected override void TouchInput(Vector2 pos, bool tap)
     {
+        bool pointerCheck = false;
+
         base.TouchInput(pos, tap);
 
         // TODO add mouse pointer changes (e.g. highlight over interactables) here
 
+
         if (tap && interactionMenu.gameObject.activeSelf)
         {
             bool interactionHide = true;
-
-            SoundSystemManager.instance.PlaySFXStandard(clickTick);
 
             // if the interaction menu is open, the first tap off it is just to close it
             if (EventSystem.current.IsPointerOverGameObject())
@@ -104,33 +124,46 @@ public class UIControlInterface : UIControlInterfaceMenu
                     if (inventory) inventory.UIMouseOver();
                 }
             }
-            else if (tap)
+            else
             {
                 // only check for touches of game objects if there is no UI element under the mouse
                 Vector2 worldPos = Camera.main.ScreenToWorldPoint(pos);
                 Collider2D[] touchHits = Physics2D.OverlapPointAll(worldPos, Global.LayerInteract());
 
-                SoundSystemManager.instance.PlaySFXStandard(clickTick);
-
                 foreach (Collider2D touch in touchHits)
                 {
                     InteractableBase interactableTest = touch.gameObject.GetComponentInParent<InteractableBase>();
 
+                    //if (tap)
                     if (interactableTest)
                     {
-                        interactable = interactableTest;
-                        // something has been touched that can be interacted with, trigger the first one found
-                        // note there should NOT be multiple interactables stacked up anyway, spread the items out more!
-                        interactionMenu.OpenUIMenu(pos, interactable.HasLook(), interactable.HasTalk(), interactable.HasUse(), interactable.HasSpecial());
-                        SceneManager.instance.playerAdventure.ClearMoveTarget();
-                        return;
+                        if (interactableTest.HasAnyInteraction())
+                        {
+                            // something has been touched that can be interacted with, trigger the first one found
+                            // note there should NOT be multiple interactables stacked up anyway, spread the items out more!
+                            pointerCheck = true;
+                            if (tap)
+                            {
+                                interactable = interactableTest;
+                                interactionMenu.OpenUIMenu(pos, interactable.HasLook(), interactable.HasTalk(), interactable.HasUse(), interactable.HasSpecial());
+                                SceneManager.instance.playerAdventure.ClearMoveTarget();
+
+                                return;
+                            }
+                        }
                     }
                 }
 
                 // nothing has been clicked on, so try telling the player pawn to move to the point
-                SceneManager.instance.playerAdventure.TryMove(worldPos, false);
+                if (tap)
+                {
+                    SceneManager.instance.playerAdventure.TryMove(worldPos, false);
+                    SoundSystemManager.instance.PlaySFXStandard(clickTick);
+                }
             }
         }
+
+        PointerState(pointerCheck);
     }
 
     public void SelectLook()

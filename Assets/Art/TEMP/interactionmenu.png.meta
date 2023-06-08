@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 54118ceae6426174fb1e6a5d8177ebd9
+guid: b5467e26b58b3cf4aa4e2889c5664a51
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cursor_0
+      name: interactionmenu_0
       rect:
         serializedVersion: 2
-        x: 79
-        y: 53
-        width: 116
-        height: 159
+        x: 55
+        y: 356
+        width: 272
+        height: 273
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +143,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c77feb1ff7511dd44829caf7d6014115
-      internalID: 902803098
+      spriteID: a7f5eb7e0c5df344e9d3a1a83c81c3be
+      internalID: 1572589831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu_1
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 495
+        width: 125
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5e89c3c6caf7724f8b04cb07917a4cc
+      internalID: -1146382447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu_3
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 346
+        width: 125
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e3c1b877049a9246b887eb89b7a96f7
+      internalID: -243126886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu_4
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 32
+        width: 272
+        height: 273
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34df1d78167cc0b49ab5bd303662d54a
+      internalID: 552106712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu_5
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 191
+        width: 126
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a74a5a06e50ef0243bd9e5947d16309c
+      internalID: 1671235540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu_7
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 36
+        width: 124
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 546756ee660dbfb49a8461b24e43848d
+      internalID: -1021033714
       vertices: []
       indices: 
       edges: []
@@ -160,7 +265,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      cursor_0: 902803098
+      interactionmenu_0: 1572589831
+      interactionmenu_1: -1146382447
+      interactionmenu_2: -233857391
+      interactionmenu_3: -243126886
+      interactionmenu_4: 552106712
+      interactionmenu_5: 1671235540
+      interactionmenu_6: 1076707339
+      interactionmenu_7: -1021033714
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

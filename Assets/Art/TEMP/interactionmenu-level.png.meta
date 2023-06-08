@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 54118ceae6426174fb1e6a5d8177ebd9
+guid: 230b555f1f37ba944aa0e7c50602356a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -129,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cursor_0
+      name: interactionmenu-level_0
       rect:
         serializedVersion: 2
-        x: 79
-        y: 53
-        width: 116
-        height: 159
+        x: 123
+        y: 374
+        width: 194
+        height: 195
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,8 +143,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c77feb1ff7511dd44829caf7d6014115
-      internalID: 902803098
+      spriteID: 6dfd7409e4014cd42bb692a6992423af
+      internalID: 1236403939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu-level_1
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 460
+        width: 94
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6844e506e7ddfa042b9a71d6b3c18139
+      internalID: 1630963041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu-level_3
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 347
+        width: 93
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1449e2d0e7b19014d8698a3ffca3bb69
+      internalID: 1935106205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu-level_4
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 105
+        width: 194
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fac60dacf937634caba723fc0a78be3
+      internalID: 1557767339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu-level_6
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 211
+        width: 92
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbd188b9499ffaa45a7e2e7882ae3c57
+      internalID: 180904174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: interactionmenu-level_8
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 83
+        width: 93
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f991e8d985e538547858a0bfdc2ef04d
+      internalID: 2004309861
       vertices: []
       indices: 
       edges: []
@@ -160,7 +265,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      cursor_0: 902803098
+      interactionmenu-level_0: 1236403939
+      interactionmenu-level_1: 1630963041
+      interactionmenu-level_2: 1735871214
+      interactionmenu-level_3: 1935106205
+      interactionmenu-level_4: 1557767339
+      interactionmenu-level_5: -460248076
+      interactionmenu-level_6: 180904174
+      interactionmenu-level_7: -587876665
+      interactionmenu-level_8: 2004309861
+      interactionmenu-level_9: -635358721
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

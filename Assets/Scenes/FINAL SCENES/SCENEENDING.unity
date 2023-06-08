@@ -565,8 +565,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 500, y: 200}
+  m_AnchoredPosition: {x: 0, y: -110}
+  m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1111752230
 MonoBehaviour:
@@ -588,8 +588,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Credits\r\n\rLead Programmer - Seph (CoSeph Games)\r\n\rBattle System
-    Programmer - Skylar Masson\n\rNarrative Designer - Deniz Kele\u015F\nArtwork
+  m_text: "<b>Credits\r</b>\n\rLead Programmer - Seph (CoSeph Games)\r\n\rBattle
+    System Programmer - Skylar Masson\n\rNarrative Designer - Deniz Kele\u015F\nArtwork
     - Amio, Tatoni Fail\nSound Designer - Hovig Sarkissian\nMusic - Asup"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9d04f5b7e1316934899939272ab6252d, type: 2}
@@ -617,11 +617,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.85
+  m_fontSize: 17.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 16
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -702,8 +702,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 500, y: 70}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 800, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1276915759
 MonoBehaviour:
@@ -725,7 +725,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You have made peace with the Aeloriax.
+  m_text: 'Thus, the Realm of Aelor was redeemed, thanks to the valiant efforts of
+    young sorcerer Alaric.
+
+
+    He vanquished the vile dominion of Aeloriax, freeing
+    the denizens of Aelor from its clutches.
+
+
+    His bravery shall forever be etched
+    in the hearts of those he saved and celebrated in the timeless melodies of future
+    bards.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9d04f5b7e1316934899939272ab6252d, type: 2}
   m_sharedMaterial: {fileID: 2555887565480758216, guid: 9d04f5b7e1316934899939272ab6252d, type: 2}
@@ -752,7 +762,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.65
+  m_fontSize: 20.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -841,7 +851,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 400}
+  m_SizeDelta: {x: 800, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1278596079
 MonoBehaviour:
