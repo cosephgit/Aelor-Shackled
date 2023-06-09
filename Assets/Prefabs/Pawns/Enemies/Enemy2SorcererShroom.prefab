@@ -86,9 +86,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1534924057320086297, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598483136514020950, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.44
+      objectReference: {fileID: 0}
     - target: {fileID: 1598483136514020950, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598483137992023340, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.32
       objectReference: {fileID: 0}
     - target: {fileID: 1598483137992023340, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -111,8 +123,32 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6551431451351282377, guid: 1884a2561d0ec9b439ee2ff1cdc8fdb9, type: 3}
     - target: {fileID: 8739399238258462052, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
+      propertyPath: sporeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 1490ccc6f0fd5904bbcd0e0651a5b338, type: 3}
+    - target: {fileID: 8739399238258462052, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
+      propertyPath: venomSound
+      value: 
+      objectReference: {fileID: 8300000, guid: b315a3f8675e38f4aa3a0691cf26df48, type: 3}
+    - target: {fileID: 8739399238258462052, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: cooldownSpores
-      value: 1
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739399238258462052, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
+      propertyPath: cooldownFirebolt
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739399238258462052, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
+      propertyPath: fireboltVelocity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739399238258462052, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
+      propertyPath: lightingOffset.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8739399238258462052, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
+      propertyPath: cooldownLightning
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8739399238961043139, guid: be13f59ceedd48f4c94455e9b21733d5, type: 3}
       propertyPath: sprite

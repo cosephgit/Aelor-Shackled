@@ -280,5 +280,7 @@ public class EnemyBattleController : MonoBehaviour {
     public void EndBattle()
     {
         StopAllCoroutines();
+        canAttack = false;
+        canSuperAttack = false;
     }
 }
