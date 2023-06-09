@@ -42,6 +42,7 @@ public class EnemyBattleController : MonoBehaviour {
 
     public void DetermineEnemy(int enemyNum) {
         enemyIndex = enemyNum;
+        StartAttack();
     }
 
     private void StartAttack()
@@ -51,8 +52,10 @@ public class EnemyBattleController : MonoBehaviour {
                 StartCoroutine(Enemy1Coroutine());
                 break;
             case 2: // mushroom sorcerer
+                StartCoroutine(Enemy2Coroutine());
                 break;
             case 3: // snake monster
+                StartCoroutine(Enemy3Coroutine());
                 break;
             default:
                 break;
@@ -106,32 +109,104 @@ public class EnemyBattleController : MonoBehaviour {
             //ATTACK ONE (FIRE)
             SpellFirebolt();
 
-            if (!canAttack) break;
-
             yield return new WaitForSeconds(cooldownFirebolt);
 
-            //ATTACK ONE (FIRE)
-            SpellFirebolt();
-
             if (!canAttack) break;
-
-            yield return new WaitForSeconds(cooldownFirebolt);
 
             //ATTACK TWO (SHIELD)
             SpellShield();
 
             yield return new WaitForSeconds(cooldownShield);
+
+            if (!canAttack) break;
+
+            //ATTACK ONE (FIRE)
+            SpellFirebolt();
+
+            yield return new WaitForSeconds(cooldownFirebolt);
         }
     }
 
+    // coroutine for the second boss: mushroomer sorcerer
+    IEnumerator Enemy2Coroutine() {
+        while (canAttack) {
+
+            yield return new WaitForSeconds(timePreAttack);
+
+            if (health.health <= 50 && canSuperAttack)
+            {
+                SpellLightning();
+                canSuperAttack = false;
+                yield return new WaitForSeconds(cooldownLightning);
+            }
+
+            if (!canAttack) break;
+
+            //ATTACK ONE (FIRE)
+            SpellFirebolt();
+
+            yield return new WaitForSeconds(cooldownFirebolt);
+
+            if (!canAttack) break;
+
+            //ATTACK TWO (SHIELD)
+            SpellShield();
+
+            yield return new WaitForSeconds(cooldownShield);
+
+            if (!canAttack) break;
+
+            //ATTACK ONE (FIRE)
+            SpellFirebolt();
+
+            yield return new WaitForSeconds(cooldownFirebolt);
+        }
+    }
+
+    // coroutine for the final boss - magic snake
+    IEnumerator Enemy3Coroutine() {
+        while (canAttack) {
+
+            yield return new WaitForSeconds(timePreAttack);
+
+            if (health.health <= 50 && canSuperAttack)
+            {
+                SpellLightning();
+                canSuperAttack = false;
+                yield return new WaitForSeconds(cooldownLightning);
+            }
+
+            if (!canAttack) break;
+
+            //ATTACK ONE (FIRE)
+            SpellFirebolt();
+
+            yield return new WaitForSeconds(cooldownFirebolt);
+
+            if (!canAttack) break;
+
+            //ATTACK TWO (SHIELD)
+            SpellShield();
+
+            yield return new WaitForSeconds(cooldownShield);
+
+            if (!canAttack) break;
+
+            //ATTACK ONE (FIRE)
+            SpellFirebolt();
+
+            yield return new WaitForSeconds(cooldownFirebolt);
+        }
+    }
+
+
     // called when this enemy is hit by the player's freeze ray
     public void Froze() {
+        StopAllCoroutines();
         StartCoroutine(Frozen());
     }
 
     public IEnumerator Frozen() {
-        StopAllCoroutines();
-
         yield return new WaitForSeconds(frozenDuration);
 
         StartAttack();

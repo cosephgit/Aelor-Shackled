@@ -24,10 +24,15 @@ public class BattleManager : MonoBehaviour {
     public GameObject playerCanvas;
     public GameObject enemyCanvas;
 
+    [Header("--BATTLE SETTINGS--")]
+    [SerializeField]private int enemyIndex = 1;
+    [SerializeField]private AudioClip battleMusic;
+
     private PlayerBattleController playerBattleController;
         // Seph handled by event system
     //private PlayerAdventureController playerAdventureController;
     private EnemyBattleController enemyController;
+    private bool battleActive = false;
 
     //Initial method that sets the instance to only this class
     void Awake()
@@ -93,48 +98,39 @@ public class BattleManager : MonoBehaviour {
         // Seph handled by event system
         //player.transform.position = new Vector2(-7.00f, -1.71f);    //Move player back a bit to give space in between the chars for the fight
 
-        enemyController.DetermineEnemy(1); //Start the enemyBattleController
+        enemyController.DetermineEnemy(enemyIndex); //Start the enemyBattleController
 
-        SoundSystemManager.instance.PlayMusic("SorcererFight1");
+        battleActive = true;
+
+        if (battleMusic)
+            SoundSystemManager.instance.PlayMusic(battleMusic);
+        else
+            SoundSystemManager.instance.PlayMusic("SorcererFight1");
     }
 
-    public void BattleEndsVictory() {
-        //Disable player and enemy battle controllers
-        playerBattleController.enabled = false;
-        enemyController.EndBattle();
-        enemyController.enabled = false;
-        //playerAdventureController.enabled = true;
+    // called by a health monitor when health is reduced to 0
+    public void BattleEnd(bool victory) {
+        if (battleActive)
+        {
+            //Disable player and enemy battle controllers
+            playerBattleController.enabled = false;
+            enemyController.EndBattle();
+            enemyController.enabled = false;
+            //playerAdventureController.enabled = true;
 
-        //Set player and enemy canvas inactive
-        playerCanvas.SetActive(false);
-        enemyCanvas.SetActive(false);
+            //Set player and enemy canvas inactive
+            playerCanvas.SetActive(false);
+            enemyCanvas.SetActive(false);
 
-        #if UNITY_EDITOR
-        Debug.Log("BattleEndsVictory");
-        #endif
+            #if UNITY_EDITOR
+            Debug.Log("BattleEnds - victory: " + victory);
+            #endif
 
-        callingEvent.BattleEnd(true);
+            callingEvent.BattleEnd(victory);
 
-        SoundSystemManager.instance.StopMusic();
-    }
+            battleActive = false;
 
-    public void BattleEndsDefeat() {
-        //Disable player and enemy battle controllers
-        playerBattleController.enabled = false;
-        enemyController.EndBattle();
-        enemyController.enabled = false;
-        //playerAdventureController.enabled = true;
-
-        //Set player and enemy canvas inactive
-        playerCanvas.SetActive(false);
-        enemyCanvas.SetActive(false);
-
-        #if UNITY_EDITOR
-        Debug.Log("BattleEndsDefeat");
-        #endif
-
-        callingEvent.BattleEnd(true);
-
-        SoundSystemManager.instance.StopMusic();
+            SoundSystemManager.instance.StopMusic();
+        }
     }
 }

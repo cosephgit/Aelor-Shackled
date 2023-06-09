@@ -112,7 +112,7 @@ public class PlayerBattleController : MonoBehaviour {
                     Rigidbody2D newShield = Instantiate(shield, shieldPosition.position, transform.rotation) as Rigidbody2D;
                     shieldCooldown = shieldCooldownMax;
                     shieldImage.fillAmount = 1;
-                    Destroy(newShield, shieldDuration);
+                    Destroy(newShield.gameObject, shieldDuration);
                     anim.SetTrigger("attack");
                     SoundSystemManager.instance.PlaySFXStandard("Defense Spell");
                     shieldText.SetActive(false);

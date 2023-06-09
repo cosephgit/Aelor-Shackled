@@ -15,9 +15,7 @@ public class DamageController : MonoBehaviour {
     private bool canHit = true;
 
 	void OnCollisionEnter2D(Collision2D c) {
-		HitObject(c.gameObject);
-        Destroy(gameObject);
-		Debug.Log(c);
+        OnTriggerEnter2D(c.collider);
 	}
 
 	void OnTriggerEnter2D(Collider2D c) {
@@ -27,27 +25,19 @@ public class DamageController : MonoBehaviour {
             if (this.gameObject.tag == "FireBurnEffect") {
 
                 if (c.gameObject.CompareTag("Enemy") || c.gameObject.CompareTag("Player")) {
-                    GameObject effect = Instantiate(burnEffect, this.transform.position + this.transform.up, this.transform.rotation);
-                    Destroy(effect, 3f);
+                    GameObject effect = Instantiate(burnEffect, c.transform.position, c.transform.rotation);
+                    Destroy(effect, 1f);
                 }
             }
 
             if (this.gameObject.tag == "FrostbiteBeam") {
 
-                if (c.gameObject.CompareTag("Enemy") || c.gameObject.CompareTag("Player")) {
+                if (c.gameObject.CompareTag("Enemy")) {
                     ParticleSystem effect = Instantiate(frostBeamEffect, transform.position, transform.rotation);
-                    Destroy(effect.gameObject, 5f);
-                }
-                
-                if(c.gameObject.CompareTag("Enemy")) {
+                    Destroy(effect.gameObject, 2f);
+
                     c.gameObject.GetComponent<EnemyBattleController>().Froze();
                 }
-            }
-
-            if (c.gameObject.CompareTag("Shield")) {
-                Debug.Log(c);
-                // Seph: redundant
-                //Destroy(this.gameObject);
             }
 
             HitObject(c.gameObject);
@@ -62,20 +52,14 @@ public class DamageController : MonoBehaviour {
 	void HitObject(GameObject g) {
 		if (g.CompareTag("Shield")) {
 			SoundSystemManager.instance.PlaySFXStandard("Shield Hit-001");
-			Debug.Log(g);
 		}
 		else {
-			SoundSystemManager.instance.PlaySFXStandard("Attack Hit");
-		}
-		HealthController health = g.GetComponentInParent<HealthController>();
-		if (health != null) {
-			health.TakeDamage(damage);
-		}
-	}
+            HealthController health = g.GetComponentInParent<HealthController>();
 
-	void Update() {
-		if (this.gameObject.tag == "Shield") {
-			Destroy(this.gameObject, 5f);
+            if (health != null) {
+                health.TakeDamage(damage);
+			    SoundSystemManager.instance.PlaySFXStandard("Attack Hit");
+            }
 		}
 	}
 }

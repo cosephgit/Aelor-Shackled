@@ -9,6 +9,8 @@ TagManager:
   - FireBurnEffect
   - Shield
   - Lightning
+  - ShieldEnemy
+  - FireBurnEffectEnemy
   layers:
   - Default
   - TransparentFX
@@ -31,7 +33,7 @@ TagManager:
   - 
   - 
   - Projectile
-  - 
+  - ProjectileEnemy
   - 
   - 
   - 

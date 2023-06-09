@@ -16190,6 +16190,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 378474766}
     - target: {fileID: 1830894714385998396, guid: bcf16b34cf4c08e4aac79f8973002b56, type: 3}
+      propertyPath: firebolt
+      value: 
+      objectReference: {fileID: 6551431451351282377, guid: 1884a2561d0ec9b439ee2ff1cdc8fdb9, type: 3}
+    - target: {fileID: 1830894714385998396, guid: bcf16b34cf4c08e4aac79f8973002b56, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -16199,19 +16203,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1830894714385998396, guid: bcf16b34cf4c08e4aac79f8973002b56, type: 3}
       propertyPath: timePreAttack
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830894714385998396, guid: bcf16b34cf4c08e4aac79f8973002b56, type: 3}
+      propertyPath: cooldownShield
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1830894714385998396, guid: bcf16b34cf4c08e4aac79f8973002b56, type: 3}
       propertyPath: durationShield
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1830894714385998396, guid: bcf16b34cf4c08e4aac79f8973002b56, type: 3}
-      propertyPath: cooldownFirebolt
+      propertyPath: shieldDuration
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1830894714385998396, guid: bcf16b34cf4c08e4aac79f8973002b56, type: 3}
+      propertyPath: cooldownFirebolt
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1830894714385998396, guid: bcf16b34cf4c08e4aac79f8973002b56, type: 3}
       propertyPath: fireboltVelocity
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1830894714385998396, guid: bcf16b34cf4c08e4aac79f8973002b56, type: 3}
       propertyPath: lightingOffset.y
@@ -41428,13 +41440,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 874218367}
     - target: {fileID: 174116784, guid: ebdb1121757d973499dac45f12ca3ab6, type: 3}
-      propertyPath: fireCooldownMax
-      value: 0.1
+      propertyPath: iceCooldownMax
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 174116786, guid: ebdb1121757d973499dac45f12ca3ab6, type: 3}
+      propertyPath: maxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 174116786, guid: ebdb1121757d973499dac45f12ca3ab6, type: 3}
       propertyPath: playerSlider
       value: 
       objectReference: {fileID: 950623692}
+    - target: {fileID: 408504109, guid: ebdb1121757d973499dac45f12ca3ab6, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 408504109, guid: ebdb1121757d973499dac45f12ca3ab6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.93
+      objectReference: {fileID: 0}
     - target: {fileID: 6857606249777988721, guid: ebdb1121757d973499dac45f12ca3ab6, type: 3}
       propertyPath: m_RootOrder
       value: 3
