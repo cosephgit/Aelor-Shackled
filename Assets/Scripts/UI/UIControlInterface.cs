@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 // this class detects mouse clicks/touch taps and implements their effects
 // Created by: Seph 27/5
@@ -21,6 +22,7 @@ public class UIControlInterface : UIControlInterfaceMenu
     [SerializeField]private AudioClip clickTick;
     [SerializeField]private Image mouseImage;
     [SerializeField]private Sprite mouseImageActive;
+    [SerializeField]private GameObject gameOver;
     private Sprite mouseImagePassive;
     private InteractableBase interactable;
     private bool mouseActive;
@@ -193,6 +195,27 @@ public class UIControlInterface : UIControlInterfaceMenu
         {
             interactable.DoSpecial();
         }
+    }
+
+    // player is defeated
+    public void Defeat()
+    {
+        Time.timeScale = 0f;
+        gameOver.SetActive(true);
+    }
+
+    // continue playing (when defeated)
+    public void ButtonDefeatRetry()
+    {
+        Time.timeScale = 1f;
+        gameOver.SetActive(false);
+    }
+
+    // quit game - return to menu
+    public void ButtonQuit()
+    {
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
     // takes a worldspace point and returns the screenspace point

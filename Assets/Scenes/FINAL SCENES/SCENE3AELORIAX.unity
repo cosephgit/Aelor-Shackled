@@ -3040,7 +3040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!1 &277646589 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 196880, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
+  m_CorrespondingSourceObject: {fileID: 9161689628093337206, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
   m_PrefabInstance: {fileID: 277646585}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &277646590 stripped
@@ -3056,12 +3056,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!1 &277646591 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 693554534, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4713902762021191366, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
   m_PrefabInstance: {fileID: 277646585}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &277646592 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 815357041, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1321205438306502421, guid: 78b3c9fdd06bd5246936973a2aaef0ee, type: 3}
   m_PrefabInstance: {fileID: 277646585}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &277646593 stripped

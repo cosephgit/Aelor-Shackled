@@ -118,6 +118,9 @@ public class PlayerBattleController : MonoBehaviour {
                     shieldText.SetActive(false);
                 }
                 break;
+            case 4: //Vine entangle
+                // TODO
+                break;
             default:
                 break;
         }

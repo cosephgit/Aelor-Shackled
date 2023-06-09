@@ -32,11 +32,6 @@ public class Event : MonoBehaviour
     // end the event if this event uses a timer
     protected virtual void Update()
     {
-        #if UNITY_EDITOR
-        if (running)
-            Debug.Log("event " + gameObject + " has endTime " + endTime);
-        #endif
-        
         if (endTime > 0)
         {
             //Debug.Log("endTime = " + endTime);
