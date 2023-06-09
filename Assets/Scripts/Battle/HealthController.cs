@@ -42,7 +42,10 @@ public class HealthController : MonoBehaviour {
 		float oldHealth = health;
 		
 		if (canChange) {
-			health -= damage;
+            if (isPlayer && GameManager.instance.adventureMode)
+                health -= damage * 0.5f;
+            else
+			    health -= damage;
 			health = Mathf.Clamp(health, 0, maxHealth);
 			onHealthChanged(oldHealth, health);
 		}

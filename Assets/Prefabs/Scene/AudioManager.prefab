@@ -41,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 1232143396}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8506200774188490657, guid: e530a05cc6d24b74c85fd94d961ffba4, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.4
@@ -169,7 +169,7 @@ AudioSource:
   m_GameObject: {fileID: 1529812953}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 214773131624498176, guid: e530a05cc6d24b74c85fd94d961ffba4, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -297,7 +297,7 @@ AudioSource:
   m_GameObject: {fileID: 1864733737}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 214773131624498176, guid: e530a05cc6d24b74c85fd94d961ffba4, type: 2}
   m_audioClip: {fileID: 8300000, guid: 618fe633e042eba43a7ccb82cbc38fe9, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.7
@@ -444,6 +444,7 @@ MonoBehaviour:
   musicClips:
   - {fileID: 8300000, guid: 9cf47b01a60be0b4692e8361f65b94ea, type: 3}
   - {fileID: 8300000, guid: 73bb2fb16213c6d429c280e12b2037b3, type: 3}
+  mixerEffects: {fileID: 214773131624498176, guid: e530a05cc6d24b74c85fd94d961ffba4, type: 2}
   musicSource: {fileID: 1232143398}
   ambienceSource: {fileID: 2271491351860382029}
   footstepSource: {fileID: 1864733739}
@@ -460,7 +461,7 @@ AudioSource:
   m_GameObject: {fileID: 5590422648038857228}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 214773131624498176, guid: e530a05cc6d24b74c85fd94d961ffba4, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -588,7 +589,7 @@ AudioSource:
   m_GameObject: {fileID: 5635092455900740881}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 214773131624498176, guid: e530a05cc6d24b74c85fd94d961ffba4, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.4

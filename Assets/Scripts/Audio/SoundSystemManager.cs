@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
-// * Date edited:     7/6/2023 by Seph
+// * Date edited:     9/6/2023 by Seph
  
 public class SoundSystemManager : MonoBehaviour {
     
@@ -11,6 +12,7 @@ public class SoundSystemManager : MonoBehaviour {
     [Header("AUDIO")]
     public AudioClip[] sfxClips;
     public AudioClip[] musicClips;
+    [SerializeField]private AudioMixerGroup mixerEffects;
     private AudioSource[] sfxPool;
     public AudioSource musicSource;
     public AudioSource ambienceSource;
@@ -39,10 +41,12 @@ public class SoundSystemManager : MonoBehaviour {
 
     void Start() {
         AudioSource multi = gameObject.AddComponent<AudioSource>();
+        multi.outputAudioMixerGroup = mixerEffects;
         sfxPool = new AudioSource[maxSFXSources];
         for (int i = 0; i < maxSFXSources; i++) {
             GameObject g = new GameObject("sfx" + i);
             AudioSource sfx = g.AddComponent<AudioSource>();
+            sfx.outputAudioMixerGroup = mixerEffects;
             sfx.gameObject.transform.SetParent(transform);
             sfx.playOnAwake = false;
             sfxPool[i] = sfx;
