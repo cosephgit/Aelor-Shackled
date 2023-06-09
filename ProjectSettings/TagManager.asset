@@ -11,6 +11,7 @@ TagManager:
   - Lightning
   - ShieldEnemy
   - FireBurnEffectEnemy
+  - Spores
   layers:
   - Default
   - TransparentFX

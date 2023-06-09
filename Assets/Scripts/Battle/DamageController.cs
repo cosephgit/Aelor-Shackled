@@ -20,13 +20,18 @@ public class DamageController : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D c) {
 
+        Debug.Log(gameObject + " hit " + c.gameObject);
+
         if (canHit)
         {
             if (this.gameObject.tag == "FireBurnEffect") {
 
                 if (c.gameObject.CompareTag("Enemy") || c.gameObject.CompareTag("Player")) {
-                    GameObject effect = Instantiate(burnEffect, c.transform.position, c.transform.rotation);
-                    Destroy(effect, 1f);
+                    if (burnEffect)
+                    {
+                        GameObject effect = Instantiate(burnEffect, c.transform.position, c.transform.rotation);
+                        Destroy(effect, 1f);
+                    }
                 }
             }
 
@@ -40,11 +45,20 @@ public class DamageController : MonoBehaviour {
                 }
             }
 
+            if (gameObject.tag == "Spores")
+            {
+                if (c.gameObject.CompareTag("Player")) {
+                    c.gameObject.GetComponent<PlayerBattleController>().SporeHit();
+                }
+            }
+
             HitObject(c.gameObject);
             if (destroyOnHit)
                 Destroy(gameObject);
-            else // stop further collisions
+            else if (c.gameObject.CompareTag("Enemy") || c.gameObject.CompareTag("Player")) // only stop further collisions for non-destroyed powers if this was a character hit
+            {
                 canHit = false;
+            }
         }
 
 	}

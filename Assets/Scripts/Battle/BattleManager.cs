@@ -28,10 +28,10 @@ public class BattleManager : MonoBehaviour {
     [SerializeField]private int enemyIndex = 1;
     [SerializeField]private AudioClip battleMusic;
 
-    private PlayerBattleController playerBattleController;
+    public PlayerBattleController playerBattleController;
         // Seph handled by event system
     //private PlayerAdventureController playerAdventureController;
-    private EnemyBattleController enemyController;
+    public EnemyBattleController enemyController;
     private bool battleActive = false;
 
     //Initial method that sets the instance to only this class
@@ -98,6 +98,7 @@ public class BattleManager : MonoBehaviour {
         // Seph handled by event system
         //player.transform.position = new Vector2(-7.00f, -1.71f);    //Move player back a bit to give space in between the chars for the fight
 
+        playerBattleController.StartBattle();
         enemyController.DetermineEnemy(enemyIndex); //Start the enemyBattleController
 
         battleActive = true;

@@ -17,13 +17,15 @@ public class PlayerBattleController : MonoBehaviour {
     [SerializeField]private float frostBeamVelocity = 150f;
     [SerializeField]private float shieldDuration = 3f;
     [SerializeField]private float fireCooldownMax = 3f;
-    [SerializeField]private float iceCooldownMax = 5f;
+    [SerializeField]private float iceCooldownMax = 6f;
     [SerializeField]private float shieldCooldownMax = 5f;
+    [SerializeField]private float vinesCooldownMax = 8f;
 
     [Header("--PUBLIC PLAYER OBJECTS--")]
     public Rigidbody2D firebolt;
     public Rigidbody2D frostBiteBeam;
     public Rigidbody2D shield;
+    public GameObject vines;
 
     [Header("--SPELL START POSITIONS--")]
     public Transform fireboltPosition;
@@ -34,47 +36,71 @@ public class PlayerBattleController : MonoBehaviour {
     public Image fireImage;
     public Image iceImage;
     public Image shieldImage;
+    public Image vineImage;
 
     [Header("--PUBLIC SPELLTEXT UI--")]
     public GameObject fireText;
     public GameObject frostText;
     public GameObject shieldText;
+    public GameObject vineText;
 
     [SerializeField] protected Animator anim;
 
+    private HealthController health;
     // power cooldown timers
     private float fireCooldown,
                  iceCooldown,
                  shieldCooldown;
+    private float sporeTime;
 
     //Initial Method - sets above data to corresponding gameobjects
     void Awake() {
+        health = GetComponent<HealthController>();
+
+        StartBattle();
+    }
+
+    public void StartBattle()
+    {
+        fireCooldown = 0;
         fireImage.fillAmount = fireCooldown;
+        iceCooldown = 0;
         iceImage.fillAmount = iceCooldown;
+        shieldCooldown = 0;
         shieldImage.fillAmount = shieldCooldown;
 
         fireText.SetActive(true);
         frostText.SetActive(true);
         shieldText.SetActive(true);
+
+        health.Initialise();
     }
 
     void Update() {
+        float timeTick = Time.deltaTime;
+
+        if (sporeTime > 0)
+        {
+            sporeTime -= Time.deltaTime;
+            timeTick *= 0.5f; // timers run at half speed while affected by the spore attack
+        }
+
         if (fireCooldown > 0) {
-            fireCooldown -= Time.deltaTime;
+            fireCooldown -= timeTick;
             // Seph: fixed
             fireImage.fillAmount = fireCooldown / fireCooldownMax;
             //fireImage.fillAmount -= 1 / (fireCooldown + 1f) * Time.deltaTime;
         } else fireText.SetActive(true);
 
         if (iceCooldown > 0) {
-            iceCooldown -= Time.deltaTime;
+            iceCooldown -= timeTick;
             // Seph: fixed
             iceImage.fillAmount = iceCooldown / iceCooldownMax;
             //iceImage.fillAmount -= 1 / (iceCooldown + 2) * Time.deltaTime;
         } else frostText.SetActive(true);
 
         if (shieldCooldown > 0) {
-            shieldCooldown -= Time.deltaTime;
+            shieldCooldown -= timeTick;
             // Seph: fixed
             shieldImage.fillAmount = shieldCooldown / shieldCooldownMax;
             //shieldImage.fillAmount -= 1 / (shieldCooldown + 2) * Time.deltaTime;
@@ -124,5 +150,9 @@ public class PlayerBattleController : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    public void SporeHit() {
+        sporeTime = 4f;
     }
 }

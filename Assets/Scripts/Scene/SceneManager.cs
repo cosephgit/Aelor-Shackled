@@ -40,8 +40,7 @@ public class SceneManager : MonoBehaviour
 
     private void Start()
     {
-        if (musicClip)
-            SoundSystemManager.instance.PlayMusic(musicClip);
+        ResumeMusic();
 
         if (ambientClip)
             SoundSystemManager.instance.PlayAmbience(ambientClip);
@@ -124,5 +123,11 @@ public class SceneManager : MonoBehaviour
         }
 
         return closestArea;
+    }
+
+    public void ResumeMusic()
+    {
+        if (musicClip)
+            SoundSystemManager.instance.PlayMusic(musicClip);
     }
 }

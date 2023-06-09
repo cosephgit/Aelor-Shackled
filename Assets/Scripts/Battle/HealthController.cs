@@ -21,6 +21,11 @@ public class HealthController : MonoBehaviour {
 	public Slider enemySlider;
 
 	void Awake () {
+        Initialise();
+	}
+
+    public void Initialise()
+    {
 		health = maxHealth;
 
 		if (isEnemy) {
@@ -30,7 +35,7 @@ public class HealthController : MonoBehaviour {
         if (isPlayer) {
 			playerSlider.value = health;
 		}
-	}
+    }
 
 	public void TakeDamage (float damage) {
 		canChange = true;
