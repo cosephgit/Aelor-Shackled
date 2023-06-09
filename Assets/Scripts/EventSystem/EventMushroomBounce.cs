@@ -35,6 +35,9 @@ public class EventMushroomBounce : Event
 
         bounceActor.SetBouncing(true);
 
+        if (bounceCurrent > 0) // the first bounce starts on the ground
+            bounceSequence[bounceCurrent - 1].BounceAnim();
+
         if (bounceSound && bounceCurrent > 0)
             SoundSystemManager.instance.PlayVariedSFX(bounceSound);
 

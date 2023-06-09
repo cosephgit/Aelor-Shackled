@@ -9,6 +9,7 @@ using UnityEngine;
 public class BounceMushroom : MonoBehaviour
 {
     [SerializeField]private SpriteRenderer sprite;
+    [SerializeField]private Animator animator;
     [SerializeField]private float bouncedScale = 0.8f;
     [SerializeField]private Color colorBounced = Color.white;
     private Color colorInitial;
@@ -41,6 +42,14 @@ public class BounceMushroom : MonoBehaviour
             }
 
             // TODO play bounce sound
+        }
+    }
+
+    public void BounceAnim()
+    {
+        if (animator)
+        {
+            animator.SetTrigger("bounce");
         }
     }
 }

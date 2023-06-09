@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 8151485617390303295}
+  animator: {fileID: 2879869384800628315}
   bouncedScale: 0.8
   colorBounced: {r: 0.7752067, g: 0.3820755, b: 1, a: 1}
 --- !u!1 &6442421698511280353
@@ -145,6 +146,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed8c2b9dd064c9b4aa1a079a27d19806, type: 3}
+--- !u!95 &2879869384800628315 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6605131512507878925, guid: ed8c2b9dd064c9b4aa1a079a27d19806, type: 3}
+  m_PrefabInstance: {fileID: 8961457303170916438}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3172125521362126317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5789617792360162747, guid: ed8c2b9dd064c9b4aa1a079a27d19806, type: 3}

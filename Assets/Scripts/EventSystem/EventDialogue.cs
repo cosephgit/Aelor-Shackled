@@ -34,8 +34,10 @@ public class EventDialogue : Event
 
     protected override void Update()
     {
-        if (endTime > 0 && Input.GetMouseButton(0))
-            endTime = Mathf.Max(endTime - Time.deltaTime, 0.01f);
+        // speed up dialogue while mouse click is pressed or screen is held down
+        // need to avoid reducing endTime below zero here, or it will break the base.Update() functionality
+        if (endTime > 0 && UIControlInterface.instance.pointerPressed)
+            endTime = Mathf.Max(endTime - (Time.deltaTime * 2f), 0.01f);
 
         base.Update();
     }
