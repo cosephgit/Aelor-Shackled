@@ -15,19 +15,28 @@ public class Event : MonoBehaviour
     private EventSequence sequence;
     protected float endTime;
     protected bool finished;
+    private bool running = false;
 
     // start this event
     public virtual void Run(EventSequence setSequence)
     {
+        running = true;
         sequence = setSequence;
         endTime = delay;
         finished = true;
-        //Debug.Log("endTime = " + endTime);
+        #if UNITY_EDITOR
+        Debug.Log("starting event " + gameObject);
+        #endif
     }
 
     // end the event if this event uses a timer
     protected virtual void Update()
     {
+        #if UNITY_EDITOR
+        if (running)
+            Debug.Log("event " + gameObject + " has endTime " + endTime);
+        #endif
+        
         if (endTime > 0)
         {
             //Debug.Log("endTime = " + endTime);
@@ -45,6 +54,7 @@ public class Event : MonoBehaviour
     // end this event and let the event sequence know
     public virtual void End()
     {
+        running = false;
         endTime = 0;
         //Debug.Log("endTime = " + endTime);
         sequence.EventComplete();

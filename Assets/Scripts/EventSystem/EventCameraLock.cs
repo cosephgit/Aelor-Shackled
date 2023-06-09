@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // this event sets the parallax manager to lock on to the target transform (e.g. for puzzles or battles)
-// Created by: Seph 28/5
-// Last edit by: Seph 28/5
+// Created by: Seph 8/6
+// Last edit by: Seph 9/6
 
 public class EventCameraLock : Event
 {
@@ -15,6 +15,7 @@ public class EventCameraLock : Event
     public override void Run(EventSequence setSequence)
     {
         base.Run(setSequence);
+
         if (lockOrElseNot)
             SceneManager.instance.parallaxManager.SetCameraLock(lockPoint.position, setOrthoSize);
         else
