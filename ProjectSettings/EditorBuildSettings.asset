@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/FINAL SCENES/SCENE1FORESTOUTSKIRTS.unity
     guid: 63788caf33eac3049b2feb1b4099eacf
   - enabled: 1
+    path: Assets/Scenes/FINAL SCENES/SCENE2DEEPFOREST.unity
+    guid: 71d7dd7454b137749913bc3d67b105dc
+  - enabled: 1
+    path: Assets/Scenes/FINAL SCENES/SCENE3AELORIAX.unity
+    guid: d260c22b59f742149a7f821098882888
+  - enabled: 1
     path: Assets/Scenes/FINAL SCENES/SCENEENDING.unity
     guid: 2e08b02db91b675438de88daae0f022a
   m_configObjects: {}

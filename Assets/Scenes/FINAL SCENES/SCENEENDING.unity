@@ -410,17 +410,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &765723023 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 927905621704091895, guid: 4d148a3f4f466094296a7b6601ff0d18, type: 3}
-  m_PrefabInstance: {fileID: 927905621245077880}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &765723025 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 927905621704091881, guid: 4d148a3f4f466094296a7b6601ff0d18, type: 3}
@@ -458,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e24f28aa5b2c5db43b1b0d22fc96b1f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePointer: {fileID: 765723023}
+  mousePointer: {fileID: 765723025}
 --- !u!114 &983747564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,8 +565,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -40}
-  m_SizeDelta: {x: 500, y: 200}
+  m_AnchoredPosition: {x: 0, y: -110}
+  m_SizeDelta: {x: 400, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1111752230
 MonoBehaviour:
@@ -599,8 +588,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Credits\r\n\rLead Programmer - Seph (CoSeph Games)\r\n\rBattle System
-    Programmer - Skylar Masson\n\rNarrative Designer - Deniz Kele\u015F\nArtwork
+  m_text: "<b>Credits\r</b>\n\rLead Programmer - Seph (CoSeph Games)\r\n\rBattle
+    System Programmer - Skylar Masson\n\rNarrative Designer - Deniz Kele\u015F\nArtwork
     - Amio, Tatoni Fail\nSound Designer - Hovig Sarkissian\nMusic - Asup"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9d04f5b7e1316934899939272ab6252d, type: 2}
@@ -628,11 +617,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22.85
+  m_fontSize: 17.15
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 18
+  m_fontSizeMin: 16
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
@@ -713,8 +702,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 100}
-  m_SizeDelta: {x: 500, y: 70}
+  m_AnchoredPosition: {x: 0, y: 70}
+  m_SizeDelta: {x: 800, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1276915759
 MonoBehaviour:
@@ -736,7 +725,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You have made peace with the Aeloriax.
+  m_text: 'Thus, the Realm of Aelor was redeemed, thanks to the valiant efforts of
+    young sorcerer Alaric.
+
+
+    He vanquished the vile dominion of Aeloriax, freeing
+    the denizens of Aelor from its clutches.
+
+
+    His bravery shall forever be etched
+    in the hearts of those he saved and celebrated in the timeless melodies of future
+    bards.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9d04f5b7e1316934899939272ab6252d, type: 2}
   m_sharedMaterial: {fileID: 2555887565480758216, guid: 9d04f5b7e1316934899939272ab6252d, type: 2}
@@ -763,7 +762,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 30.65
+  m_fontSize: 20.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -852,7 +851,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 400}
+  m_SizeDelta: {x: 800, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1278596079
 MonoBehaviour:
@@ -866,6 +865,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6478dbd23f4321469ad1656c362c701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuButton: {fileID: 8300000, guid: 54de4bd28eadb324f9607844a3774919, type: 3}
+  menuMusic: {fileID: 8300000, guid: 0e1ae3fb4e026d3428b3475e44fa163e, type: 3}
+--- !u!1001 &1447459198
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857227, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590422648038857228, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fc8fc3878bda444087bcf0a6b1d2f20, type: 3}
 --- !u!1 &1656007591
 GameObject:
   m_ObjectHideFlags: 0

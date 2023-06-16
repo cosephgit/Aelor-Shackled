@@ -5,12 +5,13 @@ using UnityEngine.UI;
 
 // this basic class just handles the mouse pointer for the menu
 // Created by: Seph 1/6
-// Last edit by: Seph 1/6
+// Last edit by: Seph 9/6
 
 public class UIControlInterfaceMenu : MonoBehaviour
 {
     [Header("Universal menu features")]
-    [SerializeField]private Image mousePointer;
+    [SerializeField]private Transform mousePointer;
+    public bool pointerPressed { get; private set; } // used to store whether the mouse is held OR the touchscreen is touched
 
     protected virtual void Awake()
     {
@@ -20,7 +21,7 @@ public class UIControlInterfaceMenu : MonoBehaviour
 
     protected virtual void TouchInput(Vector2 pos, bool tap)
     {
-        mousePointer.transform.position = pos;
+        mousePointer.position = pos;
     }
 
     // check for touches and mouse clicks each frame
@@ -29,6 +30,8 @@ public class UIControlInterfaceMenu : MonoBehaviour
         if (Input.mousePresent)
         {
             // if there's a mouse, it takes control of the pointer
+            pointerPressed = Input.GetMouseButton(0);
+
             Vector3 touchPos = Input.mousePosition;
             TouchInput(touchPos, (Input.GetMouseButtonDown(0)));
 
@@ -36,6 +39,8 @@ public class UIControlInterfaceMenu : MonoBehaviour
         }
         else if (Input.touchCount > 0)
         {
+            pointerPressed = true;
+
             // no mouse, so try for touch controls
             if (Input.touchCount == 1)
             {
@@ -47,5 +52,7 @@ public class UIControlInterfaceMenu : MonoBehaviour
                 // detect stretching/shrinking/dragging
             }
         }
+        else
+            pointerPressed = false;
     }
 }

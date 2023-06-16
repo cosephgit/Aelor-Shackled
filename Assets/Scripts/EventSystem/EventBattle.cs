@@ -19,10 +19,10 @@ public class EventBattle : Event
         // TODO camera transition to battle view
         finished = false;
 
-        //battle.BeginBattleEvent(this);
+        battle.BeginBattleEvent(this);
 
         // TEMP FOR TESTING
-        UIControlInterface.instance.dialogueTree.OpenDialogue(transform.position, new string[2] { "WIN", "LOSE" }, this);
+        //UIControlInterface.instance.dialogueTree.OpenDialogue(transform.position, new string[2] { "WIN", "LOSE" }, this);
     }
 
     public void BattleEnd(bool victory)
@@ -30,7 +30,11 @@ public class EventBattle : Event
         finished = true;
         base.End();
         if (victory)
+        {
+            // resume normal BGM
+            SoundSystemManager.instance.PlayMusic("ForestOutskirts");
             sequenceVictory.Run();
+        }
         else
             sequenceDefeat.Run();
     }

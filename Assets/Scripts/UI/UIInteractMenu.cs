@@ -8,7 +8,7 @@ using UnityEngine.UI;
 // it disappears when the player clicks off it, or after they click on a valid interaction option
 // the interaction option is returned to the controller interface, which then passes the instruction to the interactable
 // Created by: Seph 27/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 8/6
 
 public class UIInteractMenu : MonoBehaviour
 {
@@ -16,13 +16,15 @@ public class UIInteractMenu : MonoBehaviour
     [SerializeField]private Button buttonTalk;
     [SerializeField]private Button buttonUse;
     [SerializeField]private Button buttonSpecial;
+    [SerializeField]private AudioClip soundButton;
+    [SerializeField]private AudioClip soundInteract;
 
 
     public void OpenUIMenu(Vector3 pos, bool look, bool talk, bool use, bool special)
     {
         if (look || talk || use || special)
         {
-            gameObject.SetActive(true);
+            SoundSystemManager.instance.PlaySFXStandard(soundInteract);
 
             transform.position = pos;
 
@@ -30,26 +32,37 @@ public class UIInteractMenu : MonoBehaviour
             buttonTalk.interactable = talk;
             buttonUse.interactable = use;
             buttonSpecial.interactable = special;
+
+            gameObject.SetActive(true);
         }
+    }
+
+    public void CloseUIMenu()
+    {
+
     }
 
     public void ButtonLookPress()
     {
+        SoundSystemManager.instance.PlaySFXStandard(soundButton);
         UIControlInterface.instance.SelectLook();
         gameObject.SetActive(false);
     }
     public void ButtonTalkPress()
     {
+        SoundSystemManager.instance.PlaySFXStandard(soundButton);
         UIControlInterface.instance.SelectTalk();
         gameObject.SetActive(false);
     }
     public void ButtonUsePress()
     {
+        SoundSystemManager.instance.PlaySFXStandard(soundButton);
         UIControlInterface.instance.SelectUse();
         gameObject.SetActive(false);
     }
     public void ButtonSpecialPress()
     {
+        SoundSystemManager.instance.PlaySFXStandard(soundButton);
         UIControlInterface.instance.SelectSpecial();
         gameObject.SetActive(false);
     }

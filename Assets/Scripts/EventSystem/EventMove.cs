@@ -5,7 +5,7 @@ using UnityEngine;
 // this event tells the subject pawn to move to the target point
 // this event only ends when the subject reaches the target
 // Created by: Seph 27/5
-// Last edit by: Seph 1/6
+// Last edit by: Seph 9/6
 
 public enum MoveFacing
 {
@@ -36,7 +36,7 @@ public class EventMove : Event
     // this event only ends when the subject reaches the target point
     protected override void Update()
     {
-        if (!subject.IsMoving())
+        if (endTime > 0 && !subject.IsMoving())
         {
             finished = true;
         }

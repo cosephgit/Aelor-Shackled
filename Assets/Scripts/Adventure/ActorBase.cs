@@ -7,7 +7,7 @@ using TMPro;
 // all interactables and anything else that can act in the world are based on this
 // it has hooks for playing animations and showing text, but it does not assume they exist
 // Created by: Seph 27/5
-// Last edit by: Seph 30/5
+// Last edit by: Seph 8/6
 
 public enum AnimSingle
 {
@@ -32,6 +32,7 @@ public class ActorBase : MonoBehaviour
     [Header("Dialogue")]
     [SerializeField]private TextMeshPro text;
     [SerializeField]private Color tint = Color.clear;
+    private SpriteRenderer[] spritesSecondary; // used for detecting any secondary sprites that artists might use for animation
     private float idleTimer;
     protected WalkableArea moveAreaCurrent;
     protected Vector3 moveTarget; // the move target to reach the target inside the current collider
@@ -39,9 +40,8 @@ public class ActorBase : MonoBehaviour
     protected Vector3 moveTargetFinal; // the final move target
     protected WalkableArea moveTargetAreaFinal; // the current move's target area
     private MoveFacing moveTargetFacing = MoveFacing.Normal; // the move facing that should be taken at the end of the move
-    private bool moving = false;
+    protected bool moving = false;
     private bool moveEvent = false; // set to true if the actor is required to move during an event
-    private float movingCycle = 0f;
     private bool waiting = false; // waiting for battle mode or adventure pause to end
     private Vector3 spriteScale;
     protected bool asleep = false;
@@ -55,8 +55,13 @@ public class ActorBase : MonoBehaviour
                 text.color = tint; // use the tint if it has been changed from clear
             else if (sprite)
                 text.color = sprite.color; // else copy the sprite color
+
             SetIdleTimer();
         }
+        if (sprite)
+            spritesSecondary = sprite.GetComponentsInChildren<SpriteRenderer>();
+        else
+            spritesSecondary = new SpriteRenderer[0];
     }
 
     private void Start()
@@ -76,14 +81,19 @@ public class ActorBase : MonoBehaviour
     private void EnterWalkArea(WalkableArea area)
     {
         if (sprite)
+        {
             sprite.sortingLayerID = area.GetAreaLayer();
+            for (int i = 0; i < spritesSecondary.Length; i++)
+            {
+                spritesSecondary[i].sortingLayerID = area.GetAreaLayer();
+            }
+        }
         moveAreaCurrent = area;
     }
 
     public void ClearMoveTarget()
     {
-        if (!moveAreaCurrent)
-            EnterWalkArea(SceneManager.instance.GetClosestWalkable(transform.position, out _));
+        EnterWalkArea(SceneManager.instance.GetClosestWalkable(transform.position, out _));
 
         moveTarget = transform.position - moveAreaCurrent.transform.position;
         moveTargetArea = null;
@@ -106,7 +116,7 @@ public class ActorBase : MonoBehaviour
     private void SetMovePath(WalkableArea areaNext, Vector3 pointNext, WalkableArea areaFinal, Vector3 pointfinal, bool duringEvent = false)
     {
         if (asleep) return;
-
+        
         moveTargetArea = areaNext;
         moveTargetFinal = pointfinal - areaFinal.transform.position;
         moveTargetAreaFinal = areaFinal;
@@ -444,7 +454,6 @@ public class ActorBase : MonoBehaviour
             {
                 // if NOT set to move during event, clear the current move target
                 ClearMoveTarget();
-                movingCycle = 0f;
                 if (animator)
                 {
                     animator.SetBool("moving", false);
@@ -469,5 +478,46 @@ public class ActorBase : MonoBehaviour
         asleep = true;
         HideLine();
         ClearMoveTarget();
+    }
+
+    public void SetBouncing(bool bounceValue)
+    {
+        if (animator)
+        {
+            if (bounceValue)
+                animator.SetTrigger("bounce");
+            //animator.SetBool("flying", bounceValue);
+        }
+    }
+
+    // cause this actor to fade away
+    public void FadeOut(float duration)
+    {
+        if (sprite)
+            StartCoroutine(FadeRoutine(duration));
+    }
+
+    private IEnumerator FadeRoutine(float duration)
+    {
+        float fadeCurrent = duration;
+        Color colorBase = sprite.color; // assume that all sprite components are the same color or this will be 100x more complicated
+
+        while (fadeCurrent > 0)
+        {
+            yield return new WaitForEndOfFrame();
+
+            fadeCurrent -= Time.deltaTime;
+
+            float progress = fadeCurrent / duration;
+            Color colorFrame = Color.Lerp(Color.black, colorBase, progress);
+            colorFrame.a = progress;
+
+            sprite.color = colorFrame;
+            for (int i = 0; i < spritesSecondary.Length; i++)
+                spritesSecondary[i].color = colorFrame;
+        }
+
+        // always put the actor to sleep at the end, make sure you're finished with it
+        Sleep();
     }
 }

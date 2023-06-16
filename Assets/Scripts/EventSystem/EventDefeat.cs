@@ -13,7 +13,11 @@ public class EventDefeat : Event
         base.Run(setSequence);
 
         // TODO some sort of game over/load screen menu elemet
+        #if UNITY_EDITOR
         Debug.Log("GAME OVER YOU LOSE");
+        #endif
+
+        UIControlInterface.instance.Defeat();
 
         finished = true;
     }

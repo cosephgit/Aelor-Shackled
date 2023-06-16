@@ -7,7 +7,7 @@ using UnityEngine;
 // (some very simple event sequences may allow the player to still move around)
 // each event sequence is a list
 // Created by: Seph 27/5
-// Last edit by: Seph 28/5
+// Last edit by: Seph 9/6
 
 public class EventSequence : MonoBehaviour
 {
@@ -18,6 +18,10 @@ public class EventSequence : MonoBehaviour
 
     public void Run()
     {
+        #if UNITY_EDITOR
+        Debug.Log("Event sequence triggered " + gameObject);
+        #endif
+
         SceneManager.instance.SetAdventurePause(pauseAdventure);
         eventCurrent = 0;
         RunCurrentEvent();

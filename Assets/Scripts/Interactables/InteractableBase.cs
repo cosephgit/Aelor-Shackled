@@ -23,6 +23,13 @@ public class InteractableBase : ActorBase
     [SerializeField]private EventSequence eventUse;
     [SerializeField]private EventSequence eventSpecial;
 
+    public bool HasAnyInteraction()
+    {
+        if (asleep) return false;
+        if (eventLook || eventTalk || eventUse || eventSpecial) return true;
+        return false;
+    }
+
     // check if there is an event sequence of the given type
     public bool HasLook() { return (eventLook != null && !asleep); }
     public bool HasTalk() { return (eventTalk != null && !asleep); }

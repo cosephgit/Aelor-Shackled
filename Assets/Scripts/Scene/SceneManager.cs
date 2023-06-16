@@ -13,11 +13,14 @@ public class SceneManager : MonoBehaviour
     [field: SerializeField]public bool DEBUG { get; private set; }
     [field: SerializeField]public WalkableArea[] moveAreas { get; private set; } // the collider which defines the area which the player pawn can move within
     [field: SerializeField]public PlayerAdventureController playerAdventure { get; private set; } // the player controller during adventure mode
+    [field: SerializeField]public ParallaxManager parallaxManager { get; private set; } // the player controller during adventure mode
     [field: Header("The scale of actors in the foreground (bottom of screen) and background (top of screen)")]
     [SerializeField]private float scaleClose = 1f;
     [SerializeField]private float posYClose = -5f;
     [SerializeField]private float scaleFar = 0.5f;
     [SerializeField]private float posYFar = 5f;
+    [SerializeField]private AudioClip musicClip;
+    [SerializeField]private AudioClip ambientClip;
     public bool adventureState { get; private set; } = true; // is the game currently in adventure mode (rather than battle mode)?
     public bool adventurePaused { get; private set; } = false; // is the adventure mode currently paused (to run an event)
 
@@ -33,6 +36,14 @@ public class SceneManager : MonoBehaviour
         }
         else
             instance = this;
+    }
+
+    private void Start()
+    {
+        ResumeMusic();
+
+        if (ambientClip)
+            SoundSystemManager.instance.PlayAmbience(ambientClip);
     }
 
     // un/pauses the adventure state (used for event sequences)
@@ -112,5 +123,11 @@ public class SceneManager : MonoBehaviour
         }
 
         return closestArea;
+    }
+
+    public void ResumeMusic()
+    {
+        if (musicClip)
+            SoundSystemManager.instance.PlayMusic(musicClip);
     }
 }
