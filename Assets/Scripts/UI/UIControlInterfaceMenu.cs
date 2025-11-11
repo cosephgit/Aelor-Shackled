@@ -12,6 +12,7 @@ public class UIControlInterfaceMenu : MonoBehaviour
     [Header("Universal menu features")]
     [SerializeField]private Transform mousePointer;
     public bool pointerPressed { get; private set; } // used to store whether the mouse is held OR the touchscreen is touched
+    private bool tapHandled;
 
     protected virtual void Awake()
     {
@@ -42,17 +43,19 @@ public class UIControlInterfaceMenu : MonoBehaviour
             pointerPressed = true;
 
             // no mouse, so try for touch controls
-            if (Input.touchCount == 1)
-            {
-                Vector3 touchPos = Input.touches[0].position;
-                TouchInput(touchPos, true);
-            }
+            Vector3 touchPos = Input.touches[0].position;
+            if (tapHandled)
+                TouchInput(touchPos, false);
             else
             {
-                // detect stretching/shrinking/dragging
+                TouchInput(touchPos, true);
+                tapHandled = true;
             }
         }
         else
+        {
+            tapHandled = false;
             pointerPressed = false;
+        }
     }
 }
